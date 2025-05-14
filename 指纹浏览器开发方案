@@ -8,50 +8,90 @@
 
 1、浏览器语言【 默认  自定义 】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_language.cc
+文件路径(已验证): src/ui/base/l10n/l10n_util.cc
+文件路径(已验证): src/net/http/http_request_headers.cc
+文件路径(已验证): src/net/http/http_request_headers.h
+文件路径(已验证): src/chrome/app/chrome_main_delegate.cc
+文件路径(已验证): src/chrome/browser/chrome_content_browser_client.cc
 
 2、浏览器界面语言【 默认  自定义】
 文件路径(已验证): src/content/public/common/content_constants.cc
+文件路径(已验证): src/ui/base/l10n/l10n_util.cc
+文件路径(已验证): src/chrome/browser/browser_process_impl.cc
+文件路径(已验证): src/ui/base/resource/resource_bundle.cc
 
 3、时区 【踉随IP匹配 自定义】
 文件路径(已验证): src/content/browser/renderer_host/render_process_host_impl.cc
 文件路径(已验证): src/services/device/time_zone_monitor/time_zone_monitor.cc
 文件路径(已验证): src/third_party/blink/renderer/core/timing/performance.cc
+文件路径(已验证): src/base/time/time.cc
 
 4、地理位置 【跟随IP匹配 自定义（经度+纬度+精度） 禁用】
 文件路径(已验证): src/content/browser/geolocation/geolocation_service_impl.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/geolocation/geolocation.cc
+文件路径(已验证): src/services/device/geolocation/geolocation_provider_impl.cc
+文件路径(已验证): src/components/permissions/contexts/geolocation_permission_context.cc
+// 文件路径(未找到): src/content/browser/geolocation/geolocation_controller.cc
+文件路径(已验证): src/ash/system/geolocation/geolocation_controller.cc
+文件路径(已验证): src/services/device/geolocation/network_location_provider.cc
+文件路径(已验证): src/services/device/geolocation/network_location_provider.h
+文件路径(已验证): src/services/device/geolocation/location_arbitrator.cc
+文件路径(已验证): src/services/device/geolocation/location_arbitrator.h
+文件路径(已验证): src/services/device/geolocation/public_ip_address_geolocator.cc
+文件路径(已验证): src/services/device/geolocation/public_ip_address_geolocator.h
 
 5、屏幕分辨率设置【真实、800x600 1024x600 1024x640 1024x768 1152x864 1280x720 1280x920 1280x1024 1360x768 1366x768 1400x1050 1400x900 1536x864 1600x900 1600x1050 1920x1080 1920x1200 2048x1152 2304x1140 2560x1600 2880x1800 4096x2304 5120x2880 2560x1440】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+// 文件路径(未找到): src/components/display_service/display_service_impl.cc
+// 文件路径(未找到): src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h
+文件路径(已验证): src/ui/display/screen.cc
 
 6、屏幕显示缩放比例【100% 125% 150% 200% 250% 300%】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+// 文件路径(未找到): src/components/display_service/display_service_impl.cc
+// 文件路径(未找到): src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h
+文件路径(已验证): src/ui/display/screen.cc
 
 7、可用屏幕尺寸【建议数值小于分辨率，0为不设置】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+// 文件路径(未找到): src/components/display_service/display_service_impl.cc
+// 文件路径(未找到): src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h
+文件路径(已验证): src/ui/display/screen.cc
 
 8、颜色深度【0为不设置】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+// 文件路径(未找到): src/components/display_service/display_service_impl.cc
+// 文件路径(未找到): src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h
+文件路径(已验证): src/ui/display/screen.cc
 
 9、最大触控点【0为不设置，移动端可设置为5】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+// 文件路径(未找到): src/components/display_service/display_service_impl.cc
+// 文件路径(未找到): src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h
+文件路径(已验证): src/ui/display/screen.cc
 
 10、canvas画布指纹【噪音 真实 可外部自定义字符串来固定噪音】
 文件路径(已验证): src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
 文件路径(已验证): src/third_party/blink/renderer/platform/graphics/canvas_2d_layer_bridge.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
+文件路径(已验证): src/cc/paint/paint_recorder.cc
+文件路径(已验证): src/gpu/command_buffer/service/gles2_cmd_decoder_passthrough.cc
+文件路径(已验证): src/third_party/blink/renderer/platform/graphics/image_data_buffer.h
 
 11、canvas字体指纹【自定义（自定义就是可以随机自主保护一部分字体避免被检测到） 真实】
 文件路径(已验证): 
 - src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
 - src/third_party/blink/renderer/platform/fonts/font_selector.cc
 - src/third_party/blink/renderer/platform/fonts/font_cache.cc
+文件路径(已验证): src/ui/gfx/platform_font_skia.cc
 
 12、css字体指纹【噪音，真实】
 文件路径(已验证): 
 - src/third_party/blink/renderer/core/css/css_font_selector.cc
 - src/third_party/blink/renderer/core/css/font_face_set.cc
 - src/third_party/blink/renderer/platform/fonts/font_cache.cc
+文件路径(已验证): src/third_party/blink/renderer/core/css/resolver/style_resolver.cc
+文件路径(已验证): src/ui/gfx/platform_font_skia.cc
 
 13、WebRTC【自动替换（自动把当前代理ip替换，达到避免检测出代理效果） 自定义（自定义可以支持设置内网和外网ip） 真实】
 文件路径(已验证): 
@@ -60,17 +100,28 @@
 - src/third_party/blink/public/common/peerconnection/webrtc_ip_handling_policy.h
 - src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
 - src/content/browser/webrtc/webrtc_internals_message_handler.cc
+// 文件路径(未找到): src/net/base/network_interfaces_param_traits.cc
+文件路径(已验证): src/net/base/network_interfaces.h
+文件路径(已验证): src/services/network/p2p/socket_manager.cc
+文件路径(已验证): src/services/network/p2p/socket_manager.h
+文件路径(已验证): src/services/network/network_service.cc
+文件路径(已验证): src/services/network/network_service.h
 
-14、WebGL图像【噪音 真实】
-文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+14、WebGL图像：
+- src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc 已验证
+- src/gpu/command_buffer/client/gles2_interface.h 已验证
+- src/gpu/command_buffer/client/gles2_implementation.cc 已验证
 
-15、WebGL元数据 【自定义（自定义WebGL厂商：Google Inc. (intel)|Google Inc. (NVIDlA)|Google Inc. (AMD)|Google Inc. (Apple)|Google Inc. (ATl Technologies inc.)） 自定义WebGL渲染：ANGLE (Intel, Intel(R) UHD Graphics 630 Direct3D11 vs_5_0 ps_5_0, D3D11-27.20.100.9565)|ANGLE (Intel, Intel(R) Iris(R) Xe Graphics Direct3D11 vs_5_0 ps_5_0, D3D11-30.0.101.1338) 真实】
-文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context.cc
-文件路径(已验证): src/gpu/config/gpu_info_collector.cc
+15、WebGL元数据：
+- src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc 已验证
+- src/gpu/command_buffer/client/gles2_implementation.cc 已验证
+- src/gpu/command_buffer/client/gpu_control.h 已验证
+- src/gpu/command_buffer/common/capabilities.h 已验证
 
 16、WebGPU【基于WebGL 真实 禁用】
-文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+- src/third_party/blink/web_tests/external/wpt/interfaces/webgpu.idl 已验证
+- src/gpu/command_buffer/client/webgpu_implementation.cc 已验证
+- src/gpu/config/gpu_info_collector.cc 已验证
 
 17、WebGL 内部特性掩码合理浮动、避免异常【
 glat	控制纹理/渲染缓冲区尺寸上限	33984	30000~40000	模拟不同显卡的纹理处理能力（值越大"性能越强"）
@@ -83,12 +134,20 @@ gl2mcvuc	WebGL2 顶点缓冲对象上限	212988	200000~250000	模拟显存容量
 gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩展（如 EXT_texture_filter_anisotropic）以改变功能特性
 】
 文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+- 文件路径(已验证): src/gpu/command_buffer/client/gles2_interface.h
++ 文件路径(已验证): src/gpu/command_buffer/client/gles2_implementation.cc
++ 文件路径(已验证): src/gpu/command_buffer/common/capabilities.h
 
 18、AudioContext 【噪音 真实】
 文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/audio_context.cc
+文件路径(已验证): src/media/base/audio_parameters.cc
 
 19、ClientRects【噪音 真实】
 文件路径(已验证): src/third_party/blink/renderer/core/dom/element.cc
+// 核心修改可能更多地集中在布局相关文件，例如 src/third_party/blink/renderer/core/layout/ 下的文件，需要进一步分析。
+文件路径(已验证): src/third_party/blink/renderer/core/layout/layout_box.cc
+文件路径(已验证): src/third_party/blink/renderer/core/layout/layout_object.cc
+文件路径(已验证): src/third_party/blink/renderer/core/layout/adjust_for_absolute_zoom.h
 
 20、SSL TLS【噪音】
 文件路径(已验证): src/services/network/network_context.cc
@@ -97,30 +156,41 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 
 21、硬件并发数【真实 自定义（2 4 6 8 12 16 20 24）】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_concurrent_hardware.cc
+文件路径(已验证): src/base/system/sys_info.cc
+文件路径(已验证): src/third_party/blink/renderer/core/workers/worker_navigator.cc
 
 22、硬盘数量【真实 自定义（1 2 3 4 5 6）】
 文件路径(已验证): src/content/browser/site_instance_impl.cc
+// 这个文件不是直接获取硬盘数量的核心文件，需要查找 src/base/system/sys_info.cc 或文件系统相关的核心访问点，需要进一步分析。
+文件路径(已验证): src/base/system/sys_info.cc
 
 23、设备内存【真实 自定义（4 8 16 32 ）】
 文件路径(已验证): src/content/browser/site_instance_impl.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_device_memory.cc
 文件路径(已验证): src/third_party/blink/public/common/device_memory/approximated_device_memory.cc
+// src/content/browser/site_instance_impl.cc 不是直接获取设备内存的核心文件，src/base/system/sys_info.cc 也是一个核心获取点，需要进一步分析。
+文件路径(已验证): src/base/system/sys_info.cc
 
 24、电池【噪音（噪音要随机充电状态 和 剩余电量） 真实】
 文件路径(已验证): src/third_party/blink/renderer/modules/battery/battery_manager.cc
 文件路径(已验证): src/services/device/battery/battery_monitor_impl.cc
+文件路径(已验证): src/services/device/public/mojom/battery_status.mojom
 
 25、端口扫描保护【开启保护 关闭保护】
 文件路径(已验证): src/services/network/network_context.cc
 文件路径(已验证): src/net/base/port_util.cc
 文件路径(已验证): src/net/base/port_util.h
 文件路径(已验证): src/net/socket/client_socket_pool_manager.cc
+文件路径(已验证): src/net/socket/tcp_socket_win.cc
+文件路径(已验证): src/net/socket/tcp_socket_posix.cc
 
 26、禁用控制台输出【开启 关闭】 禁用console.log等方法输出信息，防止某些网站通过console作为检测项
 文件路径(已验证): src/third_party/blink/renderer/core/inspector/console_message.cc
+文件路径(已验证): src/third_party/blink/renderer/core/inspector/inspector_console_agent.cc
 
 27、Do Not Track【开启 关闭】
 文件路径(已验证): src/components/privacy_sandbox/tracking_protection_settings.cc
+文件路径(已验证): src/net/url_request/url_request.cc
 
 指纹保护总体控制文件(已验证):
 - src/components/privacy_sandbox/tracking_protection_settings.h
