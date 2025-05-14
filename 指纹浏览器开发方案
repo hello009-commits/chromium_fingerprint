@@ -1,176 +1,129 @@
-一、核心架构设计
+需要支持一键随机指纹功能，比如我传入一个固定字符串"123" 那就代表我每次传入这个字符串，所有指纹都是固定的，包括哪些随机参数的也要固定。如果我传入random，那就代表每次都是随机新的指纹。
 
-1. 分层架构：
-   - 用户层：提供API控制种子值（固定或随机）、设备模板选择
-   - 逻辑层：
-     * 指纹生成引擎（基于种子值派生参数）
-     * 动态行为模拟器（渲染波动、传感器噪声等）
-     * 一致性校验模块
-   - 驱动层：浏览器内核修改、GPU参数注入、网络协议栈定制
+浏览器内核版本 125 122 109 这里主要指不同内核的chromium 模拟的ua版本是有限制的
 
-2. 随机性管理：
-   - 主种子 → HKDF派生 → 各模块子密钥
-   - 时间盐值：每日UTC0点自动更新派生因子
-   - 冲突解决：会话ID + 时间戳作为HMAC附加参数
-二、浏览器指纹模块规范
-1. 浏览器内核与渲染引擎
+操作系统模拟：Windows  macOS  Linux  Android  ios 可能要改多处文件才能确保模拟全面。
 
-- 内核版本映射：
-  * 查询Chromium代码库获取ANGLE提交哈希（非版本号）
-  * WebGL标准强制分级：
-    ■ WebGL 1.0 → GLES 2.0（兼容模式）
-    ■ WebGL 2.0 → GLES 3.0（默认模式）
-    ■ Vulkan后端动态选择（通过`chrome://gpu`验证）
+浏览器指纹项目：
 
-- UA生成规则：
-  * 格式：Mozilla/5.0 (平台) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{主版本}.0.{Build}.0 Safari/537.36
-  * Build号库：从OmahaProxy获取真实版本范围（如Chrome 125 → 125.0.6423.0~125.0.6478.0）
-  * 禁止主版本偏移（±0），Build号随机选择
-2. 图形渲染参数
+1、浏览器语言【 默认  自定义 】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_language.cc
 
-- WebGL核心参数：
-  * MAX_URE_SIZE: 4096（低端） / 8192（中端） / 16384（高端）
-  * MAX_SAMPLES（抗锯齿）：2x / 4x / 8x（与显存容量反向关联）
-  * 渲染器元数据模板：
-    ■ Chrome Windows：ANGLE (NVIDIA, RTX 3080 Direct3D11 vs_5_0 ps_5_0, D3D11-30.0.15.1125)
-    ■ Chrome macOS：ANGLE (Apple, M1 Pro Metal, Metal 3.0)
+2、浏览器界面语言【 默认  自定义】
+文件路径(已验证): src/content/public/common/content_constants.cc
 
-- Canvas指纹：
-  * 噪声算法：HMAC-SHA256(种子+坐标) → 像素扰动±3（8位色深）
-  * 热区增强：鼠标轨迹区域扰动提升至±5
-  * 字体渲染：伪粗体概率（Windows 30%，macOS 15%）
-3. 硬件与设备模拟
+3、时区 【踉随IP匹配 自定义】
+文件路径(已验证): src/content/browser/renderer_host/render_process_host_impl.cc
+文件路径(已验证): src/services/device/time_zone_monitor/time_zone_monitor.cc
+文件路径(已验证): src/third_party/blink/renderer/core/timing/performance.cc
 
-- CPU与内存：
-  * 桌面端：4~16核 / 8~32GB（i7/i9/Xeon型号匹配）
-  * 移动端：2~8核 / 4~8GB（Snapdragon/A14/Bionic型号）
+4、地理位置 【跟随IP匹配 自定义（经度+纬度+精度） 禁用】
+文件路径(已验证): src/content/browser/geolocation/geolocation_service_impl.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/geolocation/geolocation.cc
 
-- 屏幕参数：
-  * 分辨率分级：
-    ■ 新设备（<2年）：3840x2160（4K）
-    ■ 普通设备：1920x1080（Full HD）
-    ■ 老旧设备：1280x720（强制降级 + 8位色深）
-  * 像素坏点模型：按0.01%/年概率生成（高斯分布坐标）
+5、屏幕分辨率设置【真实、800x600 1024x600 1024x640 1024x768 1152x864 1280x720 1280x920 1280x1024 1360x768 1366x768 1400x1050 1400x900 1536x864 1600x900 1600x1050 1920x1080 1920x1200 2048x1152 2304x1140 2560x1600 2880x1800 4096x2304 5120x2880 2560x1440】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
 
-- 电池模拟：
-  * 充放电曲线：分段函数（恒流充电→恒压充电→涓流）
-  * 容量衰减：循环次数>800 → 容量×0.85 + 正态分布噪声
-4. 网络与协议栈
+6、屏幕显示缩放比例【100% 125% 150% 200% 250% 300%】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
 
-- TLS指纹增强：
-  * 证书链动态生成：
-    ■ 根证书库：预置500+ CA指纹（Let's Encrypt/DigiCert等）
-    ■ 中间证书：ECDSA P-256 + RSA 2048双签名
-  * 扩展顺序：
-    ■ ALPN: h2,http/1.1（严格顺序）
-    ■ GREASE：插入随机TLS扩展类型（RFC 8701）
+7、可用屏幕尺寸【建议数值小于分辨率，0为不设置】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
 
-- WebRTC防护：
-  * IP泄露阻断：STUN请求过滤 + 本地IP替换为VPN出口IP
-  * 端口绑定策略：相同种子值维持固定UDP端口（50000~60000）
-5. 传感器与行为模拟
+8、颜色深度【0为不设置】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
 
-- 陀螺仪模型：
-  * 噪声类型：白噪声（20-100Hz） + 温度漂移（0.5%/10min）
-  * 姿态补偿：根据设备旋转矩阵动态调整扰动幅度
+9、最大触控点【0为不设置，移动端可设置为5】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
 
-- 鼠标轨迹：
-  * 移动速度模型：费根鲍姆常数驱动的混沌方程
-  * 点击精度：±1~3像素随机偏移（贝叶斯概率优化）
-三、反检测策略
-1. 指纹一致性规则
+10、canvas画布指纹【噪音 真实 可外部自定义字符串来固定噪音】
+文件路径(已验证): src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
+文件路径(已验证): src/third_party/blink/renderer/platform/graphics/canvas_2d_layer_bridge.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
 
-- 硬件-软件匹配：
-  * macOS设备必须启用Metal渲染 + CoreAnimation 5.0+
-  * Android设备强制匹配SurfaceFlinger版本与API Level
+11、canvas字体指纹【自定义（自定义就是可以随机自主保护一部分字体避免被检测到） 真实】
+文件路径(已验证): 
+- src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
+- src/third_party/blink/renderer/platform/fonts/font_selector.cc
+- src/third_party/blink/renderer/platform/fonts/font_cache.cc
 
-- 地域-参数关联：
-  * 欧美IP → 英语+西班牙语浏览器语言（en-US,es-ES）
-  * 亚洲IP → 中文+日语语言池（zh-CN,ja-JP）
-2. 动态行为注入
+12、css字体指纹【噪音，真实】
+文件路径(已验证): 
+- src/third_party/blink/renderer/core/css/css_font_selector.cc
+- src/third_party/blink/renderer/core/css/font_face_set.cc
+- src/third_party/blink/renderer/platform/fonts/font_cache.cc
 
-- WebGL渲染波动：
-  * 每16.6ms微调：纹理尺寸±0.5%，抗锯齿级别±1x
-  * 显存压力模拟：显存使用率>80%时自动降级画质
+13、WebRTC【自动替换（自动把当前代理ip替换，达到避免检测出代理效果） 自定义（自定义可以支持设置内网和外网ip） 真实】
+文件路径(已验证): 
+- src/content/browser/webrtc/webrtc_ip_permissions_browsertest.cc
+- src/content/browser/webrtc/webrtc_internals.cc
+- src/third_party/blink/public/common/peerconnection/webrtc_ip_handling_policy.h
+- src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+- src/content/browser/webrtc/webrtc_internals_message_handler.cc
 
-- 网络请求特征：
-  * TCP窗口缩放：动态调整（2~14次幂）模拟不同网络环境
-  * HTTP/2流并发数：桌面端6~10，移动端2~4
-3. 异常回退机制
+14、WebGL图像【噪音 真实】
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
 
-- 渲染失败处理：
-  * WebGL 2.0崩溃 → 自动回退到WebGL 1.0 + 关闭MSAA
-  * ANGLE初始化失败 → 切换到SwiftShader软件渲染
+15、WebGL元数据 【自定义（自定义WebGL厂商：Google Inc. (intel)|Google Inc. (NVIDlA)|Google Inc. (AMD)|Google Inc. (Apple)|Google Inc. (ATl Technologies inc.)） 自定义WebGL渲染：ANGLE (Intel, Intel(R) UHD Graphics 630 Direct3D11 vs_5_0 ps_5_0, D3D11-27.20.100.9565)|ANGLE (Intel, Intel(R) Iris(R) Xe Graphics Direct3D11 vs_5_0 ps_5_0, D3D11-30.0.101.1338) 真实】
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context.cc
+文件路径(已验证): src/gpu/config/gpu_info_collector.cc
 
-- 地理定位降级：
-  * GPS失效 → IP定位 + 高斯噪声（σ=0.05°）
-  * 连续失败 → 切换至手动预设坐标（需用户配置）
+16、WebGPU【基于WebGL 真实 禁用】
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
 
-四、测试与验证流程
-1. 自动化测试框架
+17、WebGL 内部特性掩码合理浮动、避免异常【
+glat	控制纹理/渲染缓冲区尺寸上限	33984	30000~40000	模拟不同显卡的纹理处理能力（值越大"性能越强"）
+glmcmts	多重采样抗锯齿（MSAA）特性	16384	10000~20000	调整抗锯齿级别，影响画质和性能（过高可能触发异常）
+glmvuv	顶点着色器属性数量限制	4095	3000~5000	模拟低端/高端显卡的顶点处理能力（4095=2^12-1，掩码全开）
+glsw	着色器编译功能开关掩码	2147483647	2^31-1 ±1e5	全掩码（2147483647=0x7FFFFFFF）表示支持所有扩展，微调模拟部分功能缺失
+glsbvm	帧缓冲区混合模式掩码	2147483647	2^31-1 ±1e5	控制混合算法（如透明度计算），微小变化即可显著改变指纹
+gl2mcfuc	WebGL2 最大计算单元数量	200704	150000~250000	伪造 GPU 计算核心数（影响 WebGL2 并行计算能力）
+gl2mcvuc	WebGL2 顶点缓冲对象上限	212988	200000~250000	模拟显存容量差异（值越大"显存越大"）
+gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩展（如 EXT_texture_filter_anisotropic）以改变功能特性
+】
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
 
-- 指纹一致性测试：
-  * 使用相同种子值连续生成100次指纹，比对参数差异（允许±0.1%浮动）
-  * 跨平台验证：Windows/macOS/Android同一种子输出差异率<5%
+18、AudioContext 【噪音 真实】
+文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/audio_context.cc
 
-- 反检测对抗测试：
-  * 部署到指纹检测平台（如FingerprintJS、CreepJS）
-  * 评分标准：检测率需低于0.1%（可信浏览器阈值）
-2. 性能优化指标
+19、ClientRects【噪音 真实】
+文件路径(已验证): src/third_party/blink/renderer/core/dom/element.cc
 
-- 渲染性能：
-  * WebGL帧率：≥55 FPS（4K画质）
-  * Canvas绘制延迟：<5ms（1920x1080分辨率）
+20、SSL TLS【噪音】
+文件路径(已验证): src/services/network/network_context.cc
+文件路径(已验证): src/services/network/public/mojom/network_context.mojom
+文件路径(已验证): src/services/network/public/mojom/network_context_client.mojom
 
-- 内存占用：
-  * 基础内存：≤500MB（无扩展功能）
-  * 全功能模式：≤1.2GB（含GPU模拟+传感器）
+21、硬件并发数【真实 自定义（2 4 6 8 12 16 20 24）】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_concurrent_hardware.cc
 
-五、部署与维护
-1. 版本更新策略
+22、硬盘数量【真实 自定义（1 2 3 4 5 6）】
+文件路径(已验证): src/content/browser/site_instance_impl.cc
 
-- Chromium内核同步：
-  * 每月同步最新稳定版代码（延迟≤7天）
-  * ANGLE提交哈希每周验证（通过Chromium Dashboard）
+23、设备内存【真实 自定义（4 8 16 32 ）】
+文件路径(已验证): src/content/browser/site_instance_impl.cc
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_device_memory.cc
+文件路径(已验证): src/third_party/blink/public/common/device_memory/approximated_device_memory.cc
 
-- 指纹规则库更新：
-  * 每日爬取主流检测平台规则（差异部分自动生成补丁）
-  * 紧急漏洞响应时间：<24小时
-2. 用户自定义接口
+24、电池【噪音（噪音要随机充电状态 和 剩余电量） 真实】
+文件路径(已验证): src/third_party/blink/renderer/modules/battery/battery_manager.cc
+文件路径(已验证): src/services/device/battery/battery_monitor_impl.cc
 
-- 高级API：
-  * setSeed(salt: string, isRandom: boolean)
-  * overrideDeviceProfile(template: 'desktop_high' | 'mobile_low')
-  * enableAntiDetection(mode: 'aggressive' | 'stealth')
+25、端口扫描保护【开启保护 关闭保护】
+文件路径(已验证): src/services/network/network_context.cc
+文件路径(已验证): src/net/base/port_util.cc
+文件路径(已验证): src/net/base/port_util.h
+文件路径(已验证): src/net/socket/client_socket_pool_manager.cc
 
-- 配置文件：
-  * JSON Schema验证（防止参数冲突）
-  * 热加载：修改配置后无需重启浏览器
+26、禁用控制台输出【开启 关闭】 禁用console.log等方法输出信息，防止某些网站通过console作为检测项
+文件路径(已验证): src/third_party/blink/renderer/core/inspector/console_message.cc
 
-六、风险控制与法律声明
-1. 合规性要求
+27、Do Not Track【开启 关闭】
+文件路径(已验证): src/components/privacy_sandbox/tracking_protection_settings.cc
 
-- 用户协议：
-  * 明确禁止用于欺诈、爬虫等非法用途
-  * 数据采集需符合GDPR/CCPA规范
-
-- 证书管理：
-  * 动态生成的SSL证书有效期≤24小时
-  * 禁止硬编码私有CA根证书
-2. 日志与审计
-
-- 行为日志：
-  * 记录种子值派生过程（加密存储）
-  * 高风险操作警报（如频繁切换地理定位）
-
-- 审计接口：
-  * 提供政府监管API（按法律要求）
-  * 日志留存周期：90天（自动销毁）
-方案总结
-本方案通过分层架构设计、严格的一致性校验、动态行为模拟三大核心机制，实现高可信度指纹浏览器开发。关键技术点包括：
-
-种子值驱动的确定性随机：确保相同输入生成唯一稳定指纹
-
-硬件-软件-地域三位一体映射：避免参数逻辑矛盾
-
-实时反检测对抗：动态更新规则库应对最新指纹检测技术
+指纹保护总体控制文件(已验证):
+- src/components/privacy_sandbox/tracking_protection_settings.h
+- src/components/privacy_sandbox/tracking_protection_settings.cc
+- src/components/privacy_sandbox/tracking_protection_prefs.h
+- src/components/privacy_sandbox/tracking_protection_prefs.cc
