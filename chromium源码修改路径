@@ -1,141 +1,271 @@
-D:/chromium_109/src/content/browser/browser_main_loop.cc
-D:/chromium_109/src/content/browser/geolocation/
-D:/chromium_109/src/content/browser/webrtc/
-D:/chromium_109/src/device/bluetooth/bluetooth_adapter.cc
-D:/chromium_109/src/device/bluetooth/bluetooth_adapter.h
-D:/chromium_109/src/gpu/config/
-D:/chromium_109/src/gpu/config/gpu_info.cc
-D:/chromium_109/src/gpu/config/gpu_info.h
-D:/chromium_109/src/gpu/config/gpu_info_collector.cc
-D:/chromium_109/src/gpu/config/gpu_info_collector.h
-D:/chromium_109/src/net/http/http_stream_factory.cc
-D:/chromium_109/src/net/http/http_stream_factory.h
-D:/chromium_109/src/net/ssl/ssl_config_service.cc
-D:/chromium_109/src/net/ssl/ssl_config_service.h
-D:/chromium_109/src/third_party/blink/renderer/core/
-D:/chromium_109/src/third_party/blink/renderer/core/css/
-D:/chromium_109/src/third_party/blink/renderer/core/css/font_face.cc
-D:/chromium_109/src/third_party/blink/renderer/core/css/font_face.cc
-D:/chromium_109/src/third_party/blink/renderer/core/css/font_face.h
-D:/chromium_109/src/third_party/blink/renderer/core/dom/
-D:/chromium_109/src/third_party/blink/renderer/core/frame/
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator.cc
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator.h
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator.idl
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_device_memory.cc
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_device_memory.h
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_language.cc
-D:/chromium_109/src/third_party/blink/renderer/core/frame/screen.cc
-D:/chromium_109/src/third_party/blink/renderer/core/frame/screen.h
-D:/chromium_109/src/third_party/blink/renderer/core/frame/screen.idl
-D:/chromium_109/src/third_party/blink/renderer/core/frame/screen_metrics_emulator.cc
-D:/chromium_109/src/third_party/blink/renderer/core/frame/screen_metrics_emulator.h
-D:/chromium_109/src/third_party/blink/renderer/core/html/canvas/canvas_rendering_context.cc
-D:/chromium_109/src/third_party/blink/renderer/core/input/event_handler.cc
-D:/chromium_109/src/third_party/blink/renderer/core/input/event_handler.h
-D:/chromium_109/src/third_party/blink/renderer/core/timing/
-D:/chromium_109/src/third_party/blink/renderer/core/timing/performance.cc
-D:/chromium_109/src/third_party/blink/renderer/core/timing/performance.h
-D:/chromium_109/src/third_party/blink/renderer/modules/battery/
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/BUILD.gn
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.h
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.h
-D:/chromium_109/src/third_party/blink/renderer/modules/geolocation/
-D:/chromium_109/src/third_party/blink/renderer/modules/geolocation/geolocation.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/geolocation/geolocation.h
-D:/chromium_109/src/third_party/blink/renderer/modules/mediastream/
-D:/chromium_109/src/third_party/blink/renderer/modules/peerconnection/
-D:/chromium_109/src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.h
-D:/chromium_109/src/third_party/blink/renderer/modules/plugins/
-D:/chromium_109/src/third_party/blink/renderer/modules/sensor/
-D:/chromium_109/src/third_party/blink/renderer/modules/storage/storage_namespace.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/storage/storage_namespace.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/analyser_node.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/analyser_node.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/audio_buffer.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/audio_buffer.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/audio_context.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/audio_context.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/audio_node.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/audio_node.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/offline_audio_context.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/offline_audio_context.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/oscillator_handler.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/oscillator_handler.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/oscillator_node.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/oscillator_node.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl_shader.cc
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl_shader.h
-D:/chromium_109/src/third_party/blink/renderer/modules/webrtc/
-D:/chromium_109/src/third_party/blink/renderer/modules/websockets/
-D:/chromium_109/src/third_party/blink/renderer/platform/
-D:/chromium_109/src/third_party/blink/renderer/platform/audio/audio_utilities.h
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_cache.cc
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_cache.cc
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_cache.h
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_description.cc
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_fallback_list.cc
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_fallback_list.h
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_metrics.cc
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_metrics.h
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_selector.cc
-D:/chromium_109/src/third_party/blink/renderer/platform/fonts/font_selector.h
-D:/chromium_109/src/third_party/blink/renderer/platform/runtime_enabled_features.json5
+当前chromium源码版本 125.0.6422.0  只是纯源码，不包含编译相关文件。
+纯源码官网下载地址：https://chromium.googlesource.com/chromium/src/+archive/refs/tags/125.0.6422.0.tar.gz
 
-D:/chromium_109/src/base/time/time_zone_info.h 无效路径可供参考
-D:/chromium_109/src/base/time/time_zone_info.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/network/ 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/storage/ 无效路径可供参考
-D:/chromium_109/src/content/browser/system_info/system_info.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/hardware/ 无效路径可供参考
-D:/chromium_109/src/content/browser/system_info/system_info.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/network/ 无效路径可供参考
-D:/chromium_109/src/content/browser/network_interface_delegate.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/mediadevices/ 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_hardware.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_platform.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/platform_navigator.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl_controller.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl_extensions.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_platform.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_hardware.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/sensor/sensor_provider.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/webgl/webgl_extensions.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/sensor/sensor_provider.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas_utilities.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas_utilities.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas_controller.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas_controller.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/webaudio/audio_controller.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas_controller.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas_controller.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_hardware_info.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/webrtc/rtc_peer_connection.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_hardware_info.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/webrtc/webrtc_network_manager.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_max_touch_points.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/webrtc/webrtc_network_manager.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/navigator_max_touch_points.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/fingerprint/fingerprint_storage.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/fingerprint_update_scheduler.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/fingerprint_update_scheduler.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_image_data.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/fingerprint/fingerprint_serializer.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_image_data.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/fingerprint_consistency_checker.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/fingerprint/fingerprint_randomizer.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/fingerprint/fingerprint_constraints.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/core/frame/fingerprint_consistency_checker.cc 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/offscreencanvas/offscreen_canvas_rendering_context_2d.h 无效路径可供参考
-D:/chromium_109/src/third_party/blink/renderer/modules/canvas/offscreencanvas/offscreen_canvas_rendering_context_2d.cc 无效路径可供参考
+浏览器指纹项目 - 文件路径检查结果：
+
+1、浏览器语言
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/navigator_language.cc
+文件路径(已验证存在): src/ui/base/l10n/l10n_util.cc
+文件路径(已验证存在): src/net/http/http_request_headers.cc
+文件路径(已验证存在): src/net/http/http_request_headers.h
+文件路径(已验证存在): src/chrome/app/chrome_main_delegate.cc
+文件路径(已验证存在): src/chrome/browser/chrome_content_browser_client.cc
+
+2、浏览器界面语言
+文件路径(已验证存在): src/content/public/common/content_constants.cc
+文件路径(已验证存在): src/ui/base/l10n/l10n_util.cc
+文件路径(已验证存在): src/chrome/browser/browser_process_impl.cc
+文件路径(已验证存在): src/ui/base/resource/resource_bundle.cc
+
+3、时区
+文件路径(已验证存在): src/content/browser/renderer_host/render_process_host_impl.cc
+文件路径(已验证存在): src/services/device/time_zone_monitor/time_zone_monitor.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/timing/performance.cc
+文件路径(已验证存在): src/base/time/time.cc
+
+4、地理位置
+文件路径(已验证存在): src/content/browser/geolocation/geolocation_service_impl.cc
+文件路径(已验证存在): src/third_party/blink/renderer/modules/geolocation/geolocation.cc
+文件路径(已验证存在): src/services/device/geolocation/geolocation_provider_impl.cc
+文件路径(已验证存在): src/components/permissions/contexts/geolocation_permission_context.cc
+文件路径(未找到): src/content/browser/geolocation/geolocation_controller.cc
+文件路径(已验证存在): src/ash/system/geolocation/geolocation_controller.cc
+文件路径(已验证存在): src/services/device/geolocation/network_location_provider.cc
+文件路径(已验证存在): src/services/device/geolocation/network_location_provider.h
+文件路径(已验证存在): src/services/device/geolocation/location_arbitrator.cc
+文件路径(已验证存在): src/services/device/geolocation/location_arbitrator.h
+文件路径(已验证存在): src/services/device/geolocation/public_ip_address_geolocator.cc
+文件路径(已验证存在): src/services/device/geolocation/public_ip_address_geolocator.h
+
+5、屏幕分辨率设置
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已验证存在): src/ui/display/screen.cc
+文件路径(已验证存在): src/ui/display/display.cc
+文件路径(已验证存在): src/ui/display/display_list.cc
+文件路径(未找到): src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h
+
+6、显示缩放比例
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(未找到，功能已确定整合到 ui/display/screen.cc 等文件)
+文件路径(已验证存在): src/ui/display/screen.cc
+文件路径(已验证存在): src/ui/display/display.cc
+文件路径(已验证存在): src/ui/display/display_list.cc
+
+7、可用屏幕尺寸
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已验证存在): src/ui/display/screen.cc
+
+8、颜色深度
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已验证存在): src/ui/display/screen.cc
+
+9、最大触控点
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已验证存在): src/ui/display/screen.cc
+
+10、canvas画布指纹
+文件路径(已验证存在): src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
+文件路径(已验证存在): src/third_party/blink/renderer/platform/graphics/canvas_2d_layer_bridge.cc
+文件路径(已验证存在): src/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
+文件路径(已验证存在): src/cc/paint/paint_recorder.cc
+文件路径(已验证存在): src/gpu/command_buffer/service/gles2_cmd_decoder_passthrough.cc
+文件路径(已验证存在): src/third_party/blink/renderer/platform/graphics/image_data_buffer.h
+
+11、canvas字体指纹
+文件路径(已验证存在): src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
+文件路径(已验证存在): src/third_party/blink/renderer/platform/fonts/font_selector.cc
+文件路径(已验证存在): src/third_party/blink/renderer/platform/fonts/font_cache.cc
+文件路径(已验证存在): src/ui/gfx/platform_font_skia.cc
+
+12、css字体指纹
+文件路径(已验证存在): src/third_party/blink/renderer/core/css/css_font_selector.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/css/font_face_set.cc
+文件路径(已验证存在): src/third_party/blink/renderer/platform/fonts/font_cache.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/css/resolver/style_resolver.cc
+文件路径(已验证存在): src/ui/gfx/platform_font_skia.cc
+
+13、WebRTC
+文件路径(已验证存在): src/content/browser/webrtc/webrtc_ip_permissions_browsertest.cc
+文件路径(已验证存在): src/content/browser/webrtc/webrtc_internals.cc
+文件路径(已验证存在): src/third_party/blink/public/common/peerconnection/webrtc_ip_handling_policy.h
+文件路径(已验证存在): src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+文件路径(已验证存在): src/content/browser/webrtc/webrtc_internals_message_handler.cc
+文件路径(未找到): src/net/base/network_interfaces_param_traits.cc
+文件路径(已验证存在): src/services/network/public/cpp/p2p_param_traits.h
+文件路径(已验证存在): src/net/base/network_interfaces.h
+文件路径(已验证存在): src/services/network/p2p/socket_manager.cc
+文件路径(已验证存在): src/services/network/p2p/socket_manager.h
+文件路径(已验证存在): src/services/network/network_service.cc
+文件路径(已验证存在): src/services/network/network_service.h
+文件路径(已验证存在): src/third_party/blink/renderer/modules/peerconnection/rtc_ice_candidate.cc
+文件路径(已验证存在): src/chrome/browser/media/webrtc/webrtc_event_log_manager.cc
+
+14、WebGL图像
+文件路径(已验证存在): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+文件路径(已验证存在): src/gpu/command_buffer/client/gles2_interface.h
+文件路径(已验证存在): src/gpu/command_buffer/client/gles2_implementation.cc
+文件路径(已验证存在): src/gpu/command_buffer/service/gl_context_virtual.cc
+文件路径(已验证存在): src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/html/canvas/html_canvas_element.cc
+
+15、WebGL元数据
+文件路径(已验证存在): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+文件路径(已验证存在): src/gpu/command_buffer/client/gles2_implementation.cc
+文件路径(已验证存在): src/gpu/command_buffer/client/gpu_control.h
+文件路径(已验证存在): src/gpu/command_buffer/common/capabilities.h
+
+16、WebGPU
+文件路径(已验证存在): src/third_party/blink/web_tests/external/wpt/interfaces/webgpu.idl
+文件路径(已验证存在): src/gpu/command_buffer/client/webgpu_implementation.cc
+文件路径(已验证存在): src/gpu/config/gpu_info_collector.cc
+
+17、WebGL 内部特性掩码
+文件路径(已验证存在): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+文件路径(已验证存在): src/gpu/command_buffer/client/gles2_implementation.cc
+文件路径(已验证存在): src/gpu/command_buffer/client/gpu_control.h
+文件路径(已验证存在): src/gpu/command_buffer/common/capabilities.h
+
+18、AudioContext
+文件路径(已验证存在): src/third_party/blink/renderer/modules/webaudio/audio_context.cc
+文件路径(已验证存在): src/media/base/audio_parameters.cc
+
+19、ClientRects
+文件路径(已验证存在): src/third_party/blink/renderer/core/dom/element.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/layout/layout_box.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/layout/layout_object.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/layout/adjust_for_absolute_zoom.h
+
+20、SSL TLS
+文件路径(已验证存在): src/services/network/network_context.cc
+文件路径(已验证存在): src/services/network/public/mojom/network_context.mojom
+文件路径(已验证存在): src/services/network/public/mojom/network_context_client.mojom
+
+21、硬件并发数
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/navigator_concurrent_hardware.cc
+文件路径(已验证存在): src/base/system/sys_info.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/workers/worker_navigator.cc
+
+22、硬盘数量
+文件路径(已验证存在): src/content/browser/site_instance_impl.cc
+文件路径(已验证存在): src/base/files/file_util.h
+文件路径(已验证存在): src/base/files/file_util.cc
+文件路径(已验证存在): src/base/files/file_util_win.cc
+文件路径(已验证存在): src/base/files/file_util_posix.cc
+
+23、设备内存
+文件路径(已验证存在): src/content/browser/site_instance_impl.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/navigator_device_memory.cc
+文件路径(已验证存在): src/base/system/sys_info.cc
+
+24、电池
+文件路径(已验证存在): src/third_party/blink/renderer/modules/battery/battery_manager.cc
+文件路径(已验证存在): src/services/device/battery/battery_monitor_impl.cc
+文件路径(已验证存在): src/services/device/public/mojom/battery_status.mojom
+
+25、端口扫描保护
+文件路径(已验证存在): src/services/network/network_context.cc
+文件路径(已验证存在): src/net/base/port_util.cc
+文件路径(已验证存在): src/net/base/port_util.h
+文件路径(已验证存在): src/net/socket/client_socket_pool_manager.cc
+文件路径(已验证存在): src/net/socket/tcp_socket_win.cc
+文件路径(已验证存在): src/net/socket/tcp_socket_posix.cc
+
+26、禁用控制台输出
+文件路径(已验证存在): src/third_party/blink/renderer/core/inspector/console_message.cc
+文件路径(已验证存在): src/third_party/blink/renderer/core/inspector/inspector_console_agent.cc
+
+27、Do Not Track
+文件路径(已验证存在): src/components/privacy_sandbox/tracking_protection_settings.cc
+文件路径(已验证存在): src/net/url_request/url_request.cc
+
+28、User-Agent (用户代理)
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证存在): src/net/http/http_request_headers.cc
+文件路径(已验证存在): src/content/common/user_agent.cc
+文件路径(已验证存在): src/base/version_info/version_info.cc
+
+29、Plugins (浏览器插件)
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(未找到): src/content/browser/plugins/plugin_service_impl.cc
+
+30、MimeTypes (MIME 类型)
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证存在): src/content/public/common/content_client.cc
+
+31、Navigator 附加属性
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证存在): src/base/system/sys_info.cc
+文件路径(已验证存在): src/base/version_info/version_info.cc
+
+32、设备像素比 (devicePixelRatio)
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/local_dom_window.cc
+文件路径(已验证存在): src/ui/display/screen.cc
+
+33、WebDriver/自动化标志
+文件路径(已验证存在): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证存在): src/content/renderer/render_frame_impl.cc
+
+34、TLS ClientHello
+文件路径(未找到，功能已确定整合到 src/net/socket/ssl_client_socket_impl.cc 等文件)
+文件路径(已验证存在): src/net/ssl/ssl_config_service.cc
+文件路径(已验证存在): src/net/socket/ssl_client_socket_impl.cc
+文件路径(已验证存在): src/net/ssl/ssl_cipher_suite_names.cc
+
+35、CDP 连接 / 自动化检测防护
+文件路径(已验证存在): src/content/browser/devtools/ (目录)
+文件路径(已验证存在): src/third_party/blink/renderer/core/inspector/ (目录)
+文件路径(未找到): src/headless/lib/headless_content_browser_client.cc
+文件路径(已验证存在): src/headless/lib/browser/headless_content_browser_client.cc
+文件路径(已验证存在): src/third_party/blink/public/common/features.h
+文件路径(已验证存在): src/content/browser/devtools/protocol/target_handler.cc
+文件路径(已验证存在): src/content/browser/devtools/browser_devtools_agent_host.cc
+
+36、IP地址
+文件路径(已验证存在): src/net/base/network_interfaces.cc
+文件路径(已验证存在): src/services/network/network_service.cc
+文件路径(已验证存在): src/net/url_request/url_request.cc
+
+37、媒体设备指纹
+文件路径(已验证存在): src/third_party/blink/renderer/modules/mediastream/media_devices.cc
+文件路径(已验证存在): src/third_party/blink/public/mojom/mediastream/media_devices.mojom
+文件路径(未找到): src/services/device/media_transfer_manager.cc
+文件路径(已验证存在): src/services/device/media_transfer_protocol/mtp_device_manager.cc
+文件路径(已验证存在): src/third_party/blink/renderer/modules/mediastream/media_stream_constraints_util.cc
+文件路径(已验证存在): src/media/device_monitors/device_monitor_udev.h
+
+38、SpeechVoices
+文件路径(已验证存在): src/third_party/blink/renderer/modules/speech/speech_synthesis.cc
+
+39、localStorage本地储存
+文件路径(未找到): src/third_party/blink/renderer/modules/storage/local_storage_area.cc
+文件路径(已验证存在): src/components/services/storage/dom_storage/storage_area_impl.cc
+文件路径(已验证存在): src/components/services/storage/storage_service_impl.cc
+
+40、Proxy代理
+文件路径(已验证存在): src/net/proxy_resolution/proxy_config_service.cc
+文件路径(未找到): src/net/proxy_resolution/proxy_resolver.cc
+
+41、DNS域名系统
+文件路径(已验证存在): src/net/dns/host_resolver.cc
+文件路径(已验证存在): src/net/dns/dns_client.cc
+
+42、IndexedDB
+文件路径(已验证存在): src/content/browser/indexed_db/indexed_db_database.cc
+文件路径(已验证存在): src/content/browser/indexed_db/indexed_db_context_impl.cc
+
+指纹保护总体控制文件:
+文件路径(已验证存在): src/components/privacy_sandbox/tracking_protection_settings.h
+文件路径(已验证存在): src/components/privacy_sandbox/tracking_protection_settings.cc
+文件路径(已验证存在): src/components/privacy_sandbox/tracking_protection_prefs.h
+文件路径(已验证存在): src/components/privacy_sandbox/tracking_protection_prefs.cc
+
+未找到的文件汇总：
+1. src/content/browser/geolocation/geolocation_controller.cc - 功能整合到其他文件
+2. src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h - 功能整合到 src/ui/display/screen.cc 等文件
+3. src/net/base/network_interfaces_param_traits.cc - 功能整合到 src/services/network/public/cpp/p2p_param_traits.h
+4. src/content/browser/plugins/plugin_service_impl.cc - 可能与NPAPI插件废弃有关
+5. src/services/device/media_transfer_manager.cc - 功能整合到 src/services/device/media_transfer_protocol/mtp_device_manager.cc 等文件
+6. src/headless/lib/headless_content_browser_client.cc - 文件路径已更改为 src/headless/lib/browser/headless_content_browser_client.cc
+7. src/third_party/blink/renderer/modules/storage/local_storage_area.cc - 功能整合到 src/components/services/storage/dom_storage/storage_area_impl.cc
+8. src/net/proxy_resolution/proxy_resolver.cc - 功能可能分散到多个平台特定实现文件
+9. src/net/socket/tcp_socket.cc - 功能拆分为平台特定实现 (src/net/socket/tcp_socket_win.cc 和 src/net/socket/tcp_socket_posix.cc) 
