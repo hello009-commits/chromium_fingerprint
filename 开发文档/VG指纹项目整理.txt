@@ -1,0 +1,579 @@
+本项目旨在实现一个完整的Chromium指纹修改系统,目前要考虑开发的指纹支持mac和windwos和linux。该系统支持以下两种指纹模式：
+当前源码目录：D:\chromium125.0.6422.0\src
+当前IDE工作目录 D:\chromium125.0.6422.0
+1.  **随机指纹模式**：在每次启动浏览器前，系统会自动生成一个JSON配置文件。该文件包含各项指纹的种子配置参数列表。
+2.  **固定指纹环境模式**：启动浏览器时，系统会加载一个固定的JSON配置文件。此模式主要用于多账号操作场景，以确保每个账号拥有稳定一致的浏览器环境（请注意，代理IP在此模式下仍可能发生变化）。
+
+指纹参数将通过JSON配置文件进行传递。此配置文件记录了各项指纹的种子参数。为确保配置文件的唯一性，其文件名将通过动态生成UUID（通用唯一标识符）来确保其全局唯一性。除非选择加载已有的历史指纹JSON文件，否则该配置文件会在每次浏览器启动时自动创建。
+
+为了应用这些配置，系统将引入一个中央指纹控制器。该控制器负责统一管理，并对Chromium源码中各个相关的指纹触点进行修改。
+
+下面是具体实现方案：
+
+当前chromium源码版本 125.0.6422.0  只是纯源码，不包含编译相关文件。
+纯源码官网下载地址：https://chromium.googlesource.com/chromium/src/+archive/refs/tags/125.0.6422.0.tar.gz
+
+
+浏览器指纹项目：
+
+1、浏览器语言【 默认  自定义 】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_language.cc
+文件路径(已验证): src/ui/base/l10n/l10n_util.cc
+文件路径(已验证): src/net/http/http_request_headers.cc
+文件路径(已验证): src/net/http/http_request_headers.h
+文件路径(已验证): src/chrome/app/chrome_main_delegate.cc
+文件路径(已验证): src/chrome/browser/chrome_content_browser_client.cc
+
+// 修改实现细节：
+// - 修改 src/third_party/blink/renderer/core/frame/navigator_language.cc 文件中获取和返回 navigator.language 和 navigator.languages 属性值的逻辑。可以拦截原始的系统语言获取函数，并返回伪造的语言字符串。
+// - 修改 src/net/http/http_request_headers.cc 文件中设置 HTTP 请求头 Accept-Language 的逻辑。确保在生成请求头时，使用伪造的语言设置，而不是真实的浏览器语言。
+// - src/ui/base/l10n/l10n_util.cc 提供了一些本地化相关的工具函数，可能需要了解这些函数如何被调用以获取语言信息，但主要的修改点在前两个文件。
+
+2、浏览器界面语言【 默认  自定义】
+文件路径(已验证): src/content/public/common/content_constants.cc
+文件路径(已验证): src/ui/base/l10n/l10n_util.cc
+文件路径(已验证): src/chrome/browser/browser_process_impl.cc
+文件路径(已验证): src/ui/base/resource/resource_bundle.cc
+
+// 修改实现细节：
+// - 主要修改点在于 src/ui/base/l10n/l10n_util.cc，这个文件包含了获取和设置 UI 语言的函数。需要修改相关的函数，使其返回伪造的界面语言设置。
+// - src/content/public/common/content_constants.cc 可能定义了与语言相关的常量，但修改其常量值通常不是正确的做法。
+// - src/chrome/browser/browser_process_impl.cc 和 src/ui/base/resource/resource_bundle.cc 可能间接使用 UI 语言设置，但主要的语言值来源是 l10n_util.cc。
+
+3、时区【跟随IP匹配 自定义】
+文件路径(已验证): src/content/browser/renderer_host/render_process_host_impl.cc
+文件路径(已验证): src/services/device/time_zone_monitor/time_zone_monitor.cc
+文件路径(已验证): src/third_party/blink/renderer/core/timing/performance.cc
+文件路径(已验证): src/base/time/time.cc
+
+// 修改实现细节：
+// - 主要修改点可能在 src/services/device/time_zone_monitor/time_zone_monitor.cc，这个文件负责监控系统时区变化并通知相关的组件。需要修改这里的逻辑，拦截系统时区信息，并广播伪造的时区。
+// - src/content/browser/renderer_host/render_process_host_impl.cc 可能会接收时区变化通知并传递给渲染进程，需要确保伪造信息正确传递。
+// - src/third_party/blink/renderer/core/timing/performance.cc 中时间相关的 API 可能使用底层时间信息，更推荐修改时间源头。
+// - src/base/time/time.cc 提供时间相关的基本函数，修改这里风险较高，不推荐作为首选修改点。
+
+4、地理位置【跟随IP匹配 自定义（经度+纬度+精度） 禁用】
+文件路径(已验证): src/content/browser/geolocation/geolocation_service_impl.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/geolocation/geolocation.cc
+文件路径(已验证): src/services/device/geolocation/geolocation_provider_impl.cc
+文件路径(已验证): src/components/permissions/contexts/geolocation_permission_context.cc
+文件路径(功能已确定转移至 src/content/browser/geolocation/geolocation_service_impl.cc 等文件)
+文件路径(已验证): src/ash/system/geolocation/geolocation_controller.cc
+文件路径(已验证): src/services/device/geolocation/network_location_provider.cc
+文件路径(已验证): src/services/device/geolocation/network_location_provider.h
+文件路径(已验证): src/services/device/geolocation/location_arbitrator.cc
+文件路径(已验证): src/services/device/geolocation/location_arbitrator.h
+文件路径(已验证): src/services/device/geolocation/public_ip_address_geolocator.cc
+文件路径(已验证): src/services/device/geolocation/public_ip_address_geolocator.h
+
+// 修改实现细节：
+// - 核心修改点在 src/services/device/geolocation/geolocation_provider_impl.cc 和 src/content/browser/geolocation/geolocation_service_impl.cc，需要拦截系统或网络位置信息的获取，并返回伪造的经纬度、精度等信息。
+// - src/third_party/blink/renderer/modules/geolocation/geolocation.cc 是 Blink 层对 navigator.geolocation API 的实现，修改这里可以确保 JS API 获取到伪造位置，但修改服务实现更彻底。
+// - src/components/permissions/contexts/geolocation_permission_context.cc 处理地理位置权限，可能需要确保权限处理正常。
+// - src/services/device/geolocation/network_location_provider.cc 和 src/services/device/geolocation/public_ip_address_geolocator.cc 是通过网络或 IP 获取位置的实现，可能需要修改。
+// - src/services/device/geolocation/location_arbitrator.cc 负责协调多个位置信息源，修改这里可以控制最终位置信息。
+
+5、屏幕分辨率设置【真实、800x600 1024x600 1024x640 1024x768 1152x864 1280x720 1280x920 1280x1024 1360x768 1366x768 1400x1050 1400x900 1536x864 1600x900 1600x1050 1920x1080 1920x1200 2048x1152 2304x1140 2560x1600 2880x1800 4096x2304 5120x2880 2560x1440】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已验证): src/ui/display/screen.cc
+文件路径(已验证): src/ui/display/display.cc
+文件路径(已验证): src/ui/display/display_list.cc
+文件路径(已验证): src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h
+
+// 修改实现细节：
+// - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取真实的屏幕显示信息，包括分辨率。需要修改其中获取屏幕宽度、高度等信息的函数，拦截系统调用，并返回伪造的分辨率数值。
+// - src/ui/display/display.cc 定义了显示设备的核心类和属性，包括分辨率、DPR等，可修改此处提供统一的显示信息伪造。
+// - src/ui/display/display_list.cc 管理多显示器环境下的显示器列表，对于多显示器环境的指纹防护很重要。
+// - src/third_party/blink/renderer/core/frame/screen.cc 在Blink层实现window.screen对象，会调用UI显示接口获取分辨率信息。
+// - src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h 与屏幕分辨率和设备像素比相关，影响渲染逻辑。
+
+6、显示缩放比例【真实】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(未找到，功能已确定整合到 ui/display/screen.cc 等文件)
+文件路径(已验证): src/ui/display/screen.cc
+文件路径(已验证): src/ui/display/display.cc
+文件路径(已验证): src/ui/display/display_list.cc
+
+// 修改实现细节：
+// - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取设备像素比（Device Pixel Ratio，DPR）。需要修改获取 DPR 的相关函数，拦截系统调用，并返回伪造的缩放比例数值（例如 1.0 对应 100%，1.25 对应 125%）。
+// - src/ui/display/display.cc 定义了显示设备的核心类和属性，包括分辨率、DPR等，可修改此处提供统一的显示信息伪造。
+// - src/ui/display/display_list.cc 管理多显示器环境下的显示器列表，对于多显示器环境的指纹防护很重要。
+// - src/third_party/blink/renderer/core/frame/screen.cc 在Blink层实现window.screen对象，会调用 ui/display/screen.cc 中的函数来获取 DPR。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+
+7、可用屏幕尺寸【建议数值小于分辨率，0为不设置】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已验证): src/ui/display/screen.cc
+
+// 修改实现细节：
+// - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取可用屏幕区域的尺寸（排除任务栏、停靠窗口等）。需要修改获取可用屏幕宽度、高度等信息的函数，拦截系统调用，并返回伪造的可用屏幕尺寸数值。这些数值通常小于或等于伪造的屏幕分辨率。
+// - src/third_搜索未发现pa/b迹象):ink/rthnre_rcrtorbl/fkre/nds ericoreoreeoutnadjust_for_.evace_vcaie_flttor.hindow.screen.availHeight 属性，它们会调用 ui/display/screen.cc 中的函数来获取可用屏幕尺寸。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+
+8、颜色深度【0为不设置】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已验证): src/ui/display/screen.cc
+
+// 修改实现细节：
+// - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取屏幕的颜色深度。需要修改获取颜色深度相关的函数，拦截系统调用，并返回伪造的颜色深度数值（通常是 24 或 32）。
+// - src/third_party/blink/ren搜索未发现de/c迹象):re/frthmr/_rertn.blc k实 i.dereclcoreD 和 outwadjust_for_ievnce_dcawe_f.etor.hxelDepth 属性，它们会调用 ui/display/screen.cc 中的函数来获取颜色深度。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+
+9、最大触控点【0为不设置，移动端可设置为5】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已验证): src/ui/display/screen.cc
+
+// 修改实现细节：
+// - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取支持的最大触控点数量。需要修改获取最大触控点数量相关的函数，拦截系统调用，并返回伪造的数值。对于桌面浏览器通常是 0，移动端可以设置为 5 或其他搜索未发现合理//迹象):- srcthtri__artrtbl/bklkrrdere/rcoreeeenout.adjust_for_cevcce_ ca现e_f了vtor.hr.maxTouchPoints 属性，它会调用 ui/display/screen.cc 中的函数来获取最大触控点数量。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+
+10、canvas画布指纹【噪音 真实 可外部自定义字符串来固定噪音】
+文件路径(已验证): src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
+文件路径(已验证): src/third_party/blink/renderer/platform/graphics/canvas_2d_layer_bridge.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc
+文件路径(已验证): src/cc/paint/paint_recorder.cc
+文件路径(已验证): src/gpu/command_buffer/service/gles2_cmd_decoder_passthrough.cc
+文件路径(已验证): src/third_party/blink/renderer/platform/graphics/image_data_buffer.h
+
+// 修改实现细节：
+// - 核心修改点在于拦截 Canvas 绘制完成后读取像素数据的过程，例如 toDataURL() 或 getImageData() 方法的实现。可以在数据返回之前，向像素数据中注入细微的噪音（修改部分像素的颜色值）。
+// - src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc 和 src/third_party/blink/renderer/modules/canvas/canvas2d/base_rendering_context_2d.cc 是处理 Canvas 2D 绘制命令的地方，理解绘制流程有助于找到注入噪音的时机。
+// - src/third_party/blink/renderer/platform/graphics/image_data_buffer.h (及其相关实现) 定义了存储 Canvas 像素数据的数据结构，是直接修改像素数据的地方。
+// - 为了实现固定的噪音，可以基于输入的固定字符串生成一个确定的随机数种子，然后使用这个种子来生成噪音数据并应用到 Canvas 像素上。
+
+11、canvas字体指纹【自定义（自定义就是可以随机自主保护一部分字体避免被检测到） 真实】
+文件路径(已验证): src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
+文件路径(已验证): src/third_party/blink/renderer/platform/fonts/font_selector.cc
+文件路径(已验证): src/third_party/blink/renderer/platform/fonts/font_cache.cc
+文件路径(已验证): src/ui/gfx/platform_font_skia.cc
+
+// 修改实现细节：
+// - Canvas 字体指纹通常是通过在 Canvas 上绘制特定文本，然后获取绘制结果的像素数据来生成的。修改的核心在于影响 Canvas 绘制文本时的字体选择和渲染。
+// - src/third_party/blink/renderer/platform/fonts/font_selector.cc 和 src/third_party/blink/renderer/platform/fonts/font_cache.cc 负责字体的查找、匹配和缓存。可以在这里拦截字体查找请求，返回一个伪造的字体对象，或者修改真实字体的加载和缓存逻辑，使其对特定的字体返回不同的结果。
+// - src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc 中处理文本绘制的函数会调用底层的字体渲染逻辑。
+// - 为了实现"随机自主保护一部分字体"，可以在字体查找或加载时，对于一部分字体，根据随机数决定是否返回真实字体，或者返回一个替代字体/修改后的字体。
+
+12、css字体指纹【噪音，真实】
+文件路径(已验证): src/third_party/blink/renderer/core/css/css_font_selector.cc
+文件路径(已验证): src/third_party/blink/renderer/core/css/font_face_set.cc
+文件路径(已验证): src/third_party/blink/renderer/platform/fonts/font_cache.cc
+文件路径(已验证): src/third_party/blink/renderer/core/css/resolver/style_resolver.cc
+文件路径(已验证): src/ui/gfx/platform_font_skia.cc
+
+// 修改实现细节：
+// - CSS 字体指纹通常通过检查特定 CSS 字体属性（如 font-family）应用的文本在布局或渲染后的差异来推断系统中安装的字体。
+// - 修改的核心在于影响 Blink 的 CSS 字体匹配和加载过程。src/third_party/blink/renderer/core/css/css_font_selector.cc 负责根据 CSS 规则选择字体，src/third_party/blink/renderer/core/css/font_face_set.cc 管理 @font-face 规则和字体的加载状态，而 src/third_party/blink/renderer/platform/fonts/font_cache.cc 缓存已加载的字体实例。
+// - 可以在 font_selector.cc 或 font_cache.cc 中拦截字体查找请求。为了制造"噪音"，可以根据配置（例如一个固定的种子字符串），对于某些字体查询，返回一个伪造的结果（例如报告某个不存在的字体存在，或某个存在的字体不存在），或者返回一个经过微调的字体对象，使其度量信息略有差异。
+// - src/third_party/blink/renderer/core/css/resolver/style_resolver.cc 负责计算元素的最终样式，理解其如何调用字体选择逻辑有助于找到合适的修改点。
+
+13、WebRTC【自动替换（自动把当前代理ip替换，达到避免检测出代理效果） 自定义（自定义可以支持设置内网和外网ip） 真实】
+文件路径(已验证): src/content/browser/webrtc/webrtc_ip_permissions_browsertest.cc
+文件路径(已验证): src/content/browser/webrtc/webrtc_internals.cc
+文件路径(已验证): src/third_party/blink/public/common/peerconnection/webrtc_ip_handling_policy.h
+文件路径(已验证): src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+文件路径(已验证): src/content/browser/webrtc/webrtc_internals_message_handler.cc
+文件路径(未找到，功能已确定整合到 src/services/network/public/cpp/p2p_param_traits.h/.cc 等文件)
+文件路径(已验证): src/net/base/network_interfaces.h
+文件路径(已验证): src/services/network/p2p/socket_manager.cc
+文件路径(已验证): src/services/network/p2p/socket_manager.h
+文件路径(已验证): src/services/network/network_service.cc
+文件路径(已验证): src/services/network/network_service.h
+文件路径(已验证): src/third_party/blink/renderer/modules/peerconnection/rtc_ice_candidate.cc
+文件路径(已验证): src/chrome/browser/media/webrtc/webrtc_event_log_manager.cc
+
+// 修改实现细节：
+// - WebRTC 通过 ICE 框架发现本地和公共 IP 地址作为候选地址进行连接。修改的核心在于拦截或修改 ICE 收集候选地址的过程。
+// - src/net/base/network_interfaces.cc 负责获取本地网络接口及其 IP 地址列表。修改这个文件中的函数，使其返回伪造的本地 IP 地址列表，是控制内网 IP 泄露的关键点。
+// - src/services/network/p2p/socket_manager.cc 处理 P2P 连接的建立，包括 ICE 候选的收集和交换。需要修改这里的逻辑，确保 ICE 框架使用伪造的 IP 地址进行候选收集。
+// - src/services/network/network_service.cc 提供网络服务，确保通过这些接口获取到的也是伪造的 IP 地址。
+// - src/third_party/blink/renderer/modules/peerconnection/rtc_ice_candidate.cc 处理ICE候选地址的表示和处理，可以在此修改候选地址的生成和使用。
+// - src/chrome/browser/media/webrtc/webrtc_event_log_manager.cc 管理WebRTC事件日志，与网络连接和候选地址收集过程相关。
+// - 实现"自动替换"代理 IP，需要在获取公共 IP 地址时，识别出代理的出口 IP，并将其替换为伪造的 IP 地址。实现"自定义"则需要允许用户配置内网和外网 IP 列表，并在收集候选地址时使用这些配置的 IP。
+
+14、WebGL图像：
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+文件路径(已验证): src/gpu/command_buffer/client/gles2_interface.h
+文件路径(已验证): src/gpu/command_buffer/client/gles2_implementation.cc
+文件路径(已验证): src/gpu/command_buffer/service/gl_context_virtual.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context.cc
+文件路径(已验证): src/third_party/blink/renderer/core/html/canvas/html_canvas_element.cc
+
+// 修改实现细节：
+// - WebGL 图像指纹也是通过在 <canvas> 元素上使用 WebGL API 进行绘制，然后读取像素数据（例如使用 readPixels 或 toDataURL 方法）来生成的。修改的核心在于拦截这个读取像素数据的过程。
+// - src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc 是 WebGL 渲染上下文的基础实现。src/gpu/command_buffer/client/gles2_implementation.cc 是 GPU 进程中 GLES2 API 的实现，负责与 GPU 驱动交互。
+// - 可以在 gles2_implementation.cc 中与 readPixels 或其他读取 framebuffer 相关的函数中，在将像素数据返回给调用方之前，向数据中注入细微的噪音。
+// - 另一种方法是在 webgl_rendering_context_base.cc 中拦截 toDataURL 等方法，在获取到像素数据后进行修改。
+// - src/gpu/command_buffer/service/gl_context_virtual.cc 提供虚拟化的GL上下文，对WebGL渲染状态和性能有影响，可修改此处实现更深层次的指纹保护。
+// - src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context.cc 处理WebGL2特有的指纹信息，对于支持WebGL2的浏览器很重要。
+// - src/third_party/blink/renderer/core/html/canvas/html_canvas_element.cc 实现HTML Canvas元素，是WebGL指纹生成的起点，可在此处添加额外保护层。
+// - 注入噪音的方式与 2D Canvas 类似，可以根据需要（真实、噪音）决定是否修改像素数据，或者使用固定种子生成噪音。
+
+15、WebGL元数据：
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+文件路径(已验证): src/gpu/command_buffer/client/gles2_implementation.cc
+文件路径(已验证): src/gpu/command_buffer/client/gpu_control.h
+文件路径(已验证): src/gpu/command_buffer/common/capabilities.h
+
+// 修改实现细节：
+// - WebGL 元数据包括通过 getContextAttributes()、getParameter()（例如获取 VERSION, RENDERER, VENDOR, SUPPORTED_EXTENSIONS 等）以及其他 API 获取的信息，这些信息反映了 GPU、驱动、API 版本和支持的特性。
+// - 主要的修改点在 src/gpu/command_buffer/client/gles2_implementation.cc 和 src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc。
+// - 需要在 gles2_implementation.cc 中拦截获取 GPU 参数和扩展列表的函数调用，返回伪造的信息。例如，修改 GetString() 返回的 VERSION, RENDERER, VENDOR 字符串，修改 GetIntegerv() 返回的参数值，以及修改 GetExtensions() 返回的支持扩展列表。
+// - capabilities.h 定义了 GPU 能力的数据结构，理解这个结构有助于知道哪些值是可以伪造的。gpu_control.h 通常不需要修改。
+// - 伪造时可以参考常见显卡型号的 WebGL 参数，或者根据固定字符串生成伪造的参数，确保参数之间的逻辑一致性。
+
+16、WebGPU【基于WebGL 真实 禁用】
+文件路径(已验证): src/third_party/blink/web_tests/external/wpt/interfaces/webgpu.idl
+文件路径(已验证): src/gpu/command_buffer/client/webgpu_implementation.cc
+文件路径(已验证): src/gpu/config/gpu_info_collector.cc
+
+// 修改实现细节：
+// - WebGPU 是新一代的 Web 图形 API，提供对 GPU 硬件更低级别的访问。WebGPU 指纹可能通过检查其可用性、支持的特性、适配器信息等来生成。
+// - 要禁用 WebGPU 指纹，最直接的方式是禁用 WebGPU 功能本身。这通常通过命令行标志或特性开关控制。
+// - src/gpu/config/gpu_info_collector.cc 负责收集 GPU 的信息，可以在这里修改报告 WebGPU 能力的逻辑，使其报告不支持 WebGPU。
+// - src/gpu/command_buffer/client/webgpu_implementation.cc 是 WebGPU API 的实现，如果需要伪造信息，可以在这里拦截获取适配器信息、设备能力等 API 调用，返回伪造的数据。
+// - src/third_party/blink/web_tests/external/wpt/interfaces/webgpu.idl 文件定义了 WebGPU 的接口，是理解 API 的参考。
+
+17、WebGL 内部特性掩码合理浮动、避免异常【 glat	控制纹理/渲染缓冲区尺寸上限	33984	30000~40000	模拟不同显卡的纹理处理能力（值越大"性能越强"）
+glmcmts	多重采样抗锯齿（MSAA）特性	16384	10000~20000	调整抗锯齿级别，影响画质和性能（过高可能触发异常）
+glmvuv	顶点着色器属性数量限制	4095	3000~5000	模拟低端/高端显卡的顶点处理能力（4095=2^12-1，掩码全开）
+glsw	着色器编译功能开关掩码	2147483647	2^31-1 ±1e5	全掩码（2147483647=0x7FFFFFFF）表示支持所有扩展，微调模拟部分功能缺失
+glsbvm	帧缓冲区混合模式掩码	2147483647	2^31-1 ±1e5	控制混合算法（如透明度计算），微小变化即可显著改变指纹
+gl2mcfuc	WebGL2 最大计算单元数量	200704	150000~250000	伪造 GPU 计算核心数（影响 WebGL2 并行计算能力）
+gl2mcvuc	WebGL2 顶点缓冲对象上限	212988	200000~250000	模拟显存容量差异（值越大"显存越大"）
+gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩展（如 EXT_texture_filter_anisotropic）以改变功能特性
+】
+文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
+文件路径(已验证): src/gpu/command_buffer/client/gles2_implementation.cc
+文件路径(已验证): src/gpu/command_buffer/client/gpu_control.h
+文件路径(已验证): src/gpu/command_buffer/common/capabilities.h
+
+// 修改实现细节：
+// - 这项指纹关注的是 WebGL 通过 getParameter() 等方法暴露的各种内部参数和能力，特别是那些以掩码形式表示的特性。
+// - 修改的核心在于 src/gpu/command_buffer/client/gles2_implementation.cc 和 src/gpu/command_buffer/common/capabilities.h。src/gpu/command_buffer/client/gles2_implementation.cc 负责从 GPU 获取这些参数。src/gpu/command_buffer/common/capabilities.h 定义了存储这些能力参数的数据结构 Capabilities。
+// - 需要在 gles2_implementation.cc 中获取 GPU 能力后，在将这些能力传递回 Blink 进程之前，修改 Capabilities 对象中的特定字段。
+// - 修改时需要确保伪造的数值在合理范围内，并且不同参数之间保持一致性，以避免触发异常或显得不真实。例如，伪造一个较低的纹理尺寸上限时，相关的参数也应该相应调整。
+// - 可以使用一个固定的种子字符串来确定伪造的偏移量或数值，以实现可重现的指纹。
+
+18、AudioContext【噪音 真实】
+文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/audio_context.cc
+文件路径(已验证): src/media/base/audio_parameters.cc
+
+// 修改实现细节：
+// - AudioContext 指纹通常通过创建 AudioContext 实例，并处理特定的音频信号（例如生成一个振荡器节点，连接到一个分析器节点，然后检查频谱数据或波形数据）来生成。
+// - 修改的核心在于影响 AudioContext 的音频处理管道。src/third_party/blink/renderer/modules/webaudio/audio_context.cc 是 AudioContext API 的主要实现文件。
+// - 可以在处理音频数据之前或之后，向音频缓冲区中注入细微的噪音。这可能涉及到修改音频节点的处理逻辑，或者在最终输出音频数据时进行修改。
+// - src/media/base/audio_parameters.cc 定义了音频参数，通常不需要修改。
+// - 注入噪音时，可以使用一个固定的种子字符串来生成伪随机噪音，确保每次生成的指纹是一致的。噪音量要足够小，以免影响正常的音频播放。
+
+19、ClientRects【噪音 真实】
+文件路径(已验证): src/third_party/blink/renderer/core/dom/element.cc
+文件路径(已验证): src/third_party/blink/renderer/core/layout/layout_box.cc
+文件路径(已验证): src/third_party/blink/renderer/core/layout/layout_object.cc
+文件路径(已验证): src/third_party/blink/renderer/core/layout/adjust_for_absolute_zoom.h
+
+// 修改实现细节：
+// - ClientRects 指纹是通过调用 Element.getBoundingClientRect() 或 Range.getClientRects() 方法获取元素或范围的布局边界信息来生成的。
+// - 修改的核心在于影响 Blink 的布局计算结果。src/third_party/blink/renderer/core/layout/layout_object.cc 和 src/third_party/blink/renderer/core/layout/layout_box.cc 是布局引擎的核心。
+// - 可以在 layout_object.cc 或 layout_box.cc 中，在计算元素的布局边界后，对其返回的 DOMRect 或 DOMRectList 对象进行微小的修改（例如对位置或尺寸增加或减少一个随机的偏移量）。
+// - src/third_party/blink/renderer/core/layout/adjust_for_absolute_zoom.h 可能包含与页面缩放相关的调整函数，理解这些函数有助于在进行修改时考虑到缩放因素。
+// - 为了注入"噪音"，可以使用一个固定的种子字符串生成伪随机偏移量，并将其应用到 ClientRects 的属性上（如 x, y, width, height）。噪音量应足够小，以免影响页面布局的正常显示。
+
+20、SSL TLS【噪音】
+文件路径(已验证): src/services/network/network_context.cc
+文件路径(已验证): src/services/network/public/mojom/network_context.mojom
+文件路径(已验证): src/services/network/public/mojom/network_context_client.mojom
+
+// 修改实现细节：
+// - SSL/TLS 指纹通常通过检查浏览器在 TLS 握手过程中发送的 ClientHello 消息来生成。
+// - 修改的核心在于控制 ClientHello 消息的内容。src/services/network/network_context.cc 是网络服务的上下文实现，负责管理网络连接和配置，包括 SSL/TLS 设置。
+// - 可能需要在 network_context.cc 或其调用的底层网络库（如 BoringSSL）中修改生成 ClientHello 消息的逻辑。这涉及到修改支持的 TLS 版本、加密套件、扩展等。
+// - 为了注入"噪音"，可以根据配置（例如一个固定的种子字符串），在 ClientHello 中随机调整某些参数的顺序、增删部分不关键的扩展，或者修改一些字段的微小细节。
+// - network_context.mojom 和 network_context_client.mojom 定义了 Mojo 接口，理解这些接口有助于了解通信方式。
+
+21、硬件并发数【真实 自定义（2 4 6 8 12 16 20 24）】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_concurrent_hardware.cc
+文件路径(已验证): src/base/system/sys_info.cc
+文件路径(已验证): src/third_party/blink/renderer/core/workers/worker_navigator.cc
+
+// 修改实现细节：
+// - 硬件并发数通常指 CPU 的核心数或逻辑处理器数量，通过 navigator.hardwareConcurrency 属性暴露给 JavaScript。
+// - 修改的核心在于 src/base/system/sys_info.cc。这个文件提供了跨平台获取系统信息的函数，包括获取 CPU 核心数。需要修改 sys_info.cc 中获取硬件并发数的函数，拦截系统调用，并返回伪造的数值。
+// - src/third_party/blink/renderer/core/frame/navigator_concurrent_hardware.cc 实现了 navigator.hardwareConcurrency 属性，它会调用 base::SysInfo::NumberOfProcessors()。确保修改 sys_info.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+// - src/third_party/blink/renderer/core/workers/worker_navigator.cc 是 Web Worker 中 navigator 对象的实现，也会获取硬件并发数，修改 sys_info.cc 会影响到 Worker。
+
+22、硬盘数量【真实 自定义（1 2 3 4 5 6）】
+文件路径(已验证): src/content/browser/site_instance_impl.cc
+文件路径(已验证): src/base/files/file_util.h
+文件路径(已验证): src/base/files/file_util.cc
+文件路径(已验证): src/base/files/file_util_win.cc
+文件路径(已验证): src/base/files/file_util_posix.cc
+
+// 修改实现细节：
+// - 硬盘数量通常指系统可用的逻辑驱动器或文件系统数量。Chromium 通过 base::files 提供的跨平台文件工具函数来获取这些信息。
+// - 修改的核心在于 base/files 目录下平台相关的实现文件（file_util_win.cc 和 file_util_posix.cc）。这些文件封装了底层操作系统 API 调用，用于枚举或获取驱动器/文件系统信息。
+// - 需要在这些平台相关的实现文件中找到负责获取驱动器列表或数量的函数，并修改其返回结果，使其返回伪造的硬盘数量。
+// - base/files/file_util.cc 提供了通用的接口，它会根据平台调用具体的实现。修改底层平台实现是更直接和有效的方式。
+// - src/content/browser/site_instance_impl.cc 等文件可能通过 base::files 的接口间接获取硬盘数量，因此修改底层实现会影响到这些调用方。
+
+23、设备内存【真实 自定义（4 8 16 32 ）】
+文件路径(已验证): src/content/browser/site_instance_impl.cc
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_device_memory.cc
+文件路径(已验证): src/base/system/sys_info.cc
+
+// 修改实现细节：
+// - 设备内存通常指系统安装的 RAM 大小，通过 navigator.deviceMemory 属性暴露给 JavaScript。
+// - 修改的核心在于 src/base/system/sys_info.cc。这个文件提供了跨平台获取系统信息的函数，包括获取物理内存大小。需要修改 sys_info.cc 中获取内存大小的函数，拦截系统调用，并返回伪造的内存数值（以 GB 为单位）。
+// - src/third_party/blink/renderer/core/frame/navigator_device_memory.cc 实现了 navigator.deviceMemory 属性，它会调用 base::SysInfo::AmountOfPhysicalMemory() 等函数。确保修改 sys_info.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+// - src/content/browser/site_instance_impl.cc 等文件可能通过 base::SysInfo 的接口间接获取设备内存信息，修改底层实现会影响到这些调用方。
+
+24、电池【噪音（噪音要随机充电状态 和 剩余电量） 真实】
+文件路径(已验证): src/third_party/blink/renderer/modules/battery/battery_manager.cc
+文件路径(已验证): src/services/device/battery/battery_monitor_impl.cc
+文件路径(已验证): src/services/device/public/mojom/battery_status.mojom
+
+// 修改实现细节：
+// - 电池指纹通常通过 navigator.getBattery() API 获取电池状态，包括是否在充电、电量水平、充电时间、放电时间等。
+// - 修改的核心在于 src/services/device/battery/battery_monitor_impl.cc。这个文件实现了设备服务的电池监控接口，负责从操作系统获取真实的电池状态。需要修改其中的方法，拦截系统调用，并返回伪造的电池状态信息。
+// - src/third_party/blink/renderer/modules/battery/battery_manager.cc 是 navigator.getBattery() API 在 Blink 层的实现，它通过 Mojo 调用设备服务来获取电池状态。确保修改设备服务后，battery_manager.cc 能够获取到伪造的状态并暴露给 JavaScript。
+// - battery_status.mojom 定义了电池状态的数据结构（BatteryStatus），理解这个结构有助于知道哪些字段可以伪造（如 charging, level, charging_time, discharging_time）。
+// - 为了注入"噪音"，可以根据配置（例如一个固定的种子字符串）生成伪随机数，用这些随机数来伪造 level、charging_time 和 discharging_time 的值，并可能根据随机数来模拟充电状态 charging 的随机变化，以实现可重现的指纹。
+
+25、端口扫描保护【开启保护 关闭保护】
+文件路径(已验证): src/services/network/network_context.cc
+文件路径(已验证): src/net/base/port_util.cc
+文件路径(已验证): src/net/base/port_util.h
+文件路径(已验证): src/net/socket/client_socket_pool_manager.cc
+文件路径(已验证): src/net/socket/tcp_socket_win.cc
+文件路径(已验证): src/net/socket/tcp_socket_posix.cc
+
+// 修改实现细节：
+// - 端口扫描保护旨在防止网页通过尝试连接大量端口来探测用户本地网络或外部主机的开放端口。
+// - 修改的核心在于限制或控制网络连接到特定端口的行为。src/net/base/port_util.cc 中可能定义了安全或受限的端口范围。
+// - 主要的修改点会在平台相关的 TCP Socket 实现文件（tcp_socket_win.cc, tcp_socket_posix.cc）或更高层的 socket 管理（client_socket_pool_manager.cc）中。需要在建立连接的逻辑中加入检查，判断目标端口是否在受保护的范围内。
+// - 如果目标端口是受保护的，可以拦截连接尝试，返回连接被拒绝的错误，或者引入随机的延迟，使其看起来不像正常的连接失败，从而混淆扫描结果。
+// - src/services/network/network_context.cc 作为网络服务的入口，可能负责加载和应用与端口相关的策略配置。
+
+26、禁用控制台输出【开启 关闭】
+禁用console.log等方法输出信息，防止某些网站通过console作为检测项
+文件路径(已验证): src/third_party/blink/renderer/core/inspector/console_message.cc
+文件路径(已验证): src/third_party/blink/renderer/core/inspector/inspector_console_agent.cc
+
+// 修改实现细节：
+// - 这项功能旨在控制或禁用通过 console 对象（如 console.log, console.warn, console.error）输出的信息，以防止网站通过检查控制台输出来进行指纹识别或检测自动化环境。
+// - 修改的核心在于拦截 JavaScript 代码生成的控制台消息，并在发送到实际的 DevTools 控制台之前将其丢弃或重定向。
+// - src/third_party/blink/renderer/core/inspector/console_message.cc 定义了控制台消息的结构和类型。src/third_party/blink/renderer/core/inspector/inspector_console_agent.cc 是处理控制台相关 DevTools 协议命令和 Blink 层生成的控制台消息的代理。
+// - 需要在 inspector_console_agent.cc 中处理接收到的控制台消息的函数中加入逻辑判断。根据一个配置开关（例如"禁用控制台输出"标志），决定是否将接收到的 ConsoleMessage 对象发送给 DevTools 前端。如果开关开启，则直接丢弃这些消息。
+
+27、Do Not Track【开启 关闭】
+文件路径(已验证): src/components/privacy_sandbox/tracking_protection_settings.cc
+文件路径(已验证): src/net/url_request/url_request.cc
+
+// 修改实现细节：
+// - "Do Not Track"（DNT）是一个浏览器设置，当启用时，浏览器会在 HTTP 请求头中发送一个特殊的信号（DNT: 1），向网站表明用户不希望被追踪。
+// - 修改的核心在于控制是否在 HTTP 请求头中发送 DNT: 1 信号。
+// - src/components/privacy_sandbox/tracking_protection_settings.cc 负责管理隐私沙盒和追踪保护相关的设置，其中可能包含了控制 DNT 信号的逻辑。
+// - src/net/url_request/url_request.cc 处理实际的 URL 请求发送，包括构建和发送 HTTP 请求头。需要修改这里的逻辑，根据 DNT 设置是否开启，在请求头中添加或移除 DNT: 1 字段。
+// - 实现"开启/关闭"功能，只需要根据用户的配置来决定是否在请求头中加入 DNT 字段即可。
+
+28、User-Agent (用户代理)【自定义 真实】
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证): src/net/http/http_request_headers.cc
+文件路径(已验证): src/content/common/user_agent.cc
+文件路径(已验证): src/base/version_info/version_info.cc
+
+// 修改实现细节：
+// - User-Agent (UA) 是浏览器在 HTTP 请求头中发送的一个字符串，用于标识浏览器及其操作系统、版本等信息。它也通过 navigator.userAgent 属性暴露给 JavaScript。
+// - 修改的核心在于控制 User-Agent 字符串的生成和发送。
+// - src/content/common/user_agent.cc 是生成 User-Agent 字符串的核心文件。需要修改这里的逻辑，根据用户的自定义设置，生成伪造的 User-Agent 字符串，而不是使用真实的浏览器和系统信息。
+// - src/net/http/http_request_headers.cc 负责构建 HTTP 请求头，它会调用 content/common/user_agent.cc 中的函数来获取 User-Agent 字符串。确保修改 user_agent.cc 后，伪造的 User-Agent 能够被正确添加到请求头中。
+// - src/third_party/blink/renderer/core/frame/navigator.cc 实现了 navigator.userAgent 属性，它也会获取 User-Agent 字符串。确保通过这个属性获取到的也是伪造的 User-Agent。
+// - src/base/version_info/version_info.cc 提供了 Chromium 的版本信息，这些信息通常用于构建真实的 User-Agent 字符串。在伪造 User-Agent 时，可以忽略或替换这些真实信息。
+
+29、Plugins (浏览器插件)【噪音 真实 禁用】
+// 注意：NPAPI插件已基本被禁用，此指纹项更多是历史遗留或特定环境下的考虑。
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(未找到): src/content/browser/plugins/plugin_service_impl.cc
+
+// 修改实现细节：
+// - 浏览器插件（如 Flash）信息可以通过 navigator.plugins 属性获取。这个属性返回一个 PluginArray 对象。
+// - 修改的核心在于控制 navigator.plugins 返回的插件列表。
+// - src/third_party/blink/renderer/core/frame/navigator.cc 实现了 navigator.plugins 属性。需要修改这里的逻辑，拦截获取真实插件列表的调用，并返回一个伪造的 PluginArray。
+// - 实现"真实"返回真实列表，实现"禁用"返回空列表，实现"噪音"返回包含伪造插件信息的列表。
+// - 伪造时可以根据固定种子生成伪造的插件名称、描述、文件名和关联的 MIME 类型列表。
+
+30、MimeTypes (MIME 类型)【噪音 真实】
+// 可能与插件相关联，参考插件相关文件。
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证): src/content/public/common/content_client.cc
+
+// 修改实现细节：
+// - MIME 类型信息通常通过 navigator.mimeTypes 属性获取。这个属性返回一个 MimeTypeArray 对象。
+// - 修改的核心在于控制 navigator.mimeTypes 返回的 MIME 类型列表。
+// - src/third_party/blink/renderer/core/frame/navigator.cc 实现了 navigator.mimeTypes 属性。需要修改这里的逻辑，拦截获取真实的 MIME 类型列表的调用，并返回一个伪造的 MimeTypeArray。
+// - MIME 类型与插件通常是关联的，所以这项的修改可能会与插件指纹（#29）的修改联动。
+// - 实现"真实"返回真实列表，实现"噪音"返回包含伪造 MIME 类型信息的列表。伪造时可以根据固定种子生成伪造的 MIME 类型字符串及其关联的插件引用。
+// - src/content/public/common/content_client.cc 可能间接相关，但主要修改点在 navigator.cc。
+
+31、Navigator 附加属性【真实】
+// 包括但不限于 platform, oscpu, product, vendor, appCodeName, appName, appVersion 等。
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证): src/base/system/sys_info.cc
+文件路径(已验证): src/base/version_info/version_info.cc
+
+// 修改实现细节：
+// - "Navigator 附加属性" 指的是 navigator 对象上除已单独列出的属性之外的其他属性，例如 platform, oscpu, product, vendor, appCodeName, appName, appVersion 等。
+// - 修改的核心在于控制 src/third_party/blink/renderer/core/frame/navigator.cc 中这些属性的返回值。
+// - 需要修改这些属性的 getter 方法，拦截获取真实系统或浏览器信息的调用，并返回伪造的字符串值。
+// - src/base/system/sys_info.cc 和 src/base/version_info/version_info.cc 提供了真实信息源，修改 navigator.cc 中的 getter 方法使其不再调用这些真实信息源。
+// - 伪造时需要注意属性值之间的逻辑一致性，例如伪造的 platform 和 oscpu 应该与伪造的 User-Agent 相匹配。
+
+32、设备像素比 (devicePixelRatio)【真实】
+// 可能与布局或缩放调整相关，参考屏幕相关文件和之前未找到的 adjust_for_device_scale_factor.h。
+文件路径(已验证): src/third_party/blink/renderer/core/frame/local_dom_window.cc
+文件路径(已验证): src/ui/display/screen.cc
+
+// 修改实现细节：
+// - 设备像素比（Device Pixel Ratio, DPR）通过 window.devicePixelRatio 属性暴露给 JavaScript。
+// - 修改的核心在于 src/ui/display/screen.cc。这个文件负责从操作系统获取真实的 DPR。需要修改获取 DPR 的相关函数，拦截系统调用，并返回伪造的 DPR 数值。
+// - src/third_party/blink/renderer/core/frame/local_dom_window.cc 实现了 window 对象，其中包括 devicePixelRatio 属性的实现。它会调用 ui/display/screen.cc 中的函数来获取 DPR。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+
+33、WebDriver/自动化标志【真实 禁用】
+// 检测 navigator.webdriver 属性或其他自动化痕迹。
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证): src/content/renderer/render_frame_impl.cc
+
+// 修改实现细节：
+// - WebDriver/自动化标志通常指 navigator.webdriver 属性，用于检测自动化环境。
+// - 修改的核心在于控制 src/third_party/blink/renderer/core/frame/navigator.cc 中 navigator.webdriver 属性的返回值。
+// - 需要修改其 getter 方法，使其根据配置（"真实"或"禁用"）返回相应的值。
+// - 实现"真实"返回 Chromium 内部判断的真实 WebDriver 状态。实现"禁用"强制返回 false。
+// - src/content/renderer/render_frame_impl.cc 可能接收自动化状态信息，但修改 navigator.cc 是最直接的控制方式。
+
+34、TLS ClientHello【真实 噪音】
+// 客户端在TLS握手时发送的信息，包括支持的加密套件、扩展等。
+文件路径(未找到，功能已确定整合到 src/net/socket/ssl_client_socket_impl.cc 等文件)
+文件路径(已验证): src/net/ssl/ssl_config_service.cc
+文件路径(已验证): src/net/socket/ssl_client_socket_impl.cc
+文件路径(已验证): src/net/ssl/ssl_cipher_suite_names.cc
+
+// 修改实现细节：
+// - TLS ClientHello 指纹是通过检查浏览器在 TLS 握手时发送的 ClientHello 消息来获取信息。
+// - 修改的核心在于控制 ClientHello 消息的内容。src/net/ssl/ssl_config_service.cc 负责管理 SSL/TLS 配置。src/net/socket/ssl_client_socket_impl.cc 负责执行 TLS 握手和发送 ClientHello 消息。
+// - 需要在 ssl_config_service.cc 中修改获取和提供 SSL/TLS 配置的函数，返回伪造的配置。
+// - 在 ssl_client_socket_impl.cc 中，在构建和发送 ClientHello 消息之前，确保使用了伪造的配置信息。可能还需要在序列化 ClientHello 消息时进行微小的修改以引入"噪音"。
+// - 实现"真实"使用真实配置，实现"噪音"根据固定种子对配置或 ClientHello 消息进行随机微小修改。
+
+35、CDP 连接 / 自动化检测防护【开启保护 关闭保护】
+// 涉及 Chrome DevTools Protocol 的使用和相关痕迹的隐藏。
+文件路径(已验证): src/content/browser/devtools/ (目录)
+文件路径(已验证): src/third_party/blink/renderer/core/inspector/ (目录)
+文件路径(未找到): src/headless/lib/headless_content_browser_client.cc // 无头模式下可能相关
+文件路径(已验证): src/headless/lib/browser/headless_content_browser_client.cc (文件)
+文件路径(已验证): src/third_party/blink/public/common/features.h // 可能通过 feature flag 控制
+文件路径(已验证): src/content/browser/devtools/protocol/target_handler.cc
+文件路径(已验证): src/content/browser/devtools/browser_devtools_agent_host.cc
+// 可能需要查找处理特定 CDP 命令的代码，例如 Runtime.evaluate, Page.addScriptToEvaluateOnNewDocument 等，以及与自动化相关的检测点。
+
+// 修改实现细节：
+// - 这项指纹关注的是检测浏览器是否连接了 Chrome DevTools Protocol (CDP) 或者运行在自动化环境中（例如 headless 模式）。
+// - 修改的核心在于隐藏 CDP 连接的痕迹和伪造自动化相关的检测点。
+// - src/content/browser/devtools/ 和 src/third_party/blink/renderer/core/inspector/ 这两个目录包含了 DevTools 和 Inspector 的实现代码。可以在这些文件中找到与 CDP 通信、会话管理相关的逻辑，修改这些逻辑以减少痕迹暴露。
+// - src/headless/lib/browser/headless_content_browser_client.cc 是 headless 模式下的实现，需要修改这里与自动化标志相关的逻辑。
+// - src/third_party/blink/public/common/features.h 可能定义了控制 DevTools 或自动化相关功能的特性标志。
+// - src/content/browser/devtools/protocol/target_handler.cc 处理DevTools协议中的目标管理，是远程调试和自动化的核心组件，修改此处可以控制CDP暴露的目标信息和功能。
+// - src/content/browser/devtools/browser_devtools_agent_host.cc 实现DevTools代理，负责浏览器级别的调试功能，是检测自动化和远程控制的关键点。
+// - 防止检测通常涉及到识别网站可能用来检测 CDP 或自动化的技术，然后在代码中针对性地进行伪造或隐藏。
+
+指纹保护总体控制文件(已验证):
+文件路径(已验证): src/components/privacy_sandbox/tracking_protection_settings.h
+文件路径(已验证): src/components/privacy_sandbox/tracking_protection_settings.cc
+文件路径(已验证): src/components/privacy_sandbox/tracking_protection_prefs.h
+文件路径(已验证): src/components/privacy_sandbox/tracking_protection_prefs.cc
+
+36、IP地址【真实 自定义】
+// 网站通过用户的IP地址获取地理位置信息，可用于识别用户、定制内容和安全检查。
+文件路径(已验证): src/net/base/network_interfaces.cc
+文件路径(已验证): src/services/network/network_service.cc
+文件路径(已验证): src/net/url_request/url_request.cc
+
+// 修改实现细节：
+// - IP地址是网络通信的基础，虽然部分通过地理位置和WebRTC指纹进行控制，但其本身可被直接获取。
+// - 修改的核心在于拦截获取本地和公共IP地址的函数调用，并返回伪造的IP地址。
+// - 这可能涉及到修改 src/net/base/network_interfaces.cc 中枚举网络接口和获取IP地址的逻辑。
+// - 也可能需要在 src/services/network/network_service.cc 等网络服务相关文件中进行拦截和修改。
+// - 对于通过HTTP头（如 X-Forwarded-For）暴露的IP，可能需要在 src/net/url_request/url_request.cc 或相关文件中进行处理。
+
+37、媒体设备指纹【噪音 真实 禁用】
+// 媒体设备指纹基于浏览器可访问的媒体输入/输出设备列表（如麦克风、摄像头）。
+// 注意：即使禁用媒体访问，设备列表仍可能被暴露用于指纹识别。
+文件路径(已验证): src/third_party/blink/renderer/modules/mediastream/media_devices.cc
+文件路径(已验证): src/third_party/blink/public/mojom/mediastream/media_devices.mojom
+文件路径(未找到，功能已确定部分整合到 src/media/device_monitors/ 等文件 (负责设备监控和列表维护))
+文件路径(已验证): src/third_party/blink/renderer/modules/mediastream/media_stream_constraints_util.cc
+文件路径(已验证): src/media/device_monitors/device_monitor_udev.h
+
+// 修改实现细节：
+// - 媒体设备指纹基于 navigator.mediaDevices.enumerateDevices() 返回的设备列表。
+// - 修改的核心在于控制 enumerateDevices() 返回的设备列表，可以返回真实列表（但通常需要伪造设备 ID），返回噪音列表，或返回空列表（禁用）。
+// - 需要修改 src/third_party/blink/renderer/modules/mediastream/media_devices.cc 中处理 enumerateDevices() 的逻辑。
+// - 在 Mojo 接口层，如 src/third_party/blink/public/mojom/mediastream/media_devices.mojom 定义了浏览器进程和渲染进程之间媒体设备相关的通信接口，可能需要调整以传递伪造的数据。
+// - src/third_party/blink/renderer/modules/mediastream/media_stream_constraints_util.cc 处理媒体约束和设备能力，在选择和过滤设备时发挥作用，可在此处修改以影响设备匹配结果。
+// - src/media/device_monitors/device_monitor_udev.h 实现了Linux平台下的设备监控接口，负责检测设备变化并维护设备列表，可修改此处控制设备监控行为。
+// - 设备监控组件(device_monitors)负责维护和更新可用媒体设备的列表，是指纹防护的重要切入点。
+
+38、SpeechVoices【噪音 真实 禁用】
+// SpeechVoices 指纹基于浏览器支持的语音合成声音列表。
+// 注意：声音列表可能因操作系统和安装的语音包而异。
+文件路径(已验证): src/third_party/blink/renderer/modules/speech/speech_synthesis.cc
+
+// 修改实现细节：
+// - SpeechVoices 指纹基于 window.speechSynthesis.getVoices() 返回的声音列表。
+// - 修改的核心在于控制 getVoices() 返回的声音列表。可以返回真实列表、噪音列表或空列表（禁用）。
+// - 需要修改 src/third_party/blink/renderer/modules/speech/speech_synthesis.cc 中处理 getVoices() 的逻辑。
+// - 噪音可以包括添加不存在的声音、修改现有声音的属性等。
+
+39、localStorage本地储存【隔离 禁用】
+// localStorage 作为 HTML5 本地存储技术，可以被网站用于存储用户识别信息。
+// 注意：隔离通常是基于域名，但指纹防护可能需要更细粒度的控制或伪造。
+文件路径(未找到): src/third_party/blink/renderer/modules/storage/local_storage_area.cc
+文件路径(已验证): src/components/services/storage/dom_storage/storage_area_impl.cc
+文件路径(已验证): src/components/services/storage/storage_service_impl.cc
+
+// 修改实现细节：
+// - localStorage 指纹基于网站在本地存储的数据。
+// - 修改的核心在于控制网站读写 localStorage 的行为。这通常由浏览器的同源策略控制，但指纹防护可能需要更进一步的拦截和修改。
+// - 需要修改 src/components/services/storage/dom_storage/storage_area_impl.cc 等文件中与 localStorage 读写相关的逻辑。
+// - src/components/services/storage/storage_service_impl.cc 实现了统一的存储服务管理接口，控制对各类存储API的访问，是实现存储隔离和禁用的重要入口点。
+// - 实现"隔离"可以确保不同指纹配置下的 localStorage 数据相互独立；实现"禁用"则阻止网站读写 localStorage。
+
+40、Proxy代理【真实 伪造IP】
+// 检测浏览器是否使用了代理，以及代理相关的配置信息。
+文件路径(已验证): src/net/proxy_resolution/proxy_config_service.cc
+文件路径(未找到): src/net/proxy_resolution/proxy_resolver.cc
+
+// 修改实现细节：
+// - Proxy 指纹可能通过检测网络连接是否经过代理或检查与代理相关的环境变量/配置来获取。
+// - 修改的核心在于控制浏览器报告的代理配置信息，或者伪造看起来没有使用代理的网络行为。
+// - 需要修改 src/net/proxy_resolution/proxy_config_service.cc 和 src/net/proxy_resolution/proxy_resolver.cc 中获取和解析代理配置的逻辑。
+// - 实现"伪造IP"可能与 IP 地址指纹的修改联动，确保通过代理看到的出口IP与伪造的IP一致。
+
+41、DNS域名系统【真实 噪音】
+// 检测浏览器如何解析域名，可能涉及本地DNS缓存、DNS服务器等信息。
+文件路径(已验证): src/net/dns/host_resolver.cc
+文件路径(已验证): src/net/dns/dns_client.cc
+
+// 修改实现细节：
+// - DNS 指纹可能通过测量域名解析时间、检查使用的 DNS 服务器、或通过 WebSockets/WebRTC 等技术绕过同源策略进行 DNS 查询来获取。
+// - 修改的核心在于控制浏览器进行 DNS 查询的行为和返回的结果。
+// - 需要修改 src/net/dns/host_resolver.cc 中处理域名解析请求的逻辑。
+// - src/net/dns/dns_client.cc 是底层的 DNS 客户端实现，可能需要在此处进行更低级别的拦截和修改。
+// - 实现"噪音"可以引入随机的解析延迟，或者在返回的解析结果中加入细微变化（如果可能）。
+
+42、IndexedDB【真实 隔离 禁用】
+// IndexedDB 是一种客户端存储数据库，可被网站用于存储大量结构化数据，可能包含用户识别信息。
+// 注意：隔离通常是基于域名，但指纹防护可能需要更细粒度的控制或伪造。
+文件路径(已验证): src/content/browser/indexed_db/indexed_db_database.cc
+文件路径(已验证): src/content/browser/indexed_db/indexed_db_context_impl.cc
+
+// 修改实现细节：
+// - IndexedDB 指纹基于网站在客户端存储的数据。
+// - 修改的核心在于控制网站对 IndexedDB 数据库的访问和数据存储。
+// - 需要修改 src/content/browser/indexed_db/indexed_db_database.cc 等文件中处理 IndexedDB 操作的逻辑。
+// - 在存储服务层，例如 src/content/browser/indexed_db/indexed_db_context_impl.cc，负责管理 IndexedDB 数据库的上下文和数据持久化，可能需要在此处进行拦截和修改。
+// - 实现"隔离"可以确保不同指纹配置下的 IndexedDB 数据相互独立；实现"禁用"则阻止网站使用 IndexedDB。

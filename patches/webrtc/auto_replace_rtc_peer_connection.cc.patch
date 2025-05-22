@@ -1,0 +1,79 @@
+diff --git a/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc b/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+index xxxxxxx..xxxxxxx 100644
+--- a/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
++++ b/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+@@ -15,6 +15,8 @@
+ #include "third_party/blink/renderer/modules/peerconnection/rtc_ice_candidate.h"
+ #include "third_party/blink/renderer/platform/bindings/exception_state.h"
+ #include "third_party/blink/renderer/platform/wtf/text/wtf_string.h"
++#include "base/json/json_reader.h"
++#include "base/files/file_util.h"
+ 
+ namespace blink {
+ 
+@@ -120,6 +122,46 @@ void RTCPeerConnection::CreateOffer(RTCOfferOptionsPlatform* options,
+   peer_handler_->CreateOffer(options, std::move(callbacks));
+ }
+ 
++// 处理ICE候选地址，替换IP地址
++void ProcessIceCandidate(const webrtc::IceCandidateInterface* candidate, std::string& sdp) {
++  // 检查是否存在指纹配置文件
++  static bool initialized = false;
++  static std::string replacement_ip;
++  
++  if (!initialized) {
++    initialized = true;
++    // 尝试从环境变量或配置文件中读取WebRTC设置
++    const char* config_path = getenv("CHROMIUM_FINGERPRINT_CONFIG");
++    if (config_path) {
++      std::string config_content;
++      if (base::ReadFileToString(base::FilePath::FromUTF8Unsafe(config_path), &config_content)) {
++        absl::optional<base::Value> json = base::JSONReader::Read(config_content);
++        if (json && json->is_dict()) {
++          const base::Value::Dict& root = json->GetDict();
++          const base::Value::Dict* settings = root.FindDict("settings");
++          if (settings) {
++            const base::Value::Dict* webrtc_settings = settings->FindDict("webrtc");
++            if (webrtc_settings && webrtc_settings->FindBool("enabled").value_or(false)) {
++              const std::string& mode = webrtc_settings->FindString("mode").value_or("");
++              if (mode == "auto_replace" || mode == "custom") {
++                const base::Value::Dict* params = webrtc_settings->FindDict("params");
++                if (params) {
++                  // 如果是自定义模式，使用配置中的IP
++                  if (mode == "custom") {
++                    replacement_ip = params->FindString("external_ip").value_or("192.168.1.100");
++                  } else {
++                    // 自动替换模式，使用一个固定的IP
++                    replacement_ip = "192.168.1.100";
++                  }
++                }
++              }
++            }
++          }
++        }
++      }
++    }
++  }
++  
++  // 如果设置了替换IP，则替换SDP中的IP地址
++  if (!replacement_ip.empty()) {
++    // 简单的IP地址替换，实际实现需要更复杂的正则表达式匹配
++    size_t pos = 0;
++    while ((pos = sdp.find("IP4 ", pos)) != std::string::npos) {
++      pos += 4; // 跳过"IP4 "
++      size_t end_pos = sdp.find(" ", pos);
++      if (end_pos == std::string::npos) end_pos = sdp.length();
++      
++      // 检查是否是公网IP（简化判断，实际需要更复杂的逻辑）
++      std::string ip = sdp.substr(pos, end_pos - pos);
++      if (ip != "127.0.0.1" && ip != "0.0.0.0" && ip.find("192.168.") != 0 
++          && ip.find("10.") != 0 && ip.find("172.") != 0) {
++        sdp.replace(pos, end_pos - pos, replacement_ip);
++      }
++    }
++  }
++}
++
+ void RTCPeerConnection::createOffer(const V8RTCOfferOptions* options,
+                                    V8RTCSessionDescriptionCallback* success_callback,
+                                    V8RTCPeerConnectionErrorCallback* error_callback,

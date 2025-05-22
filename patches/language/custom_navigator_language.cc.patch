@@ -1,0 +1,98 @@
+diff --git a/third_party/blink/renderer/core/frame/navigator_language.cc b/third_party/blink/renderer/core/frame/navigator_language.cc
+index xxxxxxx..xxxxxxx 100644
+--- a/third_party/blink/renderer/core/frame/navigator_language.cc
++++ b/third_party/blink/renderer/core/frame/navigator_language.cc
+@@ -10,6 +10,7 @@
+ #include "third_party/blink/renderer/core/frame/local_dom_window.h"
+ #include "third_party/blink/renderer/core/frame/navigator.h"
+ #include "third_party/blink/renderer/core/frame/settings.h"
++#include "base/json/json_reader.h"
+ 
+ namespace blink {
+ 
+@@ -20,6 +21,36 @@ NavigatorLanguage::NavigatorLanguage() = default;
+ NavigatorLanguage::~NavigatorLanguage() = default;
+ 
+ String NavigatorLanguage::language() {
++  // 检查是否存在指纹配置文件
++  static bool initialized = false;
++  static String custom_language;
++  
++  if (!initialized) {
++    initialized = true;
++    // 尝试从环境变量或配置文件中读取自定义语言设置
++    const char* config_path = getenv("CHROMIUM_FINGERPRINT_CONFIG");
++    if (config_path) {
++      std::string config_content;
++      if (base::ReadFileToString(base::FilePath::FromUTF8Unsafe(config_path), &config_content)) {
++        absl::optional<base::Value> json = base::JSONReader::Read(config_content);
++        if (json && json->is_dict()) {
++          const base::Value::Dict& root = json->GetDict();
++          const base::Value::Dict* settings = root.FindDict("settings");
++          if (settings) {
++            const base::Value::Dict* language_settings = settings->FindDict("language");
++            if (language_settings && language_settings->FindBool("enabled").value_or(false)) {
++              const base::Value::Dict* params = language_settings->FindDict("params");
++              if (params) {
++                const std::string* lang = params->FindString("language");
++                if (lang) {
++                  custom_language = String::FromUTF8(lang->c_str());
++                }
++              }
++            }
++          }
++        }
++      }
++    }
++  }
++  
++  if (!custom_language.IsEmpty())
++    return custom_language;
++    
+   return GetLocale().GetLanguage();
+ }
+ 
+@@ -27,6 +58,36 @@ Vector<String> NavigatorLanguage::languages() {
+   if (!GetFrame())
+     return Vector<String>();
+ 
++  // 检查是否存在指纹配置文件
++  static bool initialized = false;
++  static Vector<String> custom_languages;
++  
++  if (!initialized) {
++    initialized = true;
++    // 尝试从环境变量或配置文件中读取自定义语言设置
++    const char* config_path = getenv("CHROMIUM_FINGERPRINT_CONFIG");
++    if (config_path) {
++      std::string config_content;
++      if (base::ReadFileToString(base::FilePath::FromUTF8Unsafe(config_path), &config_content)) {
++        absl::optional<base::Value> json = base::JSONReader::Read(config_content);
++        if (json && json->is_dict()) {
++          const base::Value::Dict& root = json->GetDict();
++          const base::Value::Dict* settings = root.FindDict("settings");
++          if (settings) {
++            const base::Value::Dict* language_settings = settings->FindDict("language");
++            if (language_settings && language_settings->FindBool("enabled").value_or(false)) {
++              const base::Value::Dict* params = language_settings->FindDict("params");
++              if (params) {
++                const base::Value::List* langs = params->FindList("languages");
++                if (langs) {
++                  for (const auto& lang : *langs) {
++                    if (lang.is_string())
++                      custom_languages.push_back(String::FromUTF8(lang.GetString()));
++                  }
++                }
++              }
++            }
++          }
++        }
++      }
++    }
++  }
++  
++  if (!custom_languages.IsEmpty())
++    return custom_languages;
++    
+   return GetFrame()->GetLocale().GetLanguages();
+ }

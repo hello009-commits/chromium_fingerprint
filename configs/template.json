@@ -1,0 +1,108 @@
+{
+  "fingerprint_mode": "random",
+  "fingerprint_id": "00000000-0000-0000-0000-000000000000",
+  "creation_time": "2023-05-20 12:34:56",
+  "settings": {
+    "language": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "language": "en-US",
+        "languages": ["en-US", "en"]
+      }
+    },
+    "ui_language": {
+      "enabled": true,
+      "mode": "default",
+      "params": {}
+    },
+    "timezone": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "timezone": "America/New_York"
+      }
+    },
+    "geolocation": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "accuracy": 100
+      }
+    },
+    "screen_resolution": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "display_zoom": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "scale_factor": 1.0
+      }
+    },
+    "screen_size": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "available_width": 1880,
+        "available_height": 1040
+      }
+    },
+    "color_depth": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "depth": 24
+      }
+    },
+    "touch_points": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "max_touch_points": 0
+      }
+    },
+    "canvas": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_seed": "random_seed_string",
+        "noise_level": 0.5
+      }
+    },
+    "canvas_font": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "protected_fonts": ["Arial", "Times New Roman", "Courier New"]
+      }
+    },
+    "css_font": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_level": 0.3
+      }
+    },
+    "webrtc": {
+      "enabled": true,
+      "mode": "auto_replace",
+      "params": {}
+    },
+    "webgl": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_seed": "webgl_random_seed",
+        "noise_level": 0.2
+      }
+    }
+  }
+}
