@@ -40,8 +40,36 @@ D:\chromium125.0.6422.0\
 10. Canvas画布指纹
 11. Canvas字体指纹
 12. CSS字体指纹
-13. WebRTC
+13. WebRTC网络接口
 14. WebGL图像
+15. WebGL元数据
+16. WebGPU
+17. WebGL特性掩码
+18. AudioContext
+19. ClientRects
+20. TLS握手指纹
+21. 硬件并发数
+22. 硬盘数量
+23. 设备内存
+24. 电池信息
+25. 端口扫描保护
+26. 控制台输出控制
+27. Do Not Track设置
+28. User-Agent
+29. 浏览器插件
+30. MIME类型
+31. Navigator附加属性
+32. 设备像素比
+33. WebDriver/自动化标志
+34. ClientHello指纹
+35. CDP连接防护
+36. IP地址
+37. 媒体设备列表
+38. 语音合成声音
+39. 本地存储隔离
+40. 代理检测防护
+41. DNS指纹
+42. IndexedDB隔离
 
 ## 使用方法
 
@@ -113,14 +141,21 @@ python patch_manager.py generate --name=custom_language --category=language --fi
         "languages": ["en-US", "en"]
       }
     },
-    "screen_resolution": {
+    "webrtc": {
       "enabled": true,
-      "mode": "custom",
+      "mode": "auto_replace",
       "params": {
-        "width": 1920,
-        "height": 1080
+        "use_proxy_ip": true
       }
     },
+    "canvas": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "seed": "canvas_noise_seed_string",
+        "noise_level": 0.5
+      }
+    }
     // 其他指纹设置...
   }
 }
