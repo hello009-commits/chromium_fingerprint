@@ -49,6 +49,32 @@ FINGERPRINT_CATEGORIES = [
     'css_font',          # css字体指纹
     'webrtc',            # WebRTC
     'webgl',             # WebGL图像
+    'webgpu',            # WebGPU
+    'audio_context',     # AudioContext
+    'client_rects',      # ClientRects
+    'ssl_tls',           # SSL TLS
+    'hardware_concurrency', # 硬件并发数
+    'storage_quota',     # 硬盘数量
+    'device_memory',     # 设备内存
+    'battery',           # 电池
+    'port_scan_protection', # 端口扫描保护
+    'console_output',    # 禁用控制台输出
+    'do_not_track',      # Do Not Track
+    'user_agent',        # User-Agent
+    'plugins',           # Plugins
+    'mime_types',        # MimeTypes
+    'navigator_properties', # Navigator附加属性
+    'device_pixel_ratio', # 设备像素比
+    'webdriver_detection', # WebDriver检测
+    'tls_client_hello',  # TLS ClientHello
+    'cdp_protection',    # CDP连接保护
+    'ip_address',        # IP地址
+    'media_devices',     # 媒体设备指纹
+    'speech_voices',     # SpeechVoices
+    'local_storage',     # localStorage
+    'proxy',             # Proxy代理
+    'dns',               # DNS域名系统
+    'indexed_db',        # IndexedDB
 ]
 
 # 补丁文件路径映射
@@ -129,6 +155,116 @@ PATCH_FILE_MAPPINGS = {
         'gpu/command_buffer/client/gles2_implementation.cc',
         'third_party/blink/renderer/modules/webgl/webgl2_rendering_context.cc',
         'third_party/blink/renderer/core/html/canvas/html_canvas_element.cc'
+    ],
+    'webgpu': [
+        'third_party/blink/renderer/modules/webgpu/gpu.cc',
+        'third_party/blink/renderer/modules/webgpu/gpu_adapter.cc',
+        'third_party/blink/renderer/modules/webgpu/gpu_device.cc'
+    ],
+    'audio_context': [
+        'third_party/blink/renderer/modules/webaudio/audio_context.cc',
+        'third_party/blink/renderer/modules/webaudio/base_audio_context.cc',
+        'third_party/blink/renderer/modules/webaudio/offline_audio_context.cc'
+    ],
+    'client_rects': [
+        'third_party/blink/renderer/core/dom/element.cc',
+        'third_party/blink/renderer/core/layout/layout_object.cc',
+        'third_party/blink/renderer/core/layout/layout_box.cc'
+    ],
+    'ssl_tls': [
+        'net/ssl/ssl_client_socket_impl.cc',
+        'net/ssl/ssl_config.cc',
+        'net/socket/ssl_client_socket.cc'
+    ],
+    'hardware_concurrency': [
+        'third_party/blink/renderer/core/workers/navigator_concurrent_hardware.cc',
+        'third_party/blink/renderer/core/frame/navigator.cc'
+    ],
+    'storage_quota': [
+        'third_party/blink/renderer/modules/quota/storage_manager.cc',
+        'content/browser/quota/quota_manager_impl.cc'
+    ],
+    'device_memory': [
+        'third_party/blink/renderer/core/frame/navigator_device_memory.cc',
+        'third_party/blink/renderer/core/frame/navigator.cc'
+    ],
+    'battery': [
+        'third_party/blink/renderer/modules/battery/battery_manager.cc',
+        'services/device/battery/battery_status_manager.cc'
+    ],
+    'port_scan_protection': [
+        'net/socket/tcp_client_socket.cc',
+        'net/socket/udp_client_socket.cc',
+        'content/browser/renderer_host/render_process_host_impl.cc'
+    ],
+    'console_output': [
+        'third_party/blink/renderer/core/inspector/console_message.cc',
+        'content/browser/devtools/devtools_agent_host_impl.cc'
+    ],
+    'do_not_track': [
+        'third_party/blink/renderer/core/frame/navigator.cc',
+        'net/http/http_request_headers.cc'
+    ],
+    'user_agent': [
+        'content/common/user_agent.cc',
+        'third_party/blink/renderer/core/frame/navigator.cc',
+        'net/http/http_util.cc'
+    ],
+    'plugins': [
+        'third_party/blink/renderer/core/frame/navigator_plugins.cc',
+        'content/browser/plugin_service_impl.cc'
+    ],
+    'mime_types': [
+        'third_party/blink/renderer/core/frame/navigator_plugins.cc',
+        'net/base/mime_util.cc'
+    ],
+    'navigator_properties': [
+        'third_party/blink/renderer/core/frame/navigator.cc',
+        'third_party/blink/renderer/core/frame/navigator_id.cc'
+    ],
+    'device_pixel_ratio': [
+        'third_party/blink/renderer/core/frame/screen.cc',
+        'ui/display/screen.cc'
+    ],
+    'webdriver_detection': [
+        'third_party/blink/renderer/core/frame/navigator.cc',
+        'content/browser/renderer_host/render_process_host_impl.cc'
+    ],
+    'tls_client_hello': [
+        'net/ssl/ssl_client_socket_impl.cc',
+        'net/socket/ssl_client_socket.cc'
+    ],
+    'cdp_protection': [
+        'content/browser/devtools/devtools_agent_host_impl.cc',
+        'content/browser/devtools/devtools_http_handler.cc'
+    ],
+    'ip_address': [
+        'net/base/network_interfaces.cc',
+        'services/network/network_service.cc'
+    ],
+    'media_devices': [
+        'third_party/blink/renderer/modules/mediastream/media_devices.cc',
+        'content/browser/media/media_devices_dispatcher_host.cc'
+    ],
+    'speech_voices': [
+        'third_party/blink/renderer/modules/speech/speech_synthesis.cc',
+        'content/browser/speech/speech_synthesis_impl.cc'
+    ],
+    'local_storage': [
+        'third_party/blink/renderer/modules/storage/storage_area.cc',
+        'content/browser/dom_storage/dom_storage_context_wrapper.cc'
+    ],
+    'proxy': [
+        'net/proxy_resolution/proxy_config.cc',
+        'net/proxy_resolution/proxy_resolver.cc'
+    ],
+    'dns': [
+        'net/dns/host_resolver_impl.cc',
+        'net/dns/dns_client.cc'
+    ],
+    'indexed_db': [
+        'third_party/blink/renderer/modules/indexeddb/idb_factory.cc',
+        'content/browser/indexed_db/indexed_db_context_impl.cc'
     ]
 }
 

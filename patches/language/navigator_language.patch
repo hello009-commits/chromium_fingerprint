@@ -1,0 +1,36 @@
+--- a/src/third_party/blink/renderer/core/frame/navigator_language.cc
++++ b/src/third_party/blink/renderer/core/frame/navigator_language.cc
+@@ -10,6 +10,7 @@
+ #include "third_party/blink/renderer/core/frame/navigator_language.h"
+ 
+ #include "third_party/blink/renderer/core/frame/local_dom_window.h"
++#include "third_party/blink/renderer/core/frame/fingerprint_controller.h"
+ #include "third_party/blink/renderer/platform/language.h"
+ #include "third_party/blink/renderer/platform/wtf/text/wtf_string.h"
+ 
+@@ -18,7 +19,12 @@ namespace blink {
+ 
+ String NavigatorLanguage::language() {
+   // 获取指纹控制器实例
+-  return DefaultLanguage();
++  FingerprintController* controller = FingerprintController::GetInstance();
++  if (controller && controller->IsLanguageEnabled()) {
++    return controller->GetCustomLanguage();
++  }
++  
++  return DefaultLanguage();
+ }
+ 
+ const Vector<String>& NavigatorLanguage::languages() {
+@@ -26,6 +32,11 @@ const Vector<String>& NavigatorLanguage::languages() {
+   // languages() 方法返回用户偏好的语言列表
+   static Vector<String> languages_list;
+   
++  FingerprintController* controller = FingerprintController::GetInstance();
++  if (controller && controller->IsLanguageEnabled()) {
++    return controller->GetCustomLanguages();
++  }
++  
+   if (languages_list.IsEmpty()) {
+     languages_list.push_back(DefaultLanguage());
+   }

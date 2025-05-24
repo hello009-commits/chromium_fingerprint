@@ -103,6 +103,166 @@
         "noise_seed": "webgl_random_seed",
         "noise_level": 0.2
       }
+    },
+    "webgpu": {
+      "enabled": true,
+      "mode": "default",
+      "params": {}
+    },
+    "audio_context": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_level": 0.1
+      }
+    },
+    "client_rects": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_level": 0.05
+      }
+    },
+    "ssl_tls": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {}
+    },
+    "hardware_concurrency": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "cores": 8
+      }
+    },
+    "storage_quota": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "quota_gb": 1000
+      }
+    },
+    "device_memory": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "memory_gb": 8
+      }
+    },
+    "battery": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "charging": true,
+        "level": 0.8
+      }
+    },
+    "port_scan_protection": {
+      "enabled": true,
+      "mode": "enable",
+      "params": {}
+    },
+    "console_output": {
+      "enabled": true,
+      "mode": "disable",
+      "params": {}
+    },
+    "do_not_track": {
+      "enabled": true,
+      "mode": "enable",
+      "params": {
+        "value": "1"
+      }
+    },
+    "user_agent": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
+      }
+    },
+    "plugins": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_level": 0.2
+      }
+    },
+    "mime_types": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_level": 0.1
+      }
+    },
+    "navigator_properties": {
+      "enabled": true,
+      "mode": "default",
+      "params": {}
+    },
+    "device_pixel_ratio": {
+      "enabled": true,
+      "mode": "default",
+      "params": {}
+    },
+    "webdriver_detection": {
+      "enabled": true,
+      "mode": "disable",
+      "params": {}
+    },
+    "tls_client_hello": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {}
+    },
+    "cdp_protection": {
+      "enabled": true,
+      "mode": "enable",
+      "params": {}
+    },
+    "ip_address": {
+      "enabled": true,
+      "mode": "custom",
+      "params": {
+        "ip": "192.168.1.100"
+      }
+    },
+    "media_devices": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_level": 0.1
+      }
+    },
+    "speech_voices": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {
+        "noise_level": 0.1
+      }
+    },
+    "local_storage": {
+      "enabled": true,
+      "mode": "isolate",
+      "params": {}
+    },
+    "proxy": {
+      "enabled": true,
+      "mode": "fake_ip",
+      "params": {
+        "proxy_ip": "127.0.0.1",
+        "proxy_port": 8080
+      }
+    },
+    "dns": {
+      "enabled": true,
+      "mode": "noise",
+      "params": {}
+    },
+    "indexed_db": {
+      "enabled": true,
+      "mode": "isolate",
+      "params": {}
     }
   }
 }

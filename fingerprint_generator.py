@@ -57,6 +57,24 @@ COLOR_DEPTHS = [24, 30, 32]
 # 随机触控点列表
 TOUCH_POINTS = [0, 5, 10]
 
+# 随机硬件并发数列表
+HARDWARE_CONCURRENCY = [2, 4, 6, 8, 12, 16, 20, 24]
+
+# 随机设备内存列表 (GB)
+DEVICE_MEMORY = [4, 8, 16, 32]
+
+# 随机存储配额列表 (GB)
+STORAGE_QUOTA = [500, 1000, 2000, 4000]
+
+# 随机User-Agent列表
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:126.0) Gecko/20100101 Firefox/126.0"
+]
+
 def generate_random_location():
     """生成随机地理位置"""
     # 生成一个合理范围内的随机经纬度
@@ -210,6 +228,166 @@ def generate_random_fingerprint():
                     "noise_seed": webgl_noise_seed,
                     "noise_level": round(random.uniform(0.1, 0.3), 2)
                 }
+            },
+            "webgpu": {
+                "enabled": True,
+                "mode": "default",
+                "params": {}
+            },
+            "audio_context": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {
+                    "noise_level": round(random.uniform(0.05, 0.2), 2)
+                }
+            },
+            "client_rects": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {
+                    "noise_level": round(random.uniform(0.01, 0.1), 2)
+                }
+            },
+            "ssl_tls": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {}
+            },
+            "hardware_concurrency": {
+                "enabled": True,
+                "mode": "custom",
+                "params": {
+                    "cores": random.choice(HARDWARE_CONCURRENCY)
+                }
+            },
+            "storage_quota": {
+                "enabled": True,
+                "mode": "custom",
+                "params": {
+                    "quota_gb": random.choice(STORAGE_QUOTA)
+                }
+            },
+            "device_memory": {
+                "enabled": True,
+                "mode": "custom",
+                "params": {
+                    "memory_gb": random.choice(DEVICE_MEMORY)
+                }
+            },
+            "battery": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {
+                    "charging": random.choice([True, False]),
+                    "level": round(random.uniform(0.1, 1.0), 2)
+                }
+            },
+            "port_scan_protection": {
+                "enabled": True,
+                "mode": "enable",
+                "params": {}
+            },
+            "console_output": {
+                "enabled": True,
+                "mode": "disable",
+                "params": {}
+            },
+            "do_not_track": {
+                "enabled": True,
+                "mode": "enable",
+                "params": {
+                    "value": random.choice(["1", "0", "unspecified"])
+                }
+            },
+            "user_agent": {
+                "enabled": True,
+                "mode": "custom",
+                "params": {
+                    "user_agent": random.choice(USER_AGENTS)
+                }
+            },
+            "plugins": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {
+                    "noise_level": round(random.uniform(0.1, 0.3), 2)
+                }
+            },
+            "mime_types": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {
+                    "noise_level": round(random.uniform(0.05, 0.2), 2)
+                }
+            },
+            "navigator_properties": {
+                "enabled": True,
+                "mode": "default",
+                "params": {}
+            },
+            "device_pixel_ratio": {
+                "enabled": True,
+                "mode": "default",
+                "params": {}
+            },
+            "webdriver_detection": {
+                "enabled": True,
+                "mode": "disable",
+                "params": {}
+            },
+            "tls_client_hello": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {}
+            },
+            "cdp_protection": {
+                "enabled": True,
+                "mode": "enable",
+                "params": {}
+            },
+            "ip_address": {
+                "enabled": True,
+                "mode": "custom",
+                "params": {
+                    "ip": f"{random.randint(192, 223)}.{random.randint(1, 254)}.{random.randint(1, 254)}.{random.randint(1, 254)}"
+                }
+            },
+            "media_devices": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {
+                    "noise_level": round(random.uniform(0.05, 0.2), 2)
+                }
+            },
+            "speech_voices": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {
+                    "noise_level": round(random.uniform(0.05, 0.2), 2)
+                }
+            },
+            "local_storage": {
+                "enabled": True,
+                "mode": "isolate",
+                "params": {}
+            },
+            "proxy": {
+                "enabled": True,
+                "mode": "fake_ip",
+                "params": {
+                    "proxy_ip": f"{random.randint(127, 192)}.{random.randint(1, 254)}.{random.randint(1, 254)}.{random.randint(1, 254)}",
+                    "proxy_port": random.choice([8080, 3128, 1080, 8888, 9999])
+                }
+            },
+            "dns": {
+                "enabled": True,
+                "mode": "noise",
+                "params": {}
+            },
+            "indexed_db": {
+                "enabled": True,
+                "mode": "isolate",
+                "params": {}
             }
         }
     }
