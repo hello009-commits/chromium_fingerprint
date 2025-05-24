@@ -111,7 +111,7 @@
 
 // 修改实现细节：
 // - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取可用屏幕区域的尺寸（排除任务栏、停靠窗口等）。需要修改获取可用屏幕宽度、高度等信息的函数，拦截系统调用，并返回伪造的可用屏幕尺寸数值。这些数值通常小于或等于伪造的屏幕分辨率。
-// - src/third_搜索未发现pa/b迹象):ink/rthnre_rcrtorbl/fkre/nds ericoreoreeoutnadjust_for_.evace_vcaie_flttor.hindow.screen.availHeight 属性，它们会调用 ui/display/screen.cc 中的函数来获取可用屏幕尺寸。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+// - src/third_party/blink/renderer/core/frame/screen.cc 实现了 window.screen.availWidth 和 window.screen.availHeight 属性，它们会调用 ui/display/screen.cc 中的函数来获取可用屏幕尺寸。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
 
 8、颜色深度【0为不设置】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
@@ -119,14 +119,15 @@
 
 // 修改实现细节：
 // - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取屏幕的颜色深度。需要修改获取颜色深度相关的函数，拦截系统调用，并返回伪造的颜色深度数值（通常是 24 或 32）。
-// - src/third_party/blink/ren搜索未发现de/c迹象):re/frthmr/_rertn.blc k实 i.dereclcoreD 和 outwadjust_for_ievnce_dcawe_f.etor.hxelDepth 属性，它们会调用 ui/display/screen.cc 中的函数来获取颜色深度。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+// - src/third_party/blink/renderer/core/frame/screen.cc 实现了 window.screen.colorDepth 和 window.screen.pixelDepth 属性，它们会调用 ui/display/screen.cc 中的函数来获取颜色深度。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
 
 9、最大触控点【0为不设置，移动端可设置为5】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
 文件路径(已验证): src/ui/display/screen.cc
 
 // 修改实现细节：
-// - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取支持的最大触控点数量。需要修改获取最大触控点数量相关的函数，拦截系统调用，并返回伪造的数值。对于桌面浏览器通常是 0，移动端可以设置为 5 或其他搜索未发现合理//迹象):- srcthtri__artrtbl/bklkrrdere/rcoreeeenout.adjust_for_cevcce_ ca现e_f了vtor.hr.maxTouchPoints 属性，它会调用 ui/display/screen.cc 中的函数来获取最大触控点数量。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+// - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取支持的最大触控点数量。需要修改获取最大触控点数量相关的函数，拦截系统调用，并返回伪造的数值。对于桌面浏览器通常是 0，移动端可以设置为 5 或其他值。
+// - src/third_party/blink/renderer/core/frame/screen.cc 实现了 navigator.maxTouchPoints 属性，它会调用 ui/display/screen.cc 中的函数来获取最大触控点数量。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
 
 10、canvas画布指纹【噪音 真实 可外部自定义字符串来固定噪音】
 文件路径(已验证): src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
@@ -174,7 +175,7 @@
 文件路径(已验证): src/third_party/blink/public/common/peerconnection/webrtc_ip_handling_policy.h
 文件路径(已验证): src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
 文件路径(已验证): src/content/browser/webrtc/webrtc_internals_message_handler.cc
-文件路径(未找到，功能已确定整合到 src/services/network/public/cpp/p2p_param_traits.h/.cc 等文件)
+文件路径(已验证): src/services/network/public/cpp/p2p_param_traits.h
 文件路径(已验证): src/net/base/network_interfaces.h
 文件路径(已验证): src/services/network/p2p/socket_manager.cc
 文件路径(已验证): src/services/network/p2p/socket_manager.h
@@ -228,10 +229,9 @@
 文件路径(已验证): src/gpu/command_buffer/client/webgpu_implementation.cc
 文件路径(已验证): src/gpu/config/gpu_info_collector.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu.cc
-文件路径(未找到): src/third_party/blink/renderer/modules/webgpu/navigator_gpu.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu_device.cc
 文件路径(已验证): src/gpu/command_buffer/service/webgpu_decoder_impl.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu.cc
+文件路径(已验证): src/gpu/config/webgpu_blocklist.cc
 
 // 修改实现细节：
 // - WebGPU 是新一代的 Web 图形 API，提供对 GPU 硬件更低级别的访问。WebGPU 指纹可能通过检查其可用性、支持的特性、适配器信息等来生成。
@@ -458,10 +458,10 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 
 34、TLS ClientHello【真实 噪音】
 // 客户端在TLS握手时发送的信息，包括支持的加密套件、扩展等。
-文件路径(未找到，功能已确定整合到 src/net/socket/ssl_client_socket_impl.cc 等文件)
 文件路径(已验证): src/net/ssl/ssl_config_service.cc
 文件路径(已验证): src/net/socket/ssl_client_socket_impl.cc
 文件路径(已验证): src/net/ssl/ssl_cipher_suite_names.cc
+文件路径(已验证): src/net/ssl/ssl_client_session_cache.cc
 
 // 修改实现细节：
 // - TLS ClientHello 指纹是通过检查浏览器在 TLS 握手时发送的 ClientHello 消息来获取信息。
@@ -515,11 +515,11 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 // 注意：即使禁用媒体访问，设备列表仍可能被暴露用于指纹识别。
 文件路径(已验证): src/third_party/blink/renderer/modules/mediastream/media_devices.cc
 文件路径(已验证): src/third_party/blink/public/mojom/mediastream/media_devices.mojom
-文件路径(未找到，功能已确定部分整合到 src/media/device_monitors/ 等文件 (负责设备监控和列表维护))
 文件路径(已验证): src/third_party/blink/renderer/modules/mediastream/media_stream_constraints_util.cc
 文件路径(已验证): src/media/device_monitors/device_monitor_udev.h
 文件路径(已验证): src/content/browser/renderer_host/media/media_devices_manager.cc
 文件路径(已验证): src/media/capture/video/video_capture_device_factory.cc
+文件路径(已验证): src/media/capture/video/create_video_capture_device_factory.cc
 
 // 修改实现细节：
 // - 媒体设备指纹基于 navigator.mediaDevices.enumerateDevices() 返回的设备列表。
@@ -561,8 +561,9 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 40、Proxy代理【真实 伪造IP】
 // 检测浏览器是否使用了代理，以及代理相关的配置信息。
 文件路径(已验证): src/net/proxy_resolution/proxy_config_service.cc
-文件路径(未找到): src/net/proxy_resolution/proxy_resolver.cc
-文件路径(未找到): src/net/proxy_resolution/proxy_resolution_service.cc
+文件路径(已验证): src/net/proxy_resolution/configured_proxy_resolution_service.cc
+文件路径(已验证): src/net/proxy_resolution/proxy_resolution_service.h
+文件路径(已验证): src/net/proxy_resolution/win/windows_system_proxy_resolution_service.cc
 
 // 修改实现细节：
 // - Proxy 指纹可能通过检测网络连接是否经过代理或检查与代理相关的环境变量/配置来获取。
@@ -594,3 +595,29 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 // - 需要修改 src/content/browser/indexed_db/indexed_db_database.cc 等文件中处理 IndexedDB 操作的逻辑。
 // - 在存储服务层，例如 src/content/browser/indexed_db/indexed_db_context_impl.cc，负责管理 IndexedDB 数据库的上下文和数据持久化，可能需要在此处进行拦截和修改。
 // - 实现"隔离"可以确保不同指纹配置下的 IndexedDB 数据相互独立；实现"禁用"则阻止网站使用 IndexedDB。
+
+43、无头模式指纹防护 【开启 关闭】
+// 无头模式(Headless)通常被自动化工具使用，但容易被网站识别和检测。
+// 注意：无头模式运行时会有多种特征泄露，包括缺少某些插件、硬件信息不符合预期等。
+文件路径(已验证): src/headless/lib/browser/headless_browser_impl.cc
+文件路径(已验证): src/headless/lib/browser/headless_web_contents_impl.cc
+文件路径(已验证): src/headless/public/headless_browser.h
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证): src/content/common/user_agent.cc
+文件路径(已验证): src/content/browser/devtools/devtools_agent_host_impl.cc
+文件路径(已验证): src/gpu/command_buffer/client/gles2_implementation.cc
+文件路径(已验证): src/ui/display/screen.cc
+
+// 修改实现细节：
+// - 无头模式指纹主要通过多个特征组合检测，而非单一指标，因此需要全面修改。
+// - 主要修改点包括：
+//   1. navigator.webdriver属性：在 src/third_party/blink/renderer/core/frame/navigator.cc 中修改 webdriver 属性的返回值，强制返回 false。
+//   2. User-Agent字符串：修改 src/content/common/user_agent.cc 中的 UA 生成逻辑，删除或隐藏 "Headless" 标识。
+//   3. 窗口尺寸：在 src/headless/lib/browser/headless_web_contents_impl.cc 和 src/ui/display/screen.cc 中伪造符合正常浏览器的窗口尺寸和视口尺寸。
+//   4. 插件和媒体设备：在 navigator.cc 中伪造插件列表和媒体设备列表，避免返回空列表。
+//   5. 浏览器特性检测：修改无头模式下缺失的特定浏览器功能，如权限请求、通知API等。
+//   6. WebGL/Canvas行为：在 src/gpu/command_buffer/client/gles2_implementation.cc 中调整WebGL参数和行为，模拟正常浏览器特性。
+//   7. 隐藏DevTools协议痕迹：在 src/content/browser/devtools/devtools_agent_host_impl.cc 中修改自动化检测相关的接口。
+//   8. 硬件加速：模拟正常浏览器的硬件加速行为，防止通过性能特征检测。
+// - 这些修改应该统一协调，确保各种指纹特征保持一致，避免出现矛盾或异常的行为特征。
+// - 通过这些修改，无头模式浏览器可以伪装成正常浏览器，避免被自动化检测工具识别。
