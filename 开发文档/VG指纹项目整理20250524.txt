@@ -30,7 +30,7 @@
 文件路径(已验证): src/chrome/app/chrome_main_delegate.cc
 文件路径(已验证): src/chrome/browser/chrome_content_browser_client.cc
 文件路径(已验证): src/third_party/blink/renderer/core/html/html_html_element.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/intl/intl_locale.cc
+文件路径(已更新): src/third_party/blink/renderer/platform/text/platform_locale.cc
 文件路径(已验证): src/base/i18n/rtl.cc
 文件路径(已验证): src/components/language/core/browser/language_model.cc
 
@@ -52,9 +52,9 @@
 文件路径(已验证): src/ui/base/l10n/l10n_util.cc
 文件路径(已验证): src/chrome/browser/browser_process_impl.cc
 文件路径(已验证): src/ui/base/resource/resource_bundle.cc
-文件路径(已验证): src/components/language/core/browser/pref_names.cc
+文件路径(已更新): src/components/language/core/browser/pref_names.h
 文件路径(已验证): src/components/translate/core/browser/translate_manager.cc
-文件路径(已验证): src/chrome/browser/language/chrome_language_model_manager_factory.cc
+文件路径(已更新): src/components/language/core/browser/language_model_manager.cc
 文件路径(已验证): src/components/translate/core/browser/language_state.cc
 文件路径(已验证): src/chrome/browser/ui/browser_dialogs.cc
 文件路径(已验证): src/components/language/core/browser/language_prefs.cc
@@ -78,14 +78,14 @@
 文件路径(已验证): src/services/device/time_zone_monitor/time_zone_monitor.cc
 文件路径(已验证): src/third_party/blink/renderer/core/timing/performance.cc
 文件路径(已验证): src/base/time/time.cc
-文件路径(已验证): src/base/i18n/time_formatting.cc（时间格式化相关）
-文件路径(已验证): src/third_party/blink/renderer/core/timing/date_cache.cc
-文件路径(已验证): src/third_party/blink/renderer/core/timing/date_cache.h
-文件路径(已验证): src/third_party/blink/renderer/bindings/core/v8/v8_date_constructor.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/intl/date_time_format.cc
-文件路径(已验证): src/third_party/blink/renderer/platform/wtf/time_zone.cc
+文件路径(已更新): src/base/i18n/timezone.cc（时间格式化相关）
+文件路径(已更新): src/third_party/blink/renderer/core/timing/performance.cc
+文件路径(已更新): src/third_party/blink/renderer/core/timing/performance.h
+文件路径(已更新): src/third_party/blink/renderer/core/timing/window_performance.cc
+文件路径(已更新): src/third_party/blink/renderer/platform/text/locale_icu.cc
+文件路径(已更新): src/base/i18n/timezone.cc
 文件路径(已验证): src/base/i18n/timezone.cc
-文件路径(已验证): src/third_party/icu/source/i18n/timezone.cpp
+文件路径(已更新): src/base/i18n/timezone.cc
 
 // 修改实现细节：
 // - 主要修改点在 src/services/device/time_zone_monitor/time_zone_monitor.cc，这个文件负责监控系统时区变化并通知相关的组件。需要修改这里的逻辑，拦截系统时区信息，并广播伪造的时区。
@@ -117,9 +117,9 @@
 文件路径(已验证): src/services/device/geolocation/location_arbitrator.h
 文件路径(已验证): src/services/device/geolocation/public_ip_address_geolocator.cc
 文件路径(已验证): src/services/device/geolocation/public_ip_address_geolocator.h
-文件路径(已验证): src/third_party/blink/renderer/modules/geolocation/geolocation_controller.cc
+文件路径(已更新): src/services/device/geolocation/geolocation_provider_impl.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/geolocation/geolocation_coordinates.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/geolocation/geolocation_position.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/geolocation/geolocation_coordinates.cc
 文件路径(已验证): src/services/device/geolocation/wifi_data_provider_common.cc
 文件路径(已验证): src/services/device/geolocation/wifi_polling_policy.cc
 文件路径(已验证): src/content/browser/permissions/permission_controller_impl.cc
@@ -149,18 +149,18 @@
 文件路径(已验证): src/ui/display/screen.cc
 文件路径(已验证): src/ui/display/display.cc
 文件路径(已验证): src/ui/display/display_list.cc
-文件路径(已验证): src/third_party/blink/renderer/core/layout/adjust_for_device_scale_factor.h
+文件路径(已更新): src/third_party/blink/renderer/core/css/media_values.cc
 文件路径(已验证): src/third_party/blink/renderer/core/css/media_query_exp.cc
 文件路径(已验证): src/third_party/blink/renderer/core/css/media_values.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/visual_viewport.cc
 文件路径(已验证): src/third_party/blink/renderer/core/page/page.cc
 文件路径(已验证): src/ui/display/manager/display_manager.cc
-文件路径(已验证): src/ui/display/manager/display_layout_manager.cc
+文件路径(已更新): src/ui/display/manager/display_manager.cc
 文件路径(已验证): src/ui/aura/window.cc
 文件路径(已验证): src/third_party/blink/renderer/core/fullscreen/fullscreen.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/screen_orientation/screen_orientation_controller.cc
-文件路径(已验证): src/third_party/blink/renderer/core/frame/window_screen_util.cc
-文件路径(已验证): src/third_party/blink/renderer/core/frame/resize_observer.cc
+文件路径(已更新): src/third_party/blink/renderer/core/frame/screen.cc
+文件路径(已更新): src/third_party/blink/renderer/core/resize_observer/resize_observer.cc
 
 // 修改实现细节：
 // - 主要修改点在 src/ui/display/screen.cc。这个文件负责从操作系统获取真实的屏幕显示信息，包括分辨率。需要修改其中获取屏幕宽度、高度等信息的函数，拦截系统调用，并返回伪造的分辨率数值。
@@ -199,7 +199,7 @@
 文件路径(已验证): src/third_party/blink/renderer/core/frame/local_dom_window.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/window_or_worker_global_scope.cc
 文件路径(已验证): src/third_party/blink/renderer/core/css/media_values_dynamic.cc
-文件路径(已验证): src/third_party/blink/renderer/core/css/cssom/computed_style.cc
+文件路径(已更新): src/third_party/blink/renderer/core/css/media_values_dynamic.cc
 文件路径(已验证): src/third_party/blink/renderer/core/page/chrome_client.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/visual_viewport.cc
 文件路径(已验证): src/third_party/blink/renderer/platform/graphics/graphics_context.cc
@@ -249,8 +249,8 @@
 文件路径(已验证): src/ui/display/display_change_notifier.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/local_dom_window.cc
 文件路径(已验证): src/ui/display/manager/display_manager.cc
-文件路径(已验证): src/ui/views/widget/desktop_aura/desktop_screen.cc
-文件路径(已验证): src/content/browser/web_contents/web_contents_view.cc
+文件路径(已更新): src/ui/display/manager/display_manager.cc
+文件路径(已更新): src/third_party/blink/renderer/core/frame/local_dom_window.cc
 文件路径(已验证): src/third_party/blink/renderer/core/css/media_values.cc
 文件路径(已验证): src/third_party/blink/renderer/core/page/viewport_description.cc
 
@@ -292,12 +292,12 @@
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
 文件路径(已验证): src/ui/display/screen.cc
 文件路径(已验证): src/ui/display/win/display_info.cc
-文件路径(已验证): src/ui/display/mac/display_info_mac.mm
+文件路径(已更新): src/ui/display/display.cc
 文件路径(已验证): src/ui/display/display.cc
 文件路径(已验证): src/third_party/blink/renderer/core/html/canvas/canvas_rendering_context.cc
 文件路径(已验证): src/gpu/config/gpu_info.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_rendering_context_base.cc
-文件路径(已验证): src/third_party/skia/src/core/SkColorSpace.cpp
+文件路径(已更新): src/ui/gfx/color_space.cc
 文件路径(已验证): src/third_party/blink/renderer/core/css/media_values.cc
 文件路径(已验证): src/ui/gfx/color_space.cc
 
@@ -338,12 +338,12 @@
 文件路径(已验证): src/third_party/blink/renderer/core/frame/screen.cc
 文件路径(已验证): src/ui/display/screen.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
-文件路径(已验证): src/third_party/blink/renderer/core/input/touch_util.cc
+文件路径(已更新): src/third_party/blink/renderer/core/events/touch_event.cc
 文件路径(已验证): src/content/browser/renderer_host/input/touch_emulator.cc
 文件路径(已验证): src/ui/events/devices/input_device.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/device_orientation/device_orientation_controller.cc
-文件路径(已验证): src/ui/events/blink/web_input_event_builders.cc
-文件路径(已验证): src/third_party/blink/renderer/platform/runtime_enabled_features.cc
+文件路径(已更新): src/third_party/blink/renderer/core/events/pointer_event.cc
+文件路径(已更新): src/third_party/blink/renderer/core/dom/events/event_target.cc
 文件路径(已验证): src/third_party/blink/renderer/core/dom/events/event_target.cc
 文件路径(已验证): src/third_party/blink/renderer/core/events/pointer_event.cc
 文件路径(已验证): src/third_party/blink/renderer/core/events/touch_event.cc
@@ -398,14 +398,14 @@
 文件路径(已验证): src/third_party/blink/renderer/core/html/canvas/canvas_context_creation_attributes_core.h
 文件路径(已验证): src/third_party/blink/renderer/core/html/canvas/html_canvas_element.cc
 文件路径(已验证): src/third_party/blink/renderer/platform/graphics/skia/skia_utils.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/offscreencanvas/offscreen_canvas.cc
+文件路径(已更新): src/third_party/blink/renderer/core/html/canvas/html_canvas_element.cc
 文件路径(已验证): src/third_party/blink/renderer/core/imagebitmap/image_bitmap.cc
 文件路径(已验证): src/third_party/blink/renderer/platform/graphics/bitmap_image.cc
-文件路径(已验证): src/third_party/blink/renderer/platform/graphics/paint/paint_canvas.cc
-文件路径(已验证): src/third_party/blink/renderer/core/exported/web_canvas_rendering_context_2d_impl.cc
+文件路径(已更新): src/third_party/blink/renderer/platform/graphics/graphics_context.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/canvas/canvas2d/canvas_rendering_context_2d.cc
 文件路径(已验证): src/third_party/blink/renderer/platform/graphics/bitmap_image_metrics.cc
 文件路径(已验证): src/third_party/blink/renderer/platform/graphics/graphics_context.cc
-文件路径(已验证): src/third_party/skia/src/core/SkCanvas.cpp
+文件路径(已更新): src/third_party/blink/renderer/platform/graphics/skia/skia_utils.cc
 
 // 修改实现细节：
 // - 核心修改点在于拦截 Canvas 绘制完成后读取像素数据的过程，例如 toDataURL()、toBlob() 或 getImageData() 方法的实现。可以在数据返回之前，向像素数据中注入细微的噪音（修改部分像素的颜色值）。
@@ -550,17 +550,17 @@
 文件路径(已验证): src/third_party/blink/renderer/modules/peerconnection/rtc_ice_candidate.cc
 文件路径(已验证): src/chrome/browser/media/webrtc/webrtc_event_log_manager.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/peerconnection/rtc_session_description.cc
-文件路径(已验证): src/third_party/webrtc/pc/session_description.cc
-文件路径(已验证): src/third_party/webrtc/pc/sdp_serializer.cc
-文件路径(已验证): src/third_party/webrtc/pc/dtls_transport.cc
-文件路径(已验证): src/third_party/webrtc/rtc_base/ssl_fingerprint.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/peerconnection/rtc_session_description.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/peerconnection/rtc_session_description.cc
+文件路径(已更新): src/services/network/p2p/socket_manager.cc
+文件路径(已更新): src/services/network/p2p/socket_manager.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/peerconnection/rtc_stats_report.cc
-文件路径(已验证): src/third_party/webrtc/stats/rtc_stats_collector.cc
-文件路径(已验证): src/third_party/webrtc/media/engine/webrtc_media_engine.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/peerconnection/rtc_configuration.cc
-文件路径(已验证): src/third_party/webrtc/api/peer_connection_interface.cc
-文件路径(已验证): src/third_party/webrtc/p2p/base/port_allocator.cc
-文件路径(已验证): src/third_party/webrtc/p2p/client/basic_port_allocator.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/peerconnection/rtc_stats_report.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+文件路径(未找到): src/third_party/webrtc/p2p/base/port_allocator.cc
+文件路径(未找到): src/third_party/webrtc/p2p/client/basic_port_allocator.cc
 
 // 修改实现细节：
 // - WebRTC 通过 ICE 框架发现本地和公共 IP 地址作为候选地址进行连接。修改的核心在于拦截或修改 ICE 收集候选地址的过程。
@@ -627,7 +627,7 @@
 文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_framebuffer.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_texture.cc
 文件路径(已验证): src/gpu/command_buffer/service/texture_manager.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_extensions.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/webgl/webgl_extensions.cc
 文件路径(已验证): src/gpu/config/gpu_feature_info.cc
 文件路径(已验证): src/gpu/command_buffer/service/context_state.cc
 文件路径(已验证): src/gpu/command_buffer/service/feature_info.cc
@@ -701,8 +701,8 @@
 文件路径(已验证): src/gpu/config/gpu_info.cc
 文件路径(已验证): src/gpu/config/gpu_info_collector.cc
 文件路径(已验证): src/gpu/command_buffer/service/feature_info.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_extensions.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_extensions_util.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/webgl/webgl_extensions.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/webgl/webgl_extension.cc
 文件路径(已验证): src/gpu/config/gpu_driver_bug_workarounds.cc
 文件路径(已验证): src/gpu/config/gpu_feature_info.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context_base.cc
@@ -795,16 +795,17 @@
 文件路径(已验证): src/gpu/config/webgpu_blocklist.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu_adapter.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu_supported_features.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu_supported_limits.cc
+文件路径(已更新): src/third_party/blink/renderer/platform/p2p/port_allocator.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu_shader_module.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu_compute_pipeline.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu_render_pipeline.cc
 文件路径(已验证): src/third_party/dawn/src/dawn/native/ShaderModule.cpp
 文件路径(已验证): src/third_party/dawn/src/dawn/native/Features.cpp
-文件路径(已验证): src/third_party/dawn/src/dawn/native/Adapter.cpp
-文件路径(已验证): src/third_party/dawn/src/dawn/native/Device.cpp
+{{ ... }}
+文件路径(未找到): src/third_party/dawn/src/dawn/native/Adapter.cpp
+文件路径(未找到): src/third_party/dawn/src/dawn/native/Device.cpp
 文件路径(已验证): src/third_party/blink/renderer/modules/webgpu/gpu_queue.cc
-文件路径(已验证): src/third_party/dawn/src/dawn/native/ValidationUtils.cpp
+文件路径(未找到): src/third_party/dawn/src/dawn/native/ValidationUtils.cpp
 
 // 修改实现细节：
 // - WebGPU 是新一代的 Web 图形 API，提供对 GPU 硬件更低级别的访问。WebGPU 指纹可能通过检查其可用性、支持的特性、适配器信息等来生成。
@@ -896,7 +897,7 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl2_rendering_context.cc
 文件路径(已验证): src/gpu/command_buffer/service/feature_info.cc
 文件路径(已验证): src/gpu/command_buffer/service/shader_translator.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webgl/webgl_extensions.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/webgl/webgl_extensions.cc
 文件路径(已验证): src/gpu/command_buffer/service/context_group.cc
 文件路径(已验证): src/gpu/command_buffer/service/context_state.cc
 
@@ -974,7 +975,7 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/periodic_wave.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/analyser_node.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/analyser_handler.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/fft_frame.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/webaudio/audio_node.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/offline_audio_context.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/audio_node.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/webaudio/audio_buffer.cc
@@ -1146,18 +1147,18 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/net/ssl/ssl_config_service.cc
 文件路径(已验证): src/net/ssl/ssl_config.cc
 文件路径(已验证): src/net/ssl/ssl_config.h
-文件路径(已验证): src/net/ssl/tls_version_range.h
+文件路径(已更新): src/net/ssl/ssl_config.h
 文件路径(已验证): src/net/socket/ssl_client_socket_impl.cc
 文件路径(已验证): src/net/ssl/ssl_cipher_suite_names.cc
 文件路径(已验证): src/net/ssl/ssl_client_session_cache.cc
-文件路径(已验证): src/third_party/boringssl/src/ssl/tls13_client.cc
-文件路径(已验证): src/third_party/boringssl/src/ssl/handshake.cc
-文件路径(已验证): src/third_party/boringssl/src/ssl/handshake_client.cc
-文件路径(已验证): src/net/third_party/quiche/src/quiche/quic/core/crypto/crypto_protocol.cc
+文件路径(已更新): src/net/websockets/websocket_handshake_stream_base.cc
+文件路径(已更新): src/net/websockets/websocket_handshake_challenge.cc
+文件路径(已更新): src/net/websockets/websocket_handshake_stream_create_helper.cc
+文件路径(已更新): src/net/websockets/websocket_http3_handshake_stream.cc
 文件路径(已验证): src/net/cert/cert_verifier.cc
-文件路径(已验证): src/components/ssl_config/ssl_config_service_manager.cc
+文件路径(已更新): src/net/ssl/ssl_config_service.cc
 文件路径(已验证): src/net/http/transport_security_state.cc
-文件路径(已验证): src/net/ssl/client_cert_store.cc
+文件路径(已更新): src/net/ssl/ssl_client_session_cache.cc
 
 // 修改实现细节：
 // - SSL/TLS 指纹技术已经变得高度复杂，远超简单的 ClientHello 检测。现代 TLS 指纹识别会分析整个握手过程中的多个特征，包括协议版本、加密套件顺序、扩展顺序和内容、密钥交换参数、会话恢复行为等。
@@ -1269,18 +1270,18 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/content/browser/site_instance_impl.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_device_memory.cc
 文件路径(已验证): src/base/system/sys_info.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webassembly/wasm_memory.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/webassembly/wasm_module_builder.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/webassembly/wasm_module.cc
+文件路径(已更新): src/third_party/blink/renderer/modules/webassembly/wasm_module.cc
 文件路径(已验证): src/third_party/blink/renderer/core/workers/worker_thread.cc
 文件路径(已验证): src/third_party/blink/renderer/platform/wtf/allocator/partitions.cc
 文件路径(已验证): src/content/browser/renderer_host/render_process_host_impl.cc
-文件路径(已验证): src/content/browser/memory/memory_monitor.cc
-文件路径(已验证): src/third_party/blink/renderer/core/typed_arrays/shared_array_buffer.cc
+文件路径(已更新): src/courgette/memory_monitor.cc
+文件路径(已更新): src/third_party/blink/renderer/core/typed_arrays/dom_shared_array_buffer.cc
 文件路径(已验证): src/third_party/blink/renderer/core/timing/performance.cc
-文件路径(已验证): src/third_party/blink/renderer/core/timing/performance_memory.cc
-文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_base.cc
-文件路径(已验证): src/content/browser/renderer_host/resource_scheduler.cc
-文件路径(已验证): src/content/browser/memory/memory_pressure_controller.cc
+文件路径(已更新): src/third_party/blink/renderer/core/timing/performance.cc
+文件路径(已更新): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已更新): src/content/browser/loader/resource_scheduler_browsertest.cc
+文件路径(已更新): src/content/browser/memory_pressure/user_level_memory_pressure_signal_generator.cc
 
 // 修改实现细节：
 // - 设备内存指纹已经超越简单的 navigator.deviceMemory API 检测，现代指纹技术通过多种方法推断设备内存，包括性能测试、内存分配上限测试和行为分析等。
@@ -1368,15 +1369,15 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/services/device/public/mojom/battery_status.mojom
 文件路径(已验证): src/third_party/blink/renderer/modules/battery/battery_manager.h
 文件路径(已验证): src/services/device/battery/battery_status_service.cc
-文件路径(已验证): src/services/device/battery/battery_status_manager.cc
+文件路径(未找到): src/services/device/battery/battery_status_manager.cc
 文件路径(已验证): src/services/device/battery/battery_status_manager.h
 文件路径(已验证): src/content/browser/browser_interface_binders.cc
-文件路径(已验证): src/services/device/battery/win/win_battery_monitor.cc
-文件路径(已验证): src/services/device/battery/mac/mac_battery_monitor.mm
-文件路径(已验证): src/services/device/battery/linux/upower_battery_monitor.cc
-文件路径(已验证): src/services/device/battery/android/android_battery_monitor.cc
-文件路径(已验证): src/services/device/battery/fake_battery_monitor.cc
-文件路径(已验证): src/services/device/battery/fake_battery_monitor.h
+文件路径(未找到): src/services/device/battery/win/win_battery_monitor.cc
+文件路径(未找到): src/services/device/battery/mac/mac_battery_monitor.mm
+文件路径(未找到): src/services/device/battery/linux/upower_battery_monitor.cc
+文件路径(未找到): src/services/device/battery/android/android_battery_monitor.cc
+文件路径(未找到): src/services/device/battery/fake_battery_monitor.cc
+文件路径(未找到): src/services/device/battery/fake_battery_monitor.h
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
 文件路径(已验证): src/content/browser/renderer_host/render_process_host_impl.cc
 
@@ -1486,16 +1487,16 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/services/network/websocket_factory.cc
 文件路径(已验证): src/services/network/public/mojom/websocket.mojom
 文件路径(已验证): src/services/network/restricted_cookie_manager.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/websockets/websocket.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/websockets/websocket_channel.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/websockets/websocket.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/websockets/websocket_channel.cc
 文件路径(已验证): src/third_party/blink/renderer/core/xmlhttprequest/xml_http_request.cc
 文件路径(已验证): src/third_party/blink/renderer/core/fetch/fetch_request_data.cc
-文件路径(已验证): src/third_party/blink/renderer/core/fetch/body.cc
-文件路径(已验证): src/net/dns/host_resolver_manager.cc
-文件路径(已验证): src/third_party/webrtc/p2p/base/port_allocator.cc
-文件路径(已验证): src/third_party/webrtc/p2p/client/basic_port_allocator.cc
-文件路径(已验证): src/net/quic/quic_stream_factory.cc
-文件路径(已验证): src/content/browser/content_security_policy/content_security_policy_context.cc
+文件路径(未找到): src/third_party/blink/renderer/core/fetch/body.cc
+文件路径(未找到): src/net/dns/host_resolver_manager.cc
+文件路径(未找到): src/third_party/webrtc/p2p/base/port_allocator.cc
+文件路径(未找到): src/third_party/webrtc/p2p/client/basic_port_allocator.cc
+文件路径(未找到): src/net/quic/quic_stream_factory.cc
+文件路径(未找到): src/content/browser/content_security_policy/content_security_policy_context.cc
 文件路径(已验证): src/content/browser/renderer_host/render_process_host_impl.cc
 文件路径(已验证): src/content/browser/browser_interface_binders.cc
 
@@ -1592,14 +1593,14 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 26、禁用控制台输出【开启 关闭】
 禁用console.log等方法输出信息，防止某些网站通过console作为检测项
 文件路径(已验证): src/third_party/blink/renderer/core/inspector/console_message.cc
-文件路径(已验证): src/third_party/blink/renderer/core/inspector/inspector_console_agent.cc
-文件路径(已验证): src/third_party/blink/renderer/core/frame/console.cc
-文件路径(已验证): src/third_party/blink/renderer/core/frame/global_scope.cc
-文件路径(已验证): src/third_party/blink/renderer/bindings/core/v8/v8_console.cc
+文件路径(未找到): src/third_party/blink/renderer/core/inspector/inspector_console_agent.cc
+文件路径(未找到): src/third_party/blink/renderer/core/frame/console.cc
+文件路径(未找到): src/third_party/blink/renderer/core/frame/global_scope.cc
+文件路径(未找到): src/third_party/blink/renderer/bindings/core/v8/v8_console.cc
 文件路径(已验证): src/third_party/blink/renderer/core/workers/worker_global_scope.cc
 文件路径(已验证): src/third_party/blink/renderer/core/execution_context/execution_context.cc
-文件路径(已验证): src/content/renderer/devtools/devtools_agent.cc
-文件路径(已验证): src/v8/src/debug/debug.cc
+文件路径(未找到): src/content/renderer/devtools/devtools_agent.cc
+文件路径(未找到): src/v8/src/debug/debug.cc
 文件路径(已验证): src/third_party/blink/renderer/platform/bindings/exception_state.cc
 文件路径(已验证): src/third_party/blink/renderer/core/inspector/inspector_log_agent.cc
 文件路径(已验证): src/third_party/blink/renderer/core/inspector/devtools_session.cc
@@ -1717,13 +1718,75 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 27、Do Not Track【开启 关闭】
 文件路径(已验证): src/components/privacy_sandbox/tracking_protection_settings.cc
 文件路径(已验证): src/net/url_request/url_request.cc
+文件路径(已验证): src/net/http/http_request_headers.cc
+文件路径(已验证): src/chrome/browser/net/system_network_context_manager.cc
+文件路径(已验证): src/components/content_settings/core/browser/content_settings_registry.cc
+文件路径(已验证): src/content/browser/renderer_host/render_process_host_impl.cc
+文件路径(已验证): src/services/network/public/cpp/features.cc
+文件路径(未找到): src/third_party/blink/public/common/features.cc
 
 // 修改实现细节：
 // - "Do Not Track"（DNT）是一个浏览器设置，当启用时，浏览器会在 HTTP 请求头中发送一个特殊的信号（DNT: 1），向网站表明用户不希望被追踪。
-// - 修改的核心在于控制是否在 HTTP 请求头中发送 DNT: 1 信号。
-// - src/components/privacy_sandbox/tracking_protection_settings.cc 负责管理隐私沙盒和追踪保护相关的设置，其中可能包含了控制 DNT 信号的逻辑。
-// - src/net/url_request/url_request.cc 处理实际的 URL 请求发送，包括构建和发送 HTTP 请求头。需要修改这里的逻辑，根据 DNT 设置是否开启，在请求头中添加或移除 DNT: 1 字段。
-// - 实现"开启/关闭"功能，只需要根据用户的配置来决定是否在请求头中加入 DNT 字段即可。
+// - 核心修改在于控制是否在 HTTP 请求头中发送 DNT: 1 信号。
+// - 修改 src/components/privacy_sandbox/tracking_protection_settings.cc 中的 IsDoNotTrackEnabled() 方法，使其根据指纹保护模式决定是否启用 DNT。
+// - 修改 src/net/url_request/url_request.cc 文件，在 URLRequestHttpJob::AddExtraHeaders() 方法中根据 DNT 设置添加或移除 DNT 头部。
+// - 确保 src/net/http/http_request_headers.cc 中 HTTP 请求头的处理能够正确添加或跳过 DNT 头部。
+// - 修改 src/chrome/browser/net/system_network_context_manager.cc 确保网络上下文正确配置 DNT 设置。
+// - 在 src/components/content_settings/core/browser/content_settings_registry.cc 中注册和处理 DNT 相关的内容设置。
+// - 在 src/content/browser/renderer_host/render_process_host_impl.cc 确保进程间通信正确传递 DNT 设置。
+//
+// - 特别注意的实现问题：
+//   * 不同窗口和会话之间的 DNT 设置一致性
+//   * 确保 DNT 设置在浏览器重启后保持不变
+//   * 处理跨域请求中的 DNT 头部一致性
+//   * 确保所有网络请求（包括XHR、Fetch、图像加载等）都正确应用 DNT 设置
+//   * 在隐私浏览模式下 DNT 设置的特殊处理
+//
+// - 防御最新指纹检测技术的特定措施：
+//   * 确保 DNT 设置在所有请求中保持一致，避免通过不同请求的 DNT 不一致进行检测
+//   * 处理 JavaScript 可能通过间接方式检测 DNT 设置的情况
+//   * 确保 DNT 设置与其他隐私设置（如第三方 Cookie 阻止、隐私浏览模式等）的逻辑关系合理
+//   * 防止通过网络请求计时差异检测 DNT 状态
+//   * 确保子资源和内嵌内容的 DNT 头部与主文档一致
+//
+// - 实现"开启/关闭"功能：
+//   * "开启"模式：在所有 HTTP 请求中添加 "DNT: 1" 头部
+//   * "关闭"模式：不添加任何 DNT 相关头部
+//   * 通过 fingerprint_protection::FingerprintController 获取当前窗口的指纹模式，根据模式决定 DNT 行为
+//   * 在指纹保护系统的 JSON 配置文件中添加 DNT 设置选项
+//
+// - 兼容性考虑：
+//   * 确保修改不影响其他隐私设置功能
+//   * 处理可能依赖于 DNT 信号的网站兼容性问题
+//   * 考虑新版浏览器中 Global Privacy Control (GPC) 与 DNT 的关系
+
+// 示例修改代码片段：
+// 在 components/privacy_sandbox/tracking_protection_settings.cc 中：
+/*
+bool TrackingProtectionSettings::IsDoNotTrackEnabled() const {
+  // Check fingerprint controller for Do Not Track setting
+  auto* controller = fingerprint_protection::FingerprintController::GetInstance();
+  if (controller && controller->IsActive()) {
+    uint64_t window_id = controller->GetCurrentWindowId();
+    fingerprint_protection::FingerprintMode mode = controller->GetModeForWindow(window_id);
+    
+    // If using REAL fingerprint mode, use the user's actual preference
+    if (mode != fingerprint_protection::FingerprintMode::REAL) {
+      // For CUSTOM mode, check the specific DNT setting
+      if (mode == fingerprint_protection::FingerprintMode::CUSTOM) {
+        return controller->IsDNTEnabled(window_id);
+      }
+      // For other modes, use the fingerprint profile's consistent setting
+      std::string domain = controller->GetCurrentDomain();
+      return controller->GetRandomBoolForWindow(
+          window_id, domain, "dnt_enabled", 0.5);
+    }
+  }
+  
+  // Fall back to the user's actual preference if fingerprint protection isn't active
+  return pref_service_->GetBoolean(prefs::kEnableDoNotTrack);
+}
+*/
 
 28、User-Agent (用户代理)【自定义 真实】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
@@ -1733,18 +1796,18 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_id.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_ua_data.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_ua_data.h
-文件路径(已验证): src/content/browser/user_agent_client.cc
-文件路径(已验证): src/services/network/public/cpp/user_agent.cc
+文件路径(未找到): src/content/browser/user_agent_client.cc
+文件路径(未找到): src/services/network/public/cpp/user_agent.cc
 文件路径(已验证): src/content/public/common/content_switches.cc
-文件路径(已验证): src/third_party/blink/renderer/platform/network/http_names.cc
+文件路径(未找到): src/third_party/blink/renderer/platform/network/http_names.cc
 文件路径(已验证): src/third_party/blink/renderer/core/fetch/headers.cc
-文件路径(已验证): src/chrome/browser/content_settings/request_header_manager.cc
-文件路径(已验证): src/net/http/structured_headers.cc
+文件路径(未找到): src/chrome/browser/content_settings/request_header_manager.cc
+文件路径(未找到): src/net/http/structured_headers.cc
 文件路径(已验证): src/services/network/url_loader.cc
-文件路径(已验证): src/services/network/public/mojom/user_agent_metadata.mojom
-文件路径(已验证): src/third_party/blink/renderer/core/executed_script/executed_script_permissions.cc
+文件路径(未找到): src/services/network/public/mojom/user_agent_metadata.mojom
+文件路径(未找到): src/third_party/blink/renderer/core/executed_script/executed_script_permissions.cc
 文件路径(已验证): src/third_party/blink/common/client_hints/client_hints.cc
-文件路径(已验证): src/third_party/blink/common/client_hints/client_hints.h
+文件路径(未找到): src/third_party/blink/common/client_hints/client_hints.h
 文件路径(已验证): src/content/browser/renderer_host/render_process_host_impl.cc
 
 // 修改实现细节：
@@ -1860,14 +1923,116 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 // 可能与插件相关联，参考插件相关文件。
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
 文件路径(已验证): src/content/public/common/content_client.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/plugins/navigator_plugins.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/plugins/dom_mime_type_array.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/plugins/dom_mime_type.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/plugins/dom_plugin_array.cc
+文件路径(已验证): src/third_party/blink/renderer/modules/plugins/dom_plugin.cc
+文件路径(已验证): src/third_party/blink/renderer/core/page/plugin_data.h
 
 // 修改实现细节：
-// - MIME 类型信息通常通过 navigator.mimeTypes 属性获取。这个属性返回一个 MimeTypeArray 对象。
-// - 修改的核心在于控制 navigator.mimeTypes 返回的 MIME 类型列表。
-// - src/third_party/blink/renderer/core/frame/navigator.cc 实现了 navigator.mimeTypes 属性。需要修改这里的逻辑，拦截获取真实的 MIME 类型列表的调用，并返回一个伪造的 MimeTypeArray。
-// - MIME 类型与插件通常是关联的，所以这项的修改可能会与插件指纹（#29）的修改联动。
-// - 实现"真实"返回真实列表，实现"噪音"返回包含伪造 MIME 类型信息的列表。伪造时可以根据固定种子生成伪造的 MIME 类型字符串及其关联的插件引用。
-// - src/content/public/common/content_client.cc 可能间接相关，但主要修改点在 navigator.cc。
+// - MimeTypes指纹是通过navigator.mimeTypes属性获取的浏览器支持的MIME类型列表，这些类型通常与插件相关联
+// - MimeTypes与Plugins指纹密切相关，二者应保持一致的防护策略
+//
+// - 核心修改文件和策略：
+//
+//   1. 主要控制逻辑：
+//      - 在src/third_party/blink/renderer/modules/plugins/navigator_plugins.cc中的ShouldReturnFixedPluginData()函数
+//        决定是否返回标准化的插件和MIME类型列表
+//      - 在NavigatorPlugins类的构造函数中设置should_return_fixed_plugin_data_标志
+//      - 修改ShouldReturnFixedPluginData()函数，集成到指纹控制框架，根据当前窗口的指纹模式决定行为
+//
+//   2. MimeTypes实现：
+//      - src/third_party/blink/renderer/modules/plugins/dom_mime_type_array.cc实现了navigator.mimeTypes返回的MimeTypeArray
+//      - 关键函数包括length()、item()、namedItem()和UpdatePluginData()
+//      - 当should_return_fixed_plugin_data_为true时，返回标准化的MIME类型列表
+//
+//   3. 与Plugin关联：
+//      - src/third_party/blink/renderer/modules/plugins/dom_plugin_array.cc中的GetFixedMimeTypeArray()函数
+//        提供标准化的MIME类型列表
+//      - 这些MIME类型通过MakeFakePlugin()函数创建的伪造插件关联
+//      - 伪造插件主要是PDF相关的插件，如"PDF Viewer"、"Chrome PDF Viewer"等
+//
+// - 针对最新指纹检测技术的防护措施：
+//
+//   1. 模式与策略：
+//      - "真实"模式：返回浏览器实际支持的MIME类型列表
+//      - "噪音"模式：返回标准化的MIME类型列表，降低指纹识别率
+//        * 基于指纹控制框架的种子，生成一致但随机的MIME类型列表
+//        * 确保所有MIME类型与其关联的插件在逻辑上保持一致
+//        * 保持MIME类型数量在合理范围内，避免异常检测
+//
+//   2. 一致性保护：
+//      - 确保navigator.mimeTypes、navigator.plugins和HTTP请求头中的信息保持一致
+//      - 处理mimeTypes.namedItem()方法，确保通过名称查询MIME类型的行为符合预期
+//      - 确保enabledPlugin属性正确引用关联的插件对象
+//      - 在iframe和其他执行上下文中保持一致的MIME类型列表
+//
+//   3. 内部结构保护：
+//      - 确保MimeType对象的内部属性（type、description、suffixes）格式符合标准
+//      - 处理MIME类型与文件扩展名的映射关系，确保逻辑合理
+//      - 维护MIME类型数组的正确索引行为，包括数字索引和名称索引
+//
+//   4. API行为保护：
+//      - 确保MimeTypeArray对象的length属性返回正确的MIME类型数量
+//      - 处理item()、namedItem()等方法的行为，保持与标准规范一致
+//      - 确保通过for...in遍历MimeTypeArray时的行为正确
+//      - 保护对象的原型链和属性描述符，防止通过元编程技术检测
+//
+// - 具体实现建议：
+//
+//   1. 修改NavigatorPlugins.cc中的ShouldReturnFixedPluginData函数：
+//      ```cpp
+//      bool ShouldReturnFixedPluginData(Navigator& navigator) {
+//        // 使用指纹控制器决定是否返回固定插件数据
+//        auto* controller = fingerprint_protection::FingerprintController::GetInstance();
+//        if (controller && navigator.DomWindow() && navigator.DomWindow()->GetFrame()) {
+//          uint64_t window_id = navigator.DomWindow()->GetFrame()->GetWindowId();
+//          fingerprint_protection::FingerprintMode mode = controller->GetModeForWindow(window_id);
+//          
+//          // 真实模式返回实际插件数据，其他模式返回固定数据
+//          return mode != fingerprint_protection::FingerprintMode::REAL;
+//        }
+//        
+//        // 默认返回固定插件数据以增强隐私保护
+//        return true;
+//      }
+//      ```
+//
+//   2. 增强DOMPluginArray中的GetFixedMimeTypeArray函数，支持基于种子的噪音生成：
+//      ```cpp
+//      HeapVector<Member<DOMMimeType>> DOMPluginArray::GetFixedMimeTypeArray() {
+//        HeapVector<Member<DOMMimeType>> mimetypes;
+//        
+//        // 使用指纹控制器
+//        auto* controller = fingerprint_protection::FingerprintController::GetInstance();
+//        if (controller && DomWindow() && DomWindow()->GetFrame()) {
+//          uint64_t window_id = DomWindow()->GetFrame()->GetWindowId();
+//          std::string domain = DomWindow()->document()->Url().Host().Utf8();
+//          fingerprint_protection::FingerprintMode mode = controller->GetModeForWindow(window_id);
+//          
+//          // 配置标准MIME类型
+//          if (dom_plugins_.empty())
+//            return mimetypes;
+//            
+//          // 添加PDF相关MIME类型
+//          mimetypes.push_back(dom_plugins_[0]->item(0));  // application/pdf
+//          mimetypes.push_back(dom_plugins_[0]->item(1));  // text/pdf
+//          
+//          // 噪音模式可以添加额外的MIME类型
+//          if (mode == fingerprint_protection::FingerprintMode::NOISE) {
+//            // 根据种子决定添加哪些额外MIME类型
+//            // ...
+//          }
+//        }
+//        return mimetypes;
+//      }
+//      ```
+//
+// - 与其他指纹保护功能的协调：
+//   * 与插件指纹（指纹29）保持一致，确保MIME类型列表与插件列表匹配
+//   * 与User-Agent指纹（指纹28）协调，确保MIME类型与声明的浏览器身份一致
+//   * 与Navigator附加属性（指纹31）协调，保持平台特性一致性
 
 31、Navigator 附加属性【真实 自定义】
 // 包括但不限于 platform, oscpu, product, vendor, appCodeName, appName, appVersion 等。
@@ -1876,21 +2041,21 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/base/version_info/version_info.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_id.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_id.h
-文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_base.cc
+文件路径(已更新): src/third_party/blink/renderer/core/frame/navigator.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_concurrent_hardware.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_device_memory.cc
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator_language.cc
 文件路径(已验证): src/third_party/blink/renderer/modules/plugins/navigator_plugins.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/presentation/navigator_presentation.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/permissions/navigator_permissions.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/storage/navigator_storage.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/mediasession/navigator_media_session.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/serviceworkers/navigator_service_worker.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/cookie_store/navigator_cookie_store.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/xr/navigator_xr.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/netinfo/navigator_network_information.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/mediastream/navigator_media_devices.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/clipboard/navigator_clipboard.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/presentation/navigator_presentation.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/permissions/navigator_permissions.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/storage/navigator_storage.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/mediasession/navigator_media_session.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/serviceworkers/navigator_service_worker.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/cookie_store/navigator_cookie_store.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/xr/navigator_xr.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/netinfo/navigator_network_information.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/mediastream/navigator_media_devices.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/clipboard/navigator_clipboard.cc
 文件路径(已验证): src/third_party/blink/renderer/core/workers/worker_navigator.cc
 文件路径(已验证): src/third_party/blink/renderer/core/workers/dedicated_worker_global_scope.cc
 文件路径(已验证): src/third_party/blink/renderer/core/execution_context/execution_context.cc
@@ -2009,26 +2174,70 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 //   * 与插件指纹（指纹29）协调，确保plugins属性一致
 //   * 与WebDriver标志（指纹33）协调，确保自动化检测行为一致
 
-32、设备像素比 (devicePixelRatio)【真实】
+32、设备像素比 (devicePixelRatio)【真实 固定 噪音】
 文件路径(已验证): src/third_party/blink/renderer/core/frame/local_dom_window.cc
+文件路径(已验证): src/third_party/blink/renderer/core/frame/local_frame.cc
+文件路径(已验证): src/third_party/blink/renderer/core/frame/local_frame.h
+文件路径(已验证): src/third_party/blink/renderer/core/page/page.cc
+文件路径(已验证): src/third_party/blink/renderer/core/page/page.h
 文件路径(已验证): src/ui/display/screen.cc
 
 // 修改实现细节：
-// - 设备像素比（Device Pixel Ratio, DPR）通过 window.devicePixelRatio 属性暴露给 JavaScript。
-// - 修改的核心在于 src/ui/display/screen.cc。这个文件负责从操作系统获取真实的 DPR。需要修改获取 DPR 的相关函数，拦截系统调用，并返回伪造的 DPR 数值。
-// - src/third_party/blink/renderer/core/frame/local_dom_window.cc 实现了 window 对象，其中包括 devicePixelRatio 属性的实现。它会调用 ui/display/screen.cc 中的函数来获取 DPR。确保修改 ui/display/screen.cc 后，能够正确获取到伪造的值并暴露给 JavaScript。
+// - 设备像素比（Device Pixel Ratio, DPR）通过 window.devicePixelRatio 属性暴露给 JavaScript，是指纹识别中重要的硬件信息。
+// - 关键修改点包括：
+//   1. 在 src/ui/display/screen.cc 中修改获取真实DPR的相关函数，拦截系统调用，根据指纹模式返回适当的DPR值。
+//   2. 在 src/third_party/blink/renderer/core/frame/local_frame.cc 中修改 DevicePixelRatio() 函数，使其通过指纹控制器获取DPR值。
+//   3. 在 src/third_party/blink/renderer/core/page/page.cc 中修改 InspectorDeviceScaleFactorOverride() 方法，支持指纹防护模式。
+//   4. 在 src/third_party/blink/renderer/core/frame/local_dom_window.cc 中的 devicePixelRatio() 方法调用帧的 DevicePixelRatio()，无需直接修改。
+// - 实现三种模式：
+//   * "真实"模式：返回系统实际的DPR值。
+//   * "固定"模式：返回标准化的DPR值（如1.0或2.0），与声称的设备和浏览器一致。
+//   * "噪音"模式：基于一个固定种子生成稳定的微小随机偏差（如1.975代替2.0），保持会话一致性。
+// - 协调性考虑：
+//   * 与屏幕分辨率指纹（指纹30）协调，确保DPR与分辨率比例合理。
+//   * 与媒体查询（指纹13）协调，确保@media (device-pixel-ratio)查询匹配相同的值。
+//   * 与Canvas/WebGL指纹（指纹16和17）协调，确保渲染分辨率与DPR一致。
+//   * 与硬件并发数（指纹21）和设备内存（指纹23）协调，保持硬件指标一致性。
 
-33、WebDriver/自动化标志【真实 禁用】
+33、WebDriver/自动化标志【真实 禁用 噪音】
 // 检测 navigator.webdriver 属性或其他自动化痕迹。
 文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.cc
+文件路径(已验证): src/third_party/blink/renderer/core/frame/navigator.h
+文件路径(已验证): src/third_party/blink/renderer/core/probe/core_probes.h
+文件路径(未找到): src/third_party/blink/renderer/core/probe/core_probe_sink.h
+文件路径(未找到): src/third_party/blink/renderer/core/probe/core_probe_sink.cc
 文件路径(已验证): src/content/renderer/render_frame_impl.cc
+文件路径(未找到): src/content/browser/webdriver/automation_controller.cc
+文件路径(已验证): src/components/embedder_support/user_agent_utils.cc
 
 // 修改实现细节：
-// - WebDriver/自动化标志通常指 navigator.webdriver 属性，用于检测自动化环境。
-// - 修改的核心在于控制 src/third_party/blink/renderer/core/frame/navigator.cc 中 navigator.webdriver 属性的返回值。
-// - 需要修改其 getter 方法，使其根据配置（"真实"或"禁用"）返回相应的值。
-// - 实现"真实"返回 Chromium 内部判断的真实 WebDriver 状态。实现"禁用"强制返回 false。
-// - src/content/renderer/render_frame_impl.cc 可能接收自动化状态信息，但修改 navigator.cc 是最直接的控制方式。
+// - WebDriver/自动化标志是现代网站检测自动化浏览器的主要方式，包括多种检测方法和特征。
+// - 关键修改点包括：
+//   1. 在 src/third_party/blink/renderer/core/frame/navigator.cc 中修改 navigator.webdriver 属性的 getter 方法，
+//      使用指纹控制器判断当前模式并返回适当的值。目前实现依赖 probe::ApplyAutomationOverride 函数。
+//   2. 在 src/third_party/blink/renderer/core/probe/core_probe_sink.cc 中修改 ApplyAutomationOverride 实现，
+//      添加对指纹控制器的调用，实现不同模式下的行为。
+//   3. 在 src/content/browser/webdriver/automation_controller.cc 中修改自动化状态传递机制，确保全局一致性。
+//   4. 在 src/content/renderer/render_frame_impl.cc 中确保 RenderFrame 对自动化状态的处理符合指纹模式要求。
+//   5. 在 src/components/embedder_support/user_agent_utils.cc 中修改自动化相关标识符在用户代理字符串中的处理。
+// - 实现三种模式：
+//   * "真实"模式：返回浏览器真实的自动化状态，如果正在使用WebDriver或自动化工具则返回true。
+//   * "禁用"模式：无论实际自动化状态如何，始终返回false，隐藏所有自动化痕迹。
+//   * "噪音"模式：在大多数情况下隐藏自动化特征，但在某些不重要的属性上引入细微变化，以避免过于一致而被检测。
+// - 需要特别处理的检测方法：
+//   1. navigator.webdriver 属性：这是最直接和常用的检测方法，核心修改点。
+//   2. 运行时特征检测：许多检测库使用行为分析，如异常模式、缺失功能或非标准行为来识别自动化。
+//   3. 浏览器功能一致性：确保弹窗、权限请求等行为与普通浏览器一致。
+//   4. 用户代理字符串：移除或修改可能泄露自动化状态的标识符，如"HeadlessChrome"。
+//   5. DevTools协议痕迹：屏蔽或伪造与Chrome DevTools Protocol连接相关的痕迹。
+// - 协调性考虑：
+//   * 与用户代理指纹（指纹4）协调，确保UA字符串中不包含自动化相关标识。
+//   * 与WebGL/Canvas指纹（指纹16和17）协调，确保渲染行为一致。
+//   * 与CDP连接/自动化检测防护（指纹35）协调，形成完整的自动化防护方案。
+//   * 与无头模式指纹防护（指纹43）协调，共同处理自动化环境的检测问题。
+// - 防护效果优化：
+//   * 实现动态调整的行为模拟，使其不仅在静态特征上隐藏自动化状态，还在交互行为上模拟真实用户。
+//   * 对基于异步行为或时序分析的高级检测技术提供防护，如模拟真实的人类输入延迟模式。
 
 34、TLS ClientHello【真实 噪音】
 // 客户端在TLS握手时发送的信息，包括支持的加密套件、扩展等。
@@ -2039,16 +2248,95 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 
 // 修改实现细节：
 // - TLS ClientHello 指纹是通过检查浏览器在 TLS 握手时发送的 ClientHello 消息来获取信息。
-// - 修改的核心在于控制 ClientHello 消息的内容。src/net/ssl/ssl_config_service.cc 负责管理 SSL/TLS 配置。src/net/socket/ssl_client_socket_impl.cc 负责执行 TLS 握手和发送 ClientHello 消息。
-// - 需要在 ssl_config_service.cc 中修改获取和提供 SSL/TLS 配置的函数，返回伪造的配置。
-// - 在 ssl_client_socket_impl.cc 中，在构建和发送 ClientHello 消息之前，确保使用了伪造的配置信息。可能还需要在序列化 ClientHello 消息时进行微小的修改以引入"噪音"。
-// - 实现"真实"使用真实配置，实现"噪音"根据固定种子对配置或 ClientHello 消息进行随机微小修改。
+// - 修改的核心在于控制 ClientHello 消息的内容，主要包括以下几个方面：
+//   1. 支持的协议版本（Protocol Versions）
+//   2. 加密套件（Cipher Suites）
+//   3. 扩展列表及其顺序（Extensions）
+//   4. 支持的曲线（Curves）
+//   5. 支持的签名算法（Signature Algorithms）
+//   6. ALPN 协议
+//   7. ECH 配置（加密客户端 Hello）
+
+// - 修改流程和关键函数：
+//   1. 在 src/net/socket/ssl_client_socket_impl.cc 的 Init() 方法中修改，该方法负责初始化 SSL 上下文和配置 TLS 参数。
+//   2. 特别关注以下几个关键函数调用，这些是决定 ClientHello 特征的主要点：
+//      - SSL_set_min_proto_version / SSL_set_max_proto_version：设置 TLS 协议版本范围
+//      - SSL_set_cipher_list：设置加密套件列表及其顺序
+//      - SSL_set1_curves：设置椭圆曲线列表及其顺序
+//      - SSL_set_verify_algorithm_prefs：设置签名算法偏好
+//      - SSL_set_alpn_protos：设置 ALPN 协议列表
+//      - SSL_set_permute_extensions：设置是否随机排列 TLS 扩展（防指纹措施）
+//      - SSL_set_options / SSL_clear_options：设置和清除 SSL 选项标志
+//      - SSL_set_mode / SSL_clear_mode：设置和清除 SSL 模式标志
+
+// - 实现"真实"模式：
+//   1. 直接使用系统默认设置和 Chromium 的默认配置，不做任何修改。
+//   2. 此模式下，ClientHello 消息将保持其原始格式，使用用户操作系统和浏览器版本特有的设置。
+
+// - 实现"噪音"模式：
+//   1. 在 Init() 方法中添加指纹模式判断逻辑，如果是"噪音"模式，修改 ClientHello 参数。
+//   2. 修改 SSLClientSocketImpl 类，添加一个新的方法 ApplyFingerprintMode() 用于根据指纹模式修改 SSL 配置。
+//   3. 添加基于固定种子的随机配置生成逻辑，这样每个相同指纹ID的实例会生成相同的"噪音"配置：
+//      - 随机选择一部分 cipher suite 子集并重新排序
+//      - 随机选择曲线列表的子集并重新排序
+//      - 随机调整 TLS 扩展的顺序（启用 SSL_set_permute_extensions）
+//      - 根据种子随机启用或禁用某些 TLS 扩展
+//      - 调整 ALPN 协议列表
+//      - 可能的话，微调 ClientHello 记录的分片大小
+
+// - 代码实现示例（伪代码）：
+// ```
+// void SSLClientSocketImpl::ApplyFingerprintMode(FingerprintMode mode, uint64_t seed) {
+//   if (mode == FINGERPRINT_MODE_REAL) {
+//     // 使用真实配置，不做任何修改
+//     return;
+//   }
+//   
+//   if (mode == FINGERPRINT_MODE_NOISE) {
+//     // 使用随机数生成器，以 seed 为种子
+//     std::mt19937_64 rng(seed);
+//     
+//     // 1. 修改加密套件列表
+//     std::string cipher_command = GenerateRandomCipherListCommand(rng);
+//     SSL_set_strict_cipher_list(ssl_.get(), cipher_command.c_str());
+//     
+//     // 2. 修改曲线列表
+//     std::vector<int> curves = GenerateRandomCurveList(rng);
+//     SSL_set1_curves(ssl_.get(), curves.data(), curves.size());
+//     
+//     // 3. 修改签名算法偏好
+//     std::vector<uint16_t> sig_algs = GenerateRandomSignatureAlgorithms(rng);
+//     SSL_set_verify_algorithm_prefs(ssl_.get(), sig_algs.data(), sig_algs.size());
+//     
+//     // 4. 随机启用或禁用 TLS 扩展排列
+//     bool permute_extensions = (rng() % 2) == 0;
+//     SSL_set_permute_extensions(ssl_.get(), permute_extensions);
+//     
+//     // 5. 随机设置 SSL 选项和模式
+//     SslSetClearMask options;
+//     ConfigureRandomSSLOptions(options, rng);
+//     SSL_set_options(ssl_.get(), options.set_mask);
+//     SSL_clear_options(ssl_.get(), options.clear_mask);
+//   }
+// }
+// ```
+
+// - 协调性考虑：
+//   * 与 IP 地址指纹（指纹36）协调，确保 TLS ClientHello 中隐含的地理位置信息与 IP 地址保持一致。
+//   * 与用户代理指纹（指纹4）协调，确保 TLS 特征与浏览器类型和版本一致。
+//   * 与 HTTP/2 和 HTTP/3 协议特征（指纹27）协调，确保 ALPN 设置与实际协议支持一致。
+//   * 与 WebSocket 握手（指纹25）协调，保持 TLS 层与应用层协议的一致性。
+
+// - 安全与性能考虑：
+//   * 不应禁用或降低 TLS 安全设置，如 TLS 1.3 支持或强密码套件。
+//   * 噪音模式下，确保生成的配置依然能与现代网站兼容。
+//   * 避免增加 TLS 握手延迟，可以预先计算和缓存指纹配置。
 
 35、CDP 连接 / 自动化检测防护【开启保护 关闭保护】
 // 涉及 Chrome DevTools Protocol 的使用和相关痕迹的隐藏。
-文件路径(已验证): src/content/browser/devtools/ (目录)
-文件路径(已验证): src/third_party/blink/renderer/core/inspector/ (目录)
-文件路径(已验证): src/third_party/blink/public/common/features.h // 可能通过 feature flag 控制
+文件路径(未找到): src/content/browser/devtools/ (目录)
+文件路径(未找到): src/third_party/blink/renderer/core/inspector/ (目录)
+文件路径(未找到): src/third_party/blink/public/common/features.h // 可能通过 feature flag 控制
 文件路径(已验证): src/content/browser/devtools/protocol/target_handler.cc
 文件路径(已验证): src/content/browser/devtools/browser_devtools_agent_host.cc
 // 可能需要查找处理特定 CDP 命令的代码，例如 Runtime.evaluate, Page.addScriptToEvaluateOnNewDocument 等，以及与自动化相关的检测点。
@@ -2070,74 +2358,237 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 
 36、IP地址【真实 自定义】
 // 网站通过用户的IP地址获取地理位置信息，可用于识别用户、定制内容和安全检查。
-文件路径(已验证): src/net/base/network_interfaces.cc
-文件路径(已验证): src/services/network/network_service.cc
-文件路径(已验证): src/net/url_request/url_request.cc
+// 现代检测技术会通过多种方式获取IP并进行交叉验证，需要全面防护。
 
-// 修改实现细节：
-// - IP地址是网络通信的基础，虽然部分通过地理位置和WebRTC指纹进行控制，但其本身可被直接获取。
-// - 修改的核心在于拦截获取本地和公共IP地址的函数调用，并返回伪造的IP地址。
-// - 这可能涉及到修改 src/net/base/network_interfaces.cc 中枚举网络接口和获取IP地址的逻辑。
-// - 也可能需要在 src/services/network/network_service.cc 等网络服务相关文件中进行拦截和修改。
-// - 对于通过HTTP头（如 X-Forwarded-For）暴露的IP，可能需要在 src/net/url_request/url_request.cc 或相关文件中进行处理。
+核心文件路径:
+- src/net/base/network_interfaces.cc (网络接口枚举)
+- src/services/network/network_service.cc (网络服务层)
+- src/net/url_request/url_request.cc (HTTP请求处理)
+
+新增关键文件:
+- src/net/dns/host_resolver_impl.cc (DNS解析防护)
+- src/net/base/network_change_notifier.cc (网络状态监控)
+- src/net/socket/tcp_socket.cc (TCP套接字层)
+- src/net/socket/udp_socket.cc (UDP套接字层)
+- src/third_party/webrtc/p2p/base/stun_request.cc (STUN请求拦截)
+- src/components/dns_over_https/dns_over_https_server_config.cc (DoH防护)
+
+协同指纹项目:
+- 与项目13 WebRTC深度集成，确保IP一致性
+- 与项目7 地理位置指纹协调，保证地理信息合理性
+- 与项目8 时区指纹匹配，维护IP-时区逻辑一致性
+
+检测对抗策略:
+- 实现多层IP获取方式的统一控制
+- 建立IP-地理位置-时区的一致性验证机制
+- 动态响应网络环境变化，保持指纹稳定性
+- 防范基于网络延迟的IP真实性检测
 
 37、媒体设备指纹【噪音 真实 禁用】
 // 媒体设备指纹基于浏览器可访问的媒体输入/输出设备列表（如麦克风、摄像头）。
-// 注意：即使禁用媒体访问，设备列表仍可能被暴露用于指纹识别。
-文件路径(已验证): src/third_party/blink/renderer/modules/mediastream/media_devices.cc
-文件路径(已验证): src/third_party/blink/public/mojom/mediastream/media_devices.mojom
-文件路径(已验证): src/third_party/blink/renderer/modules/mediastream/media_stream_constraints_util.cc
-文件路径(已验证): src/media/device_monitors/device_monitor_udev.h
-文件路径(已验证): src/content/browser/renderer_host/media/media_devices_manager.cc
-文件路径(已验证): src/media/capture/video/video_capture_device_factory.cc
-文件路径(已验证): src/media/capture/video/create_video_capture_device_factory.cc
+// 现代检测技术会分析设备能力、权限行为和媒体流元数据，需要全面防护。
 
-// 修改实现细节：
-// - 媒体设备指纹基于 navigator.mediaDevices.enumerateDevices() 返回的设备列表。
-// - 修改的核心在于控制 enumerateDevices() 返回的设备列表，可以返回真实列表（但通常需要伪造设备 ID），返回噪音列表，或返回空列表（禁用）。
-// - 需要修改 src/third_party/blink/renderer/modules/mediastream/media_devices.cc 中处理 enumerateDevices() 的逻辑。
-// - 在 Mojo 接口层，如 src/third_party/blink/public/mojom/mediastream/media_devices.mojom 定义了浏览器进程和渲染进程之间媒体设备相关的通信接口，可能需要调整以传递伪造的数据。
-// - src/third_party/blink/renderer/modules/mediastream/media_stream_constraints_util.cc 处理媒体约束和设备能力，在选择和过滤设备时发挥作用，可在此处修改以影响设备匹配结果。
-// - src/media/device_monitors/device_monitor_udev.h 实现了Linux平台下的设备监控接口，负责检测设备变化并维护设备列表，可修改此处控制设备监控行为。
-// - 设备监控组件(device_monitors)负责维护和更新可用媒体设备的列表，是指纹防护的重要切入点。
+核心文件路径:
+- src/third_party/blink/renderer/modules/mediastream/media_devices.cc (设备枚举核心)
+- src/content/browser/renderer_host/media/media_devices_manager.cc (设备管理器)
+- src/third_party/blink/public/mojom/mediastream/media_devices.mojom (Mojo接口)
+
+权限管理防护:
+- src/content/browser/media/media_stream_manager.cc (媒体流权限管理)
+- src/third_party/blink/renderer/modules/mediastream/user_media_request.cc (用户媒体请求)
+- src/content/browser/permissions/permission_manager_impl.cc (权限管理器)
+- src/components/permissions/permission_context_base.cc (权限上下文)
+
+设备能力控制:
+- src/media/base/video_capture_types.cc (视频捕获类型)
+- src/media/base/audio_parameters.cc (音频参数)
+- src/third_party/blink/renderer/modules/mediastream/media_track_capabilities.cc (轨道能力)
+- src/media/capture/video/video_capture_device_descriptor.cc (设备描述符)
+
+跨平台设备监控:
+- src/media/device_monitors/device_monitor_udev.h (Linux设备监控)
+- src/media/device_monitors/device_monitor_win.cc (Windows设备监控)
+- src/media/device_monitors/device_monitor_mac.cc (macOS设备监控)
+
+媒体流元数据防护:
+- src/third_party/blink/renderer/modules/mediastream/media_stream_track.cc (媒体轨道)
+- src/third_party/blink/renderer/modules/mediastream/media_stream_video_track.cc (视频轨道)
+- src/third_party/blink/renderer/modules/mediastream/media_stream_audio_track.cc (音频轨道)
+
+检测对抗策略:
+- 实现设备ID的智能生成，确保格式合理性
+- 建立设备能力与硬件规格的一致性验证
+- 控制权限请求的时序和行为模式
+- 确保媒体流质量与设备能力的匹配
+- 维护设备列表变化的合理性
+
+协同指纹项目:
+- 与硬件指纹保持设备兼容性一致
+- 与操作系统指纹协调设备驱动信息
+- 与网络指纹匹配带宽处理能力
 
 38、SpeechVoices【噪音 真实 禁用】
-// SpeechVoices 指纹基于浏览器支持的语音合成声音列表。
-// 注意：声音列表可能因操作系统和安装的语音包而异。
-文件路径(已验证): src/third_party/blink/renderer/modules/speech/speech_synthesis.cc
+文件路径(核心): src/third_party/blink/renderer/modules/speech/speech_synthesis.cc
+文件路径(新增): src/third_party/blink/renderer/modules/speech/speech_synthesis_voice.cc
+文件路径(新增): src/third_party/blink/renderer/modules/speech/speech_synthesis_voice.h
+文件路径(新增): src/third_party/blink/public/mojom/speech/speech_synthesis.mojom
+文件路径(新增): src/third_party/blink/renderer/modules/speech/testing/mojom_speech_synthesis_mock.cc
+文件路径(新增): src/third_party/blink/renderer/modules/speech/speech_synthesis.idl
 
 // 修改实现细节：
-// - SpeechVoices 指纹基于 window.speechSynthesis.getVoices() 返回的声音列表。
-// - 修改的核心在于控制 getVoices() 返回的声音列表。可以返回真实列表、噪音列表或空列表（禁用）。
-// - 需要修改 src/third_party/blink/renderer/modules/speech/speech_synthesis.cc 中处理 getVoices() 的逻辑。
-// - 噪音可以包括添加不存在的声音、修改现有声音的属性等。
+// - SpeechVoices 指纹已超越简单的语音列表检测，现代指纹技术通过语音属性一致性、
+//   平台特定语音引擎特征和动态语音包行为等多维度进行检测。
+//
+// - 核心修改文件和策略：
+//
+//   1. JavaScript接口层防护：
+//      - 在 speech_synthesis.cc 中修改 getVoices() 方法和 OnSetVoiceList() 回调
+//      - 在 speech_synthesis_voice.cc 中控制 SpeechSynthesisVoice 对象的属性暴露
+//      - 确保 voiceURI、name、lang、localService、default 属性的一致性
+//
+//   2. Mojo接口层防护：
+//      - 在 speech_synthesis.mojom 中处理语音列表的跨进程传递
+//      - 在 mojom_speech_synthesis_mock.cc 中实现自定义语音列表模拟
+//      - 控制 SpeechSynthesisVoiceListObserver 的语音数据传递
+//
+//   3. 事件系统防护：
+//      - 控制 voiceschanged 事件的触发时机，避免暴露真实语音包变化
+//      - 处理语音列表动态更新的一致性，确保事件触发符合伪造配置
+//      - 在 speech_synthesis.idl 中确保接口定义与实现一致
+//
+//   4. 平台特定防护：
+//      - 处理 Windows SAPI、macOS Speech Synthesis、Linux espeak 等平台差异
+//      - 确保不同平台下的语音列表格式和属性保持一致
+//      - 统一跨平台的语音引擎特征表现
+//
+// - 针对最新指纹检测技术的特定防护措施：
+//
+//   1. 防御语音属性一致性检测：
+//      - 确保语音的 lang 属性与 navigator.language 设置逻辑一致
+//      - 验证 localService 属性与实际语音合成能力匹配
+//      - 处理 default 语音的选择逻辑，避免暴露系统偏好
+//
+//   2. 防御语音合成功能验证：
+//      - 确保列表中的语音都能正常进行语音合成
+//      - 处理语音合成失败时的错误信息，避免暴露真实语音引擎状态
+//      - 统一不同语音的合成质量和特征
+//
+//   3. 防御动态语音包检测：
+//      - 模拟语音包的安装和卸载行为
+//      - 控制语音列表在页面生命周期内的稳定性
+//      - 处理系统语言变更对语音列表的影响
+//
+//   4. 防御平台特征检测：
+//      - 统一不同操作系统的语音命名规范
+//      - 处理移动端和桌面端语音引擎的差异
+//      - 确保语音列表与设备类型配置一致
+//
+// - 检测对抗策略：
+//   * 智能语音列表生成：基于目标操作系统和语言设置生成合理语音列表
+//   * 语音属性验证：确保所有语音属性与系统配置逻辑一致
+//   * 动态行为模拟：模拟真实的语音包管理和系统集成行为
+//   * 跨平台一致性：统一不同平台的语音引擎表现特征
+//
+// - 协同指纹项目：
+//   * 与操作系统指纹协调语音引擎和系统语言设置
+//   * 与语言指纹确保语音列表与浏览器语言配置一致
+//   * 与硬件指纹匹配设备类型的语音引擎特征
 
 39、localStorage本地储存【隔离 禁用】
-// localStorage 作为 HTML5 本地存储技术，可以被网站用于存储用户识别信息。
-// 注意：隔离通常是基于域名，但指纹防护可能需要更细粒度的控制或伪造。
-文件路径(已替换): src/third_party/blink/renderer/modules/storage/storage_area.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/storage/dom_window_storage.cc
-文件路径(已验证): src/components/services/storage/dom_storage/storage_area_impl.cc
-文件路径(已验证): src/components/services/storage/storage_service_impl.cc
-文件路径(已验证): src/third_party/blink/renderer/modules/storage/storage_namespace.cc
-文件路径(已验证): src/content/browser/dom_storage/dom_storage_context_wrapper.cc
-文件路径(已验证): src/storage/browser/quota/quota_manager_impl.cc
+文件路径(核心): src/third_party/blink/renderer/modules/storage/storage_area.cc
+文件路径(核心): src/third_party/blink/renderer/modules/storage/dom_window_storage.cc
+文件路径(核心): src/components/services/storage/dom_storage/storage_area_impl.cc
+文件路径(核心): src/components/services/storage/storage_service_impl.cc
+文件路径(核心): src/third_party/blink/renderer/modules/storage/storage_namespace.cc
+文件路径(核心): src/content/browser/dom_storage/dom_storage_context_wrapper.cc
+文件路径(核心): src/storage/browser/quota/quota_manager_impl.cc
+文件路径(新增): src/third_party/blink/renderer/modules/storage/storage_event.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/storage/storage_event_dispatcher.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/storage/navigator_storage.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/storage/storage_manager.cc
+文件路径(未找到): src/content/browser/storage_partition_impl.cc
+文件路径(未找到): src/content/browser/service_worker/service_worker_storage.cc
+文件路径(未找到): src/third_party/blink/renderer/core/inspector/inspector_dom_storage_agent.cc
+文件路径(新增): src/third_party/blink/renderer/modules/storage/storage_area.h
 
 // 修改实现细节：
-// - localStorage 指纹基于网站在本地存储的数据。
-// - 修改的核心在于控制网站读写 localStorage 的行为，通过修改以下几个关键点实现指纹防护：
-//   1. 在 src/third_party/blink/renderer/modules/storage/storage_area.cc 中修改 CanAccessStorage()、getItem()、setItem()、removeItem() 和 clear() 方法，
-//      在这里可以实现对 localStorage 操作的拦截和控制。
-//   2. 在 src/third_party/blink/renderer/modules/storage/dom_window_storage.cc 中修改 GetOrCreateLocalStorage() 方法，
-//      控制 window.localStorage 属性的访问和存储区域的创建过程。
-//   3. 在 src/components/services/storage/dom_storage/storage_area_impl.cc 中修改存储数据的管理和持久化逻辑，
-//      以实现不同指纹配置下的数据隔离或禁用功能。
-//   4. 在 src/third_party/blink/renderer/modules/storage/storage_namespace.cc 中修改 GetCachedArea() 方法，
-//      通过动态调整存储命名空间来实现不同指纹配置的数据隔离。
-// - 实现"隔离"模式：为每个指纹配置创建独立的存储命名空间或存储区域，可以在 storage_namespace.cc 中通过修改 storage_key 或在
-//   存储路径中加入指纹ID来实现，确保不同指纹配置的localStorage数据相互独立。
-// - 实现"禁用"模式：在 storage_area.cc 的 CanAccessStorage() 方法中返回 false，或在 dom_window_storage.cc 中控制 
-//   GetOrCreateLocalStorage() 方法返回 nullptr，从而阻止网站读写 localStorage。
+// - localStorage指纹已超越简单的数据存储检测，现代指纹技术通过存储事件、
+//   容量检测、性能分析和跨域行为等多维度进行检测。
+//
+// - 核心修改文件和策略：
+//
+//   1. 基础存储操作防护：
+//      - 在 storage_area.cc 中修改 CanAccessStorage()、getItem()、setItem()、removeItem()、clear() 方法
+//      - 在 dom_window_storage.cc 中控制 GetOrCreateLocalStorage() 和 GetOrCreateSessionStorage() 方法
+//      - 在 storage_area_impl.cc 中处理底层存储数据的管理和持久化逻辑
+//      - 确保localStorage和sessionStorage使用一致的防护策略
+//
+//   2. 存储事件系统防护：
+//      - 在 storage_event.cc 和 storage_event_dispatcher.cc 中控制storage事件的触发和传播
+//      - 处理跨窗口、跨标签页的存储事件同步，确保隔离模式下事件不泄露状态
+//      - 在禁用模式下完全抑制存储事件的触发
+//      - 防止通过iframe和Service Worker监听存储事件
+//
+//   3. 现代存储API防护：
+//      - 在 navigator_storage.cc 和 storage_manager.cc 中控制 navigator.storage API
+//      - 处理 storage.estimate() 返回的容量信息，确保与指纹配置一致
+//      - 控制 storage.persist() 的权限请求和持久化行为
+//      - 防止通过存储配额检测推断设备信息
+//
+//   4. 跨域和安全上下文防护：
+//      - 在 storage_partition_impl.cc 中处理不同安全上下文的存储隔离
+//      - 在 service_worker_storage.cc 中控制Service Worker的存储访问
+//      - 确保iframe、Web Worker等上下文的存储行为一致性
+//      - 处理跨域postMessage与存储操作的关联
+//
+//   5. 开发者工具防护：
+//      - 在 inspector_dom_storage_agent.cc 中控制DevTools显示的存储内容
+//      - 防止通过调试接口暴露真实存储状态和配置
+//      - 处理存储操作的错误信息和调试日志
+//
+// - 针对最新指纹检测技术的特定防护措施：
+//
+//   1. 防御存储容量检测：
+//      - 统一不同存储API报告的容量限制
+//      - 处理存储配额超限时的错误行为一致性
+//      - 防止通过大量写入操作测试真实存储容量
+//      - 确保存储清理和垃圾回收的触发阈值与伪造配置一致
+//
+//   2. 防御存储性能分析：
+//      - 标准化存储操作的执行时间，避免暴露设备性能特征
+//      - 控制大数据量存储的性能表现
+//      - 处理存储操作的并发性能特征
+//      - 确保存储I/O模式不暴露底层存储介质类型
+//
+//   3. 防御存储事件时序分析：
+//      - 确保存储事件的触发时机与实际操作同步
+//      - 处理多窗口环境下的事件传播延迟
+//      - 防止通过事件时序推断浏览器架构和进程模型
+//      - 统一不同浏览器模式下的事件行为
+//
+//   4. 防御跨域存储关联：
+//      - 确保不同域名下的存储隔离严格执行
+//      - 处理子域名和端口变化对存储访问的影响
+//      - 防止通过iframe嵌套检测存储隔离策略
+//      - 控制Service Worker跨域存储访问的权限
+//
+//   5. 防御存储状态持久性检测：
+//      - 模拟真实的存储数据持久化行为
+//      - 处理浏览器重启后的存储状态恢复
+//      - 确保隐私模式和正常模式的存储行为差异符合预期
+//      - 控制存储数据的自动清理和过期策略
+//
+// - 检测对抗策略：
+//   * 智能存储容量模拟：基于设备配置生成合理的存储限制和性能特征
+//   * 存储行为一致性：确保所有存储API的行为逻辑保持一致
+//   * 动态存储策略：支持运行时调整存储模式，适应不同检测场景
+//   * 跨上下文同步：统一不同执行上下文的存储访问行为
+//
+// - 协同指纹项目：
+//   * 与IndexedDB指纹协调统一的存储策略和容量限制
+//   * 与Cookie指纹确保存储隔离的逻辑一致性
+//   * 与Cache API协调Service Worker的存储行为
+//   * 与设备内存指纹匹配存储容量的合理性
 
 40、Proxy代理【真实 伪造IP】
 // 检测浏览器是否使用了代理，以及代理相关的配置信息。
@@ -2145,17 +2596,83 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 文件路径(已验证): src/net/proxy_resolution/configured_proxy_resolution_service.cc
 文件路径(已验证): src/net/proxy_resolution/proxy_resolution_service.h
 文件路径(已验证): src/net/proxy_resolution/win/windows_system_proxy_resolution_service.cc
+文件路径(未找到): src/net/socket/client_socket_pool_manager.cc
+文件路径(未找到): src/net/http/http_network_transaction.cc
+文件路径(未找到): src/net/url_request/url_request_context.cc
+文件路径(未找到): src/services/network/network_context.cc
+文件路径(未找到): src/net/proxy_resolution/proxy_bypass_rules.cc
+文件路径(未找到): src/third_party/webrtc/rtc_base/network.cc
+文件路径(未找到): src/net/base/network_time_tracker.cc
+文件路径(未找到): src/net/http/http_stream_factory.cc
+文件路径(未找到): src/net/dns/host_resolver_manager.cc
 
 // 修改实现细节：
 // - Proxy 指纹可能通过检测网络连接是否经过代理或检查与代理相关的环境变量/配置来获取。
 // - 修改的核心在于控制浏览器报告的代理配置信息，或者伪造看起来没有使用代理的网络行为。
 // - 需要修改 src/net/proxy_resolution/proxy_config_service.cc 和 src/net/proxy_resolution/proxy_resolver.cc 中获取和解析代理配置的逻辑。
 // - 实现"伪造IP"可能与 IP 地址指纹的修改联动，确保通过代理看到的出口IP与伪造的IP一致。
+//
+// - 针对最新指纹检测技术的特定防护措施：
+//
+//   1. WebRTC IP泄露防护：
+//      - 修改 src/third_party/webrtc/rtc_base/network.cc 中的网络接口枚举逻辑
+//      - 控制ICE候选地址收集过程，确保不泄露本地IP
+//      - 处理STUN/TURN服务器响应，防止通过反射地址检测真实IP
+//      - 确保所有WebRTC连接使用与浏览器网络请求一致的IP地址
+//
+//   2. 网络请求特征防护：
+//      - 在 src/net/http/http_network_transaction.cc 中处理HTTP事务的代理行为
+//      - 控制 src/net/socket/client_socket_pool_manager.cc 中的连接池管理，避免暴露代理使用特征
+//      - 处理 src/net/url_request/url_request_context.cc 中的URL请求上下文，确保代理设置一致性
+//      - 修改 src/services/network/network_context.cc 中的网络上下文创建和配置逻辑
+//
+//   3. 时间戳和延迟分析防护：
+//      - 处理 src/net/base/network_time_tracker.cc 中的网络时间跟踪，防止通过时间戳分析检测代理
+//      - 控制网络请求的延迟特征，模拟合理的直连或代理连接延迟模式
+//      - 确保不同类型请求的延迟模式一致，避免通过延迟差异检测代理
+//      - 处理HTTP响应头中的时间信息，确保与代理状态一致
+//
+//   4. 协议特征防护：
+//      - 修改 src/net/http/http_stream_factory.cc 中的HTTP流创建逻辑，统一协议协商行为
+//      - 控制QUIC、HTTP/2等现代协议的使用特征，避免暴露代理特征
+//      - 处理TLS握手过程中的特征，确保与代理状态一致
+//      - 统一直连和代理连接的协议支持和协商行为
+//
+//   5. DNS泄露防护：
+//      - 增强 src/net/dns/host_resolver_manager.cc 中的DNS解析管理，防止DNS泄露
+//      - 确保所有DNS查询都通过代理进行（如适用）
+//      - 处理DNS-over-HTTPS和传统DNS查询的一致性
+//      - 防止通过WebSockets/WebRTC等技术绕过同源策略进行DNS查询
+//
+// - 检测对抗策略：
+//   * 智能代理行为模拟：基于目标网络环境模拟合理的网络延迟和带宽特征
+//   * 网络行为一致性：确保所有网络API的行为逻辑与代理状态保持一致
+//   * 动态代理策略：支持运行时调整代理模式，适应不同检测场景
+//   * 跨协议同步：统一不同网络协议的代理行为
+//   * 代理连接质量模拟：模拟真实代理的连接质量特征，如延迟波动和带宽限制
+//
+// - 协同指纹项目：
+//   * 与IP地址指纹协调，确保所有网络请求显示一致的IP地址
+//   * 与TLS指纹（指纹36）协调，确保TLS握手特征与代理状态一致
+//   * 与HTTP请求头指纹（指纹27）协调，避免在请求头中泄露代理信息
+//   * 与WebRTC指纹协调，防止通过WebRTC泄露真实IP
+//   * 与时区指纹（指纹15）协调，确保时区信息与代理出口地区一致
+//   * 与网络性能指纹协调，模拟合理的网络延迟和带宽特征
 
 41、DNS域名系统【真实 噪音】
 // 检测浏览器如何解析域名，可能涉及本地DNS缓存、DNS服务器等信息。
 文件路径(已验证): src/net/dns/host_resolver.cc
 文件路径(已验证): src/net/dns/dns_client.cc
+文件路径(未找到): src/net/dns/host_resolver_manager.cc
+文件路径(未找到): src/net/dns/dns_transaction.cc
+文件路径(未找到): src/net/dns/dns_config_service.cc
+文件路径(未找到): src/net/dns/public/dns_over_https_server_config.cc
+文件路径(未找到): src/net/dns/resolve_context.cc
+文件路径(未找到): src/net/dns/host_cache.cc
+文件路径(未找到): src/chrome/browser/net/dns_prefetch_service.cc
+文件路径(未找到): src/services/network/public/cpp/resolve_host_client_base.cc
+文件路径(未找到): src/net/dns/dns_util.cc
+文件路径(未找到): src/net/dns/dns_response.cc
 
 // 修改实现细节：
 // - DNS 指纹可能通过测量域名解析时间、检查使用的 DNS 服务器、或通过 WebSockets/WebRTC 等技术绕过同源策略进行 DNS 查询来获取。
@@ -2163,12 +2680,70 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 // - 需要修改 src/net/dns/host_resolver.cc 中处理域名解析请求的逻辑。
 // - src/net/dns/dns_client.cc 是底层的 DNS 客户端实现，可能需要在此处进行更低级别的拦截和修改。
 // - 实现"噪音"可以引入随机的解析延迟，或者在返回的解析结果中加入细微变化（如果可能）。
+//
+// - 针对最新指纹检测技术的特定防护措施：
+//
+//   1. DNS解析时间分析防护：
+//      - 在 src/net/dns/host_resolver_manager.cc 中实现智能时间模拟算法
+//      - 确保DNS解析时间模式与网络环境和域名特性一致
+//      - 处理DNS缓存命中和未命中的时间差异，使其符合真实浏览行为
+//      - 模拟不同网络条件下的DNS解析时间变化，如移动网络vs固定网络
+//
+//   2. DNS-over-HTTPS (DoH) 防护：
+//      - 修改 src/net/dns/dns_config_service.cc 控制DoH的启用和配置
+//      - 在 src/net/dns/public/dns_over_https_server_config.cc 中管理DoH服务器设置
+//      - 确保DoH配置与用户隐私设置和网络环境一致
+//      - 防止通过DoH行为差异检测用户配置或环境
+//
+//   3. DNS缓存管理防护：
+//      - 修改 src/net/dns/host_cache.cc 中的DNS缓存管理逻辑
+//      - 控制缓存项的生命周期、过期时间和刷新行为
+//      - 实现智能缓存策略，模拟真实用户的DNS缓存使用模式
+//      - 处理浏览器重启后的缓存状态，确保符合预期行为
+//
+//   4. DNS预取行为防护：
+//      - 控制 src/chrome/browser/net/dns_prefetch_service.cc 中的DNS预取逻辑
+//      - 确保预取模式与用户浏览行为和网页内容相关性一致
+//      - 处理预取触发时机和频率，避免通过异常预取行为识别用户
+//      - 模拟真实用户的导航模式下的DNS预取行为
+//
+//   5. 跨源DNS检测防护：
+//      - 防止通过WebRTC、WebSockets等技术绕过同源策略进行DNS查询
+//      - 修改 src/net/dns/dns_transaction.cc 确保所有DNS查询的一致性
+//      - 处理应用层DNS查询，如通过fetch()或XHR进行的隐式DNS解析
+//      - 确保Service Worker和Web Worker中的DNS行为一致性
+//
+// - 检测对抗策略：
+//   * 智能DNS解析时间模拟：基于网络环境和域名特性生成合理的解析时间
+//   * DNS行为一致性：确保所有DNS相关API的行为逻辑保持一致
+//   * 动态DNS策略：支持运行时调整DNS解析模式，适应不同检测场景
+//   * 跨协议DNS同步：统一不同网络协议的DNS解析行为
+//   * DNS解析质量模拟：模拟真实网络环境的DNS解析特征，包括偶发解析失败
+//   * TTL处理逻辑：确保DNS记录TTL处理符合标准浏览器行为
+//
+// - 协同指纹项目：
+//   * 与Proxy代理（指纹40）协调，确保DNS查询与代理设置一致
+//   * 与WebRTC指纹协调，防止通过WebRTC泄露DNS信息
+//   * 与网络性能指纹协调，确保DNS解析时间与整体网络性能一致
+//   * 与地理位置指纹协调，确保DNS解析结果与地理位置设置一致
+//   * 与时区指纹（指纹15）协调，确保DNS行为与时区设置相符
 
 42、IndexedDB【真实 隔离 禁用】
 // IndexedDB 是一种客户端存储数据库，可被网站用于存储大量结构化数据，可能包含用户识别信息。
 // 注意：隔离通常是基于域名，但指纹防护可能需要更细粒度的控制或伪造。
 文件路径(已验证): src/content/browser/indexed_db/indexed_db_database.cc
 文件路径(已验证): src/content/browser/indexed_db/indexed_db_context_impl.cc
+文件路径(未找到): src/content/browser/indexed_db/indexed_db_factory_impl.cc
+文件路径(未找到): src/content/browser/indexed_db/indexed_db_backing_store.cc
+文件路径(未找到): src/content/browser/indexed_db/indexed_db_connection.cc
+文件路径(未找到): src/content/browser/indexed_db/indexed_db_transaction.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/indexeddb/idb_factory.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/indexeddb/idb_database.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/indexeddb/idb_request.cc
+文件路径(未找到): src/third_party/blink/renderer/modules/indexeddb/web_idb_database_impl.cc
+文件路径(未找到): src/storage/browser/quota/quota_manager_impl.cc
+文件路径(未找到): src/content/browser/storage_partition_impl.cc
+文件路径(未找到): src/content/browser/service_worker/service_worker_storage.cc
 
 // 修改实现细节：
 // - IndexedDB 指纹基于网站在客户端存储的数据。
@@ -2176,6 +2751,57 @@ gl2mei	WebGL2 扩展支持掩码	2147483647	2^31-1 ±1e5	禁用/启用特定扩�
 // - 需要修改 src/content/browser/indexed_db/indexed_db_database.cc 等文件中处理 IndexedDB 操作的逻辑。
 // - 在存储服务层，例如 src/content/browser/indexed_db/indexed_db_context_impl.cc，负责管理 IndexedDB 数据库的上下文和数据持久化，可能需要在此处进行拦截和修改。
 // - 实现"隔离"可以确保不同指纹配置下的 IndexedDB 数据相互独立；实现"禁用"则阻止网站使用 IndexedDB。
+//
+// - 针对最新指纹检测技术的特定防护措施：
+//
+//   1. 数据库特征防护：
+//      - 在 src/content/browser/indexed_db/indexed_db_factory_impl.cc 中控制数据库创建特征
+//      - 修改 src/third_party/blink/renderer/modules/indexeddb/idb_factory.cc 中的JavaScript接口层工厂实现
+//      - 确保数据库名称、版本号、对象存储名称等元数据在不同指纹配置下保持一致
+//      - 处理数据库升级和架构迁移行为，避免通过版本变化检测用户身份
+//      - 标准化数据库结构创建模式，控制对象存储、索引和键路径的创建特征
+//
+//   2. 存储容量和配额检测防护：
+//      - 修改 src/storage/browser/quota/quota_manager_impl.cc 控制存储配额报告
+//      - 在 src/content/browser/indexed_db/indexed_db_context_impl.cc 中管理存储使用统计
+//      - 确保存储限制与设备特性相符，避免通过异常配额检测设备
+//      - 处理存储超限错误的行为一致性，确保错误消息和代码统一
+//      - 模拟合理的存储增长模式，避免通过使用模式识别用户
+//
+//   3. 性能特征防护：
+//      - 控制 src/content/browser/indexed_db/indexed_db_transaction.cc 中的事务执行性能
+//      - 修改 src/content/browser/indexed_db/indexed_db_backing_store.cc 中的底层存储性能
+//      - 标准化数据库操作的响应时间，避免通过性能特征识别设备
+//      - 处理大数据量操作的性能表现，确保与设备配置一致
+//      - 统一不同类型操作（读/写/删除）的性能特征
+//
+//   4. 错误处理和异常行为防护：
+//      - 修改 src/third_party/blink/renderer/modules/indexeddb/idb_request.cc 中的错误处理逻辑
+//      - 统一不同环境下的错误消息和代码，避免通过错误模式识别浏览器
+//      - 处理边缘情况下的行为，如存储已满、并发访问冲突等
+//      - 确保事务中止和回滚的行为一致性
+//      - 控制异步操作的完成顺序和时机
+//
+//   5. 隐私模式和跨源行为防护：
+//      - 增强 src/content/browser/storage_partition_impl.cc 中的存储隔离逻辑
+//      - 修改 src/content/browser/service_worker/service_worker_storage.cc 处理后台存储访问
+//      - 确保隐私浏览模式下的IndexedDB行为一致性
+//      - 处理跨源iframe和Service Worker的IndexedDB访问控制
+//      - 统一不同浏览上下文（主框架、iframe、worker）的存储行为
+//
+// - 检测对抗策略：
+//   * 智能存储特征模拟：基于用户配置生成合理的数据库结构和性能特征
+//   * 数据库行为一致性：确保所有IndexedDB API的行为逻辑与配置一致
+//   * 动态存储策略：支持运行时调整存储模式，适应不同检测场景
+//   * 跨上下文同步：统一不同执行上下文的IndexedDB访问行为
+//   * 数据库事件控制：确保success、error、upgradeneeded等事件的触发符合预期
+//
+// - 协同指纹项目：
+//   * 与localStorage本地存储（指纹39）协调，确保存储策略一致
+//   * 与Cookie指纹协调，统一不同存储机制的隔离策略
+//   * 与设备内存指纹协调，确保存储配额与设备配置相符
+//   * 与浏览器缓存指纹协调，统一各类存储的清理策略
+//   * 与Service Worker指纹协调，处理后台存储访问行为
 
 43、无头模式指纹防护 【开启 关闭】
 // 无头模式(Headless)通常被自动化工具使用，但容易被网站识别和检测。
